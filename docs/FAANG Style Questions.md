@@ -1,3 +1,11 @@
+---
+id: FAANG-Style
+title: FAANG Related Questions
+---
+
+# FAANG
+This is FAANG contents
+
 # FAANG Style Questions
 
 ## FAANG-Style Networking Interview Questions

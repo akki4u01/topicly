@@ -1,3 +1,11 @@
+---
+id: DHCP
+title: DHCP Related Questions
+---
+
+# DHCP
+This is DHCP contents
+
 # DHCP
 
 # DHCP Interview Questions (FAANG Style)

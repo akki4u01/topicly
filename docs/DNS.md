@@ -1,3 +1,11 @@
+---
+id: DNS
+title: DNS Related Questions
+---
+
+# DNS
+This is DNS contents
+
 # DNS
 
 ![image.png](image.png)

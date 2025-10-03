@@ -1,3 +1,11 @@
+---
+id: MPLS
+title: MPLS Related Questions
+---
+
+# MPLS
+This is MPLS contents
+
 # IP/MPLS
 
 ### IP/MPLS & Routing
