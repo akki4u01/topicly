@@ -3,1222 +3,1168 @@ id: IPv4
 title: IPv4 Related Questions
 ---
 
-# IPv4
-This is IPv4 contents
-
-# IPV4
-
 # IPv4 Interview Questions — FAANG Style
 
 ### Basics & Concepts
 
-- What is IPv4? How is it structured?
-    
-    # What is IPv4?
-    
-    - **IPv4** stands for **Internet Protocol version 4**.
-    - It is the **fourth version** of the Internet Protocol and is the most widely used protocol for identifying devices on a network using an addressing system.
-    - IPv4 provides a **logical addressing scheme** to devices so that they can communicate over interconnected networks like the internet or private LANs.
-    
-    ---
-    
-    # How is IPv4 Structured?
-    
-    - IPv4 addresses are **32-bit numerical identifiers** usually represented in **dotted decimal notation**.
-        
-        Example: `192.168.1.10`
-        
-    - The 32 bits are divided into **4 octets (8 bits each)**, separated by dots.
-        
-        Each octet can range from 0 to 255.
-        
-    - Example in binary (for IP 192.168.1.10):
-        
-        ```
-        CopyEdit
-        192        . 168       . 1         . 10
-        11000000   . 10101000  . 00000001  . 00001010
-        
-        ```
-        
-    
-    ---
-    
-    # IPv4 Address Components
-    
-    IPv4 address is composed of two main parts:
-    
-    1. **Network Portion**
-        - Identifies the **network segment or subnet** the host belongs to.
-        - Determined by the **subnet mask** or prefix length.
-    2. **Host Portion**
-        - Identifies the **specific device or host** within the network.
-    
-    ---
-    
-    # Subnet Mask
-    
-    - A **subnet mask** is a 32-bit number that masks the IP address to distinguish the network and host portions.
-    - Represented similarly in dotted decimal (e.g., `255.255.255.0`) or as CIDR notation (`/24`).
-    - Bits set to `1` in the subnet mask represent the **network portion**, bits set to `0` represent the **host portion**.
-    
-    ---
-    
-    # Summary
-    
-    | Aspect | Description |
-    | --- | --- |
-    | Address length | 32 bits |
-    | Notation | Dotted decimal (e.g., 192.168.1.10) |
-    | Structure | 4 octets (8 bits each) |
-    | Purpose | Logical identification of devices in IPv4 networks |
-    | Network vs Host | Divided by subnet mask |
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > IPv4 is a 32-bit address system used to uniquely identify devices on a network. It’s structured as four 8-bit octets, represented in dotted decimal form. The address consists of a network portion and a host portion, distinguished by the subnet mask.
-    > 
-- Explain the difference between public and private IPv4 addresses.
-    
-    # Difference Between Public and Private IPv4 Addresses
-    
-    ---
-    
-    ### 1. **Public IPv4 Addresses**
-    
-    - **Definition:**
-        
-        Public IPv4 addresses are globally unique IP addresses that are routable on the internet.
-        
-    - **Purpose:**
-        
-        Used by devices and servers that need to be accessible over the internet (e.g., web servers, mail servers).
-        
-    - **Assignment:**
-        
-        Assigned and managed by regional internet registries (RIRs) like ARIN, RIPE, APNIC.
-        
-    - **Reachability:**
-        
-        Can be reached from any other device on the internet, assuming no firewalls or filtering block traffic.
-        
-    - **Example:**
-        - `8.8.8.8` (Google Public DNS)
-        - `172.217.16.238` (Google.com)
-    
-    ---
-    
-    ### 2. **Private IPv4 Addresses**
-    
-    - **Definition:**
-        
-        Private IPv4 addresses are reserved for use within private networks and are **not routable on the public internet**.
-        
-    - **Purpose:**
-        
-        Used for internal communication within home, enterprise, or organizational networks.
-        
-    - **Assignment:**
-        
-        Defined by RFC 1918, these ranges are reserved for private use.
-        
-    - **Ranges (RFC 1918):**
-        
-        
-        | Range | CIDR | Number of Addresses |
-        | --- | --- | --- |
-        | 10.0.0.0 – 10.255.255.255 | 10.0.0.0/8 | 16,777,216 |
-        | 172.16.0.0 – 172.31.255.255 | 172.16.0.0/12 | 1,048,576 |
-        | 192.168.0.0 – 192.168.255.255 | 192.168.0.0/16 | 65,536 |
-    - **Reachability:**
-        
-        Devices with private IPs cannot be directly accessed from the internet without network address translation (NAT).
-        
-    
-    ---
-    
-    ### Why Use Private IP Addresses?
-    
-    - To **conserve public IPv4 addresses** because IPv4 address space is limited.
-    - Enhance **security** by isolating internal devices from direct internet exposure.
-    - Enable **internal network flexibility** without coordination with external authorities.
-    
-    ---
-    
-    ### How Private and Public IPs Work Together
-    
-    - Devices on a private network access the internet using **NAT** (Network Address Translation), which translates private IPs to a public IP address.
-    - NAT enables multiple private IP devices to share a single or small pool of public IP addresses.
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > Public IPv4 addresses are unique, globally routable IPs used on the internet, assigned by registries. Private IPv4 addresses are reserved for internal networks, not routable on the internet, and fall within specific RFC 1918 ranges. Private IPs use NAT to access external networks, conserving public IP space and enhancing security.
-    > 
-- What are the classes of IPv4 addresses? Describe their ranges and use cases.
-    
-    # Summary Table
-    
-    | Class | Range | Default Mask | Networks | Hosts per Network | Use Case |
-    | --- | --- | --- | --- | --- | --- |
-    | A | 0.0.0.0 – 127.255.255.255 (0 & 127 reserved) | 255.0.0.0 (/8) | 128 | ~16 million | Very large networks |
-    | B | 128.0.0.0 – 191.255.255.255 | 255.255.0.0 (/16) | 16,384 | ~65,000 | Medium/large networks |
-    | C | 192.0.0.0 – 223.255.255.255 | 255.255.255.0 (/24) | 2,097,152 | 254 | Small networks |
-    | D | 224.0.0.0 – 239.255.255.255 | N/A | N/A | N/A | Multicast |
-    | E | 240.0.0.0 – 255.255.255.255 | N/A | N/A | N/A | Experimental |
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > IPv4 address classes segment the address space to support networks of varying sizes. Classes A, B, and C cover large, medium, and small networks respectively with different default masks. Class D is for multicast, and Class E is experimental.
-    > 
-- What is subnetting? Why is it important?
-    
-    # What is Subnetting?
-    
-    ---
-    
-    ### Definition
-    
-    - **Subnetting** is the process of dividing a larger IP network (or IP address space) into smaller, more manageable subnetworks called **subnets**.
-    - It involves borrowing bits from the **host portion** of an IP address to create additional network bits.
-    - This allows organizations to create multiple logical networks within a single classful network.
-    
-    ---
-    
-    ### How It Works
-    
-    - Given an IP address and subnet mask, subnetting increases the number of network segments.
-    - For example, dividing a Class C network (with default mask 255.255.255.0) into multiple smaller subnets by changing the subnet mask to something like 255.255.255.192 (/26).
-    - This creates multiple subnets, each with fewer hosts.
-    
-    ---
-    
-    ### Example
-    
-    - Original network: `192.168.1.0/24` (1 subnet, 254 hosts)
-    - Subnet mask changed to `/26` (255.255.255.192):
-        - Number of subnets: 4
-        - Hosts per subnet: 62
-    
-    ---
-    
-    # Why is Subnetting Important?
-    
-    ---
-    
-    ### 1. **Efficient IP Address Utilization**
-    
-    - Conserves IP addresses by allocating only the necessary number of hosts per subnet.
-    - Avoids wasting large address spaces on small networks.
-    
-    ---
-    
-    ### 2. **Improved Network Performance**
-    
-    - Reduces broadcast domain size, limiting broadcast traffic to smaller subnetworks.
-    - Enhances overall network efficiency and reduces congestion.
-    
-    ---
-    
-    ### 3. **Enhanced Security**
-    
-    - Segments networks to isolate sensitive devices or departments.
-    - Allows application of access control policies per subnet.
-    
-    ---
-    
-    ### 4. **Simplified Management**
-    
-    - Makes network administration easier by grouping related devices logically.
-    - Facilitates easier troubleshooting and network monitoring.
-    
-    ---
-    
-    ### 5. **Scalability**
-    
-    - Enables organizations to grow their network in an organized manner.
-    - Allows creation of additional subnets without redesigning the entire network.
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > Subnetting is the division of a larger IP network into smaller subnetworks by extending the network portion of the address. It improves IP utilization, reduces broadcast traffic, enhances security, simplifies management, and supports scalable network design.
-    > 
-    
-- Explain the concept of CIDR (Classless Inter-Domain Routing).
-    
-    # What is CIDR (Classless Inter-Domain Routing)?
-    
-    ---
-    
-    ### Definition:
-    
-    - **CIDR** is a method for allocating IP addresses and routing IP packets more efficiently than the traditional classful addressing.
-    - It **replaces the rigid class-based (A, B, C) IP addressing scheme** with a flexible, variable-length subnet masking system.
-    - CIDR was introduced in 1993 (RFC 1519) to help slow IPv4 address exhaustion and improve routing scalability.
-    
-    ---
-    
-    ### How CIDR Works:
-    
-    - Instead of classful boundaries (like /8, /16, /24), CIDR uses **prefix notation** to specify the network portion of an IP address.
-    - An IP address is written as:
-        
-        ```
-        bash
-        CopyEdit
-        a.b.c.d/n
-        
-        ```
-        
-        where **`n`** is the number of bits in the network prefix (from 0 to 32).
-        
-    - For example, `192.168.1.0/24` means the first 24 bits represent the network, and the remaining 8 bits represent hosts.
-    
-    ---
-    
-    ### Benefits of CIDR:
-    
-    1. **Flexible Subnetting:**
-        - Allows networks to be divided into subnets of varying sizes—not constrained by fixed classes.
-    2. **Efficient Address Allocation:**
-        - Allocates IP address blocks that closely match organizational needs, reducing waste.
-    3. **Route Aggregation (Supernetting):**
-        - Multiple contiguous CIDR blocks can be summarized into a single routing table entry, reducing the size of routing tables on the internet.
-    
-    ---
-    
-    ### Example of CIDR Block Aggregation:
-    
-    - Traditional classful approach:
-        - Networks: `192.168.0.0/24`, `192.168.1.0/24`, `192.168.2.0/24`, `192.168.3.0/24`
-        - 4 separate routing entries.
-    - CIDR aggregation:
-        - `192.168.0.0/22` covers all four subnets in a **single routing entry**.
-    
-    ---
-    
-    ### CIDR vs. Classful Addressing:
-    
-    | Feature | Classful Addressing | CIDR |
+#### What is IPv4? How is it structured?
+
+##### What is IPv4?
+
+- **IPv4** stands for **Internet Protocol version 4**.
+- It is the **fourth version** of the Internet Protocol and is the most widely used protocol for identifying devices on a network using an addressing system.
+- IPv4 provides a **logical addressing scheme** to devices so that they can communicate over interconnected networks like the internet or private LANs.
+
+---
+
+##### How is IPv4 Structured?
+
+- IPv4 addresses are **32-bit numerical identifiers** usually represented in **dotted decimal notation**.
+    
+    Example: `192.168.1.10`
+    
+- The 32 bits are divided into **4 octets (8 bits each)**, separated by dots.
+    
+    Each octet can range from 0 to 255.
+    
+- Example in binary (for IP 192.168.1.10):
+    
+    ```
+    192        . 168       . 1         . 10
+    11000000   . 10101000  . 00000001  . 00001010
+    ```
+
+---
+
+##### IPv4 Address Components
+
+IPv4 address is composed of two main parts:
+
+1. **Network Portion**
+    - Identifies the **network segment or subnet** the host belongs to.
+    - Determined by the **subnet mask** or prefix length.
+2. **Host Portion**
+    - Identifies the **specific device or host** within the network.
+
+---
+
+##### Subnet Mask
+
+- A **subnet mask** is a 32-bit number that masks the IP address to distinguish the network and host portions.
+- Represented similarly in dotted decimal (e.g., `255.255.255.0`) or as CIDR notation (`/24`).
+- Bits set to `1` in the subnet mask represent the **network portion**, bits set to `0` represent the **host portion**.
+
+---
+
+##### Summary
+
+| Aspect | Description |
+| --- | --- |
+| Address length | 32 bits |
+| Notation | Dotted decimal (e.g., 192.168.1.10) |
+| Structure | 4 octets (8 bits each) |
+| Purpose | Logical identification of devices in IPv4 networks |
+| Network vs Host | Divided by subnet mask |
+
+---
+
+###### 🧠 Interview Summary:
+
+> IPv4 is a 32-bit address system used to uniquely identify devices on a network. It’s structured as four 8-bit octets, represented in dotted decimal form. The address consists of a network portion and a host portion, distinguished by the subnet mask.
+
+#### Explain the difference between public and private IPv4 addresses.
+
+##### Difference Between Public and Private IPv4 Addresses
+
+---
+
+###### 1. **Public IPv4 Addresses**
+
+- **Definition:** Public IPv4 addresses are globally unique IP addresses that are routable on the internet.
+- **Purpose:** Used by devices and servers that need to be accessible over the internet (e.g., web servers, mail servers).
+- **Assignment:** Assigned and managed by regional internet registries (RIRs) like ARIN, RIPE, APNIC.
+- **Reachability:** Can be reached from any other device on the internet, assuming no firewalls or filtering block traffic.
+- **Example:**
+    - `8.8.8.8` (Google Public DNS)
+    - `172.217.16.238` (Google.com)
+
+---
+
+###### 2. **Private IPv4 Addresses**
+
+- **Definition:** Private IPv4 addresses are reserved for use within private networks and are **not routable on the public internet**.
+- **Purpose:** Used for internal communication within home, enterprise, or organizational networks.
+- **Assignment:** Defined by RFC 1918, these ranges are reserved for private use.
+- **Ranges (RFC 1918):**
+    
+    | Range | CIDR | Number of Addresses |
     | --- | --- | --- |
-    | Address Boundaries | Fixed (/8, /16, /24) | Variable prefix length (/n) |
-    | Address Allocation | Often wastes IP addresses | Efficient, minimal waste |
-    | Routing Table Size | Larger, more entries | Smaller due to aggregation |
-    | Flexibility | Limited | Highly flexible |
+    | 10.0.0.0 – 10.255.255.255 | 10.0.0.0/8 | 16,777,216 |
+    | 172.16.0.0 – 172.31.255.255 | 172.16.0.0/12 | 1,048,576 |
+    | 192.168.0.0 – 192.168.255.255 | 192.168.0.0/16 | 65,536 |
+
+- **Reachability:** Devices with private IPs cannot be directly accessed from the internet without network address translation (NAT).
+
+---
+
+##### Why Use Private IP Addresses?
+
+- To **conserve public IPv4 addresses** because IPv4 address space is limited.
+- Enhance **security** by isolating internal devices from direct internet exposure.
+- Enable **internal network flexibility** without coordination with external authorities.
+
+---
+
+##### How Private and Public IPs Work Together
+
+- Devices on a private network access the internet using **NAT** (Network Address Translation), which translates private IPs to a public IP address.
+- NAT enables multiple private IP devices to share a single or small pool of public IP addresses.
+
+---
+
+###### 🧠 Interview Summary:
+
+> Public IPv4 addresses are unique, globally routable IPs used on the internet, assigned by registries. Private IPv4 addresses are reserved for internal networks, not routable on the internet, and fall within specific RFC 1918 ranges. Private IPs use NAT to access external networks, conserving public IP space and enhancing security.
+
+#### What are the classes of IPv4 addresses? Describe their ranges and use cases.
+
+##### Summary Table
+
+| Class | Range | Default Mask | Networks | Hosts per Network | Use Case |
+| --- | --- | --- | --- | --- | --- |
+| A | 0.0.0.0 – 127.255.255.255 (0 & 127 reserved) | 255.0.0.0 (/8) | 128 | ~16 million | Very large networks |
+| B | 128.0.0.0 – 191.255.255.255 | 255.255.0.0 (/16) | 16,384 | ~65,000 | Medium/large networks |
+| C | 192.0.0.0 – 223.255.255.255 | 255.255.255.0 (/24) | 2,097,152 | 254 | Small networks |
+| D | 224.0.0.0 – 239.255.255.255 | N/A | N/A | N/A | Multicast |
+| E | 240.0.0.0 – 255.255.255.255 | N/A | N/A | N/A | Experimental |
+
+---
+
+###### 🧠 Interview Summary:
+
+> IPv4 address classes segment the address space to support networks of varying sizes. Classes A, B, and C cover large, medium, and small networks respectively with different default masks. Class D is for multicast, and Class E is experimental.
+
+#### What is subnetting? Why is it important?
+
+##### What is Subnetting?
+
+---
+
+###### Definition
+
+- **Subnetting** is the process of dividing a larger IP network (or IP address space) into smaller, more manageable subnetworks called **subnets**.
+- It involves borrowing bits from the **host portion** of an IP address to create additional network bits.
+- This allows organizations to create multiple logical networks within a single classful network.
+
+---
+
+###### How It Works
+
+- Given an IP address and subnet mask, subnetting increases the number of network segments.
+- For example, dividing a Class C network (with default mask 255.255.255.0) into multiple smaller subnets by changing the subnet mask to something like 255.255.255.192 (/26).
+- This creates multiple subnets, each with fewer hosts.
+
+---
+
+###### Example
+
+- Original network: `192.168.1.0/24` (1 subnet, 254 hosts)
+- Subnet mask changed to `/26` (255.255.255.192):
+    - Number of subnets: 4
+    - Hosts per subnet: 62
+
+---
+
+##### Why is Subnetting Important?
+
+---
+
+###### 1. **Efficient IP Address Utilization**
+
+- Conserves IP addresses by allocating only the necessary number of hosts per subnet.
+- Avoids wasting large address spaces on small networks.
+
+---
+
+###### 2. **Improved Network Performance**
+
+- Reduces broadcast domain size, limiting broadcast traffic to smaller subnetworks.
+- Enhances overall network efficiency and reduces congestion.
+
+---
+
+###### 3. **Enhanced Security**
+
+- Segments networks to isolate sensitive devices or departments.
+- Allows application of access control policies per subnet.
+
+---
+
+###### 4. **Simplified Management**
+
+- Makes network administration easier by grouping related devices logically.
+- Facilitates easier troubleshooting and network monitoring.
+
+---
+
+###### 5. **Scalability**
+
+- Enables organizations to grow their network in an organized manner.
+- Allows creation of additional subnets without redesigning the entire network.
+
+---
+
+###### 🧠 Interview Summary:
+
+> Subnetting is the division of a larger IP network into smaller subnetworks by extending the network portion of the address. It improves IP utilization, reduces broadcast traffic, enhances security, simplifies management, and supports scalable network design.
+
+#### Explain the concept of CIDR (Classless Inter-Domain Routing).
+
+##### What is CIDR (Classless Inter-Domain Routing)?
+
+---
+
+###### Definition:
+
+- **CIDR** is a method for allocating IP addresses and routing IP packets more efficiently than the traditional classful addressing.
+- It **replaces the rigid class-based (A, B, C) IP addressing scheme** with a flexible, variable-length subnet masking system.
+- CIDR was introduced in 1993 (RFC 1519) to help slow IPv4 address exhaustion and improve routing scalability.
+
+---
+
+###### How CIDR Works:
+
+- Instead of classful boundaries (like /8, /16, /24), CIDR uses **prefix notation** to specify the network portion of an IP address.
+- An IP address is written as:
     
-    ---
+    ```bash
+    a.b.c.d/n
+    ```
     
-    ## 🧠 Interview Summary:
+    where **`n`** is the number of bits in the network prefix (from 0 to 32).
     
-    > CIDR is a flexible IP addressing method that uses variable-length prefixes to allocate IP blocks and aggregate routes efficiently. It replaces classful addressing, conserves IP space, and reduces routing table size by enabling route summarization.
-    > 
-- How do you calculate the number of hosts and subnets in an IPv4 subnet?
-    
-    # How to Calculate the Number of Hosts and Subnets in an IPv4 Subnet
-    
-    ---
-    
-    ### Given:
-    
-    - An IPv4 address with a subnet mask (or CIDR prefix).
-    - You want to find:
-        - **Number of subnets** created by subnetting.
-        - **Number of usable hosts** per subnet.
-    
-    ---
-    
-    ## 1. **Understanding Network, Subnet, and Host Bits**
-    
-    - IPv4 address = 32 bits.
-    - Subnetting **borrows bits** from the **host portion** to create additional subnet bits.
-    - 
-    
+- For example, `192.168.1.0/24` means the first 24 bits represent the network, and the remaining 8 bits represent hosts.
+
+---
+
+###### Benefits of CIDR:
+
+1. **Flexible Subnetting:**
+    - Allows networks to be divided into subnets of varying sizes—not constrained by fixed classes.
+2. **Efficient Address Allocation:**
+    - Allocates IP address blocks that closely match organizational needs, reducing waste.
+3. **Route Aggregation (Supernetting):**
+    - Multiple contiguous CIDR blocks can be summarized into a single routing table entry, reducing the size of routing tables on the internet.
+
+---
+
+###### Example of CIDR Block Aggregation:
+
+- Traditional classful approach:
+    - Networks: `192.168.0.0/24`, `192.168.1.0/24`, `192.168.2.0/24`, `192.168.3.0/24`
+    - 4 separate routing entries.
+- CIDR aggregation:
+    - `192.168.0.0/22` covers all four subnets in a **single routing entry**.
+
+---
+
+###### CIDR vs. Classful Addressing:
+
+| Feature | Classful Addressing | CIDR |
+| --- | --- | --- |
+| Address Boundaries | Fixed (/8, /16, /24) | Variable prefix length (/n) |
+| Address Allocation | Often wastes IP addresses | Efficient, minimal waste |
+| Routing Table Size | Larger, more entries | Smaller due to aggregation |
+| Flexibility | Limited | Highly flexible |
+
+---
+
+###### 🧠 Interview Summary:
+
+> CIDR is a flexible IP addressing method that uses variable-length prefixes to allocate IP blocks and aggregate routes efficiently. It replaces classful addressing, conserves IP space, and reduces routing table size by enabling route summarization.
+
+#### How do you calculate the number of hosts and subnets in an IPv4 subnet?
+
+##### How to Calculate the Number of Hosts and Subnets in an IPv4 Subnet
+
+---
+
+###### Given:
+
+- An IPv4 address with a subnet mask (or CIDR prefix).
+- You want to find:
+    - **Number of subnets** created by subnetting.
+    - **Number of usable hosts** per subnet.
+
+---
+
+###### 1. **Understanding Network, Subnet, and Host Bits**
+
+- IPv4 address = 32 bits.
+- Subnetting **borrows bits** from the **host portion** to create additional subnet bits.
+- 
     | Total bits | Network bits | Subnet bits | Host bits |
     | --- | --- | --- | --- |
     | 32 | Fixed (Classful) or Variable (CIDR) | Borrowed bits | Remaining bits |
+
+---
+
+###### 2. **Calculating Number of Subnets**
+
+- **Number of subnets** = $2^s$
     
-    ---
+    where $s$ = number of bits borrowed for subnetting.
     
-    ## 2. **Calculating Number of Subnets**
+- Example:
+    - If you borrow 3 bits for subnetting,
+    - Number of subnets = $2^3$ = 8 subnets.
+
+---
+
+###### 3. **Calculating Number of Hosts per Subnet**
+
+- **Number of hosts per subnet** = $2^h – 2$
     
-    - **Number of subnets** = 2^s
-        
-        where *s* = number of bits borrowed for subnetting.
-        
-    - Example:
-        - If you borrow 3 bits for subnetting,
-        - Number of subnets = 2^3 = 8 subnets.
+    where $h$ = number of bits left for hosts.
     
-    ---
-    
-    ## 3. **Calculating Number of Hosts per Subnet**
-    
-    - **Number of hosts per subnet** = 2^h – 2
-        
-        where *h* = number of bits left for hosts.
-        
-    - The subtraction of 2 accounts for:
-        - Network address (all host bits 0)
-        - Broadcast address (all host bits 1)
-    - Example:
-        - If 5 bits remain for host addressing,
-        - Hosts per subnet = 2^5 – 2 = 32 – 2 = 30 hosts.
-    
-    ---
-    
-    ## 4. **Example Calculation**
-    
-    - Given: IP address with subnet mask 255.255.255.224 (/27)
-    - Breakdown:
-        - /27 means 27 bits are for network + subnet combined.
-        - Host bits = 32 – 27 = 5 bits.
-        - Number of hosts = 2^5 – 2 = 30 hosts.
-    - To find subnets:
-        - Suppose original classful mask was /24, subnet mask now is /27, so
-        - Subnet bits borrowed = 27 – 24 = 3 bits.
-        - Number of subnets = 2^3 = 8 subnets.
-    
-    ---
-    
-    ## 5. **Quick Formulas**
-    
-    | Parameter | Formula |
-    | --- | --- |
-    | Number of subnets | 2^(# of subnet bits) |
-    | Number of hosts/subnet | 2^(# of host bits) – 2 |
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > To calculate the number of subnets, count how many bits are borrowed from the host portion and raise 2 to that power. To calculate usable hosts per subnet, raise 2 to the number of remaining host bits and subtract 2 for network and broadcast addresses.
-    > 
-- What is the purpose of the subnet mask? How does it work?
-    
-    # What is the Purpose of the Subnet Mask?
-    
-    ---
-    
-    ### Definition:
-    
-    - A **subnet mask** is a 32-bit number used in IPv4 networking to **divide an IP address into network and host portions**.
-    - It **helps devices identify which part of the IP address represents the network** and which part represents individual hosts within that network.
-    
-    ---
-    
-    ### Why is it Important?
-    
-    - Enables **subnetting**, allowing large networks to be split into smaller, manageable subnetworks.
-    - Helps routers and hosts **determine if a destination IP is on the local subnet or needs to be reached via a gateway/router**.
-    - Essential for **efficient IP address allocation and routing**.
-    
-    ---
-    
-    # How Does the Subnet Mask Work?
-    
-    ---
-    
-    ### Binary AND Operation
-    
-    - The subnet mask works by applying a **bitwise AND operation** between the IP address and the subnet mask.
-    - This operation **extracts the network address** by keeping network bits and zeroing out the host bits.
-    
-    ---
-    
-    ### Example
-    
-    | IP Address (Decimal) | 192.168.10.14 |
-    | --- | --- |
-    | IP Address (Binary) | 11000000.10101000.00001010.00001110 |
-    | Subnet Mask (Decimal) | 255.255.255.0 |
-    | Subnet Mask (Binary) | 11111111.11111111.11111111.00000000 |
-    - Perform bitwise AND between IP and subnet mask:
-    
+- The subtraction of 2 accounts for:
+    - Network address (all host bits 0)
+    - Broadcast address (all host bits 1)
+- Example:
+    - If 5 bits remain for host addressing,
+    - Hosts per subnet = $2^5 – 2$ = 32 – 2 = 30 hosts.
+
+---
+
+###### 4. **Example Calculation**
+
+- Given: IP address with subnet mask 255.255.255.224 (/27)
+- Breakdown:
+    - /27 means 27 bits are for network + subnet combined.
+    - Host bits = 32 – 27 = 5 bits.
+    - Number of hosts = $2^5 – 2$ = 30 hosts.
+- To find subnets:
+    - Suppose original classful mask was /24, subnet mask now is /27, so
+    - Subnet bits borrowed = 27 – 24 = 3 bits.
+    - Number of subnets = $2^3$ = 8 subnets.
+
+---
+
+###### 5. **Quick Formulas**
+
+| Parameter | Formula |
+| --- | --- |
+| Number of subnets | $2^{\text{(# of subnet bits)}}$ |
+| Number of hosts/subnet | $2^{\text{(# of host bits)}} – 2$ |
+
+---
+
+###### 🧠 Interview Summary:
+
+> To calculate the number of subnets, count how many bits are borrowed from the host portion and raise 2 to that power. To calculate usable hosts per subnet, raise 2 to the number of remaining host bits and subtract 2 for network and broadcast addresses.
+
+#### What is the purpose of the subnet mask? How does it work?
+
+##### What is the Purpose of the Subnet Mask?
+
+---
+
+###### Definition:
+
+- A **subnet mask** is a 32-bit number used in IPv4 networking to **divide an IP address into network and host portions**.
+- It **helps devices identify which part of the IP address represents the network** and which part represents individual hosts within that network.
+
+---
+
+###### Why is it Important?
+
+- Enables **subnetting**, allowing large networks to be split into smaller, manageable subnetworks.
+- Helps routers and hosts **determine if a destination IP is on the local subnet or needs to be reached via a gateway/router**.
+- Essential for **efficient IP address allocation and routing**.
+
+---
+
+##### How Does the Subnet Mask Work?
+
+---
+
+###### Binary AND Operation
+
+- The subnet mask works by applying a **bitwise AND operation** between the IP address and the subnet mask.
+- This operation **extracts the network address** by keeping network bits and zeroing out the host bits.
+
+---
+
+###### Example
+
+| IP Address (Decimal) | 192.168.10.14 |
+| --- | --- |
+| IP Address (Binary) | 11000000.10101000.00001010.00001110 |
+| Subnet Mask (Decimal) | 255.255.255.0 |
+| Subnet Mask (Binary) | 11111111.11111111.11111111.00000000 |
+- Perform bitwise AND between IP and subnet mask:
+
     ```
-    CopyEdit
     11000000.10101000.00001010.00001110  (IP)
     AND
     11111111.11111111.11111111.00000000  (Subnet Mask)
     =
     11000000.10101000.00001010.00000000  (Network Address)
+    ```
+
+- Resulting network address: `192.168.10.0`
+
+---
+
+###### What Happens Next?
+
+- Hosts use the subnet mask to **determine if the destination IP is in the same subnet**:
+    - If `(Destination IP & Subnet Mask) == (Source IP & Subnet Mask)`, then destination is local.
+    - Otherwise, traffic is sent to the default gateway/router.
+
+---
+
+##### Summary Table:
+
+| Aspect | Explanation |
+| --- | --- |
+| Purpose | Separate network and host portions |
+| Format | 32-bit binary mask |
+| Operation | Bitwise AND with IP to get network ID |
+| Helps With | Routing, subnetting, IP allocation |
+
+---
+
+###### 🧠 Interview Summary:
+
+> The subnet mask distinguishes the network portion from the host portion of an IP address by using a bitwise AND operation. It enables devices to determine if a destination IP is local or requires routing, facilitating efficient IP management and routing.
+
+#### Explain the difference between unicast, multicast, and broadcast IPv4 addresses.
+
+##### Summary Table
+
+| Address Type | Communication | Address Range / Examples | Use Case | Routing Behavior |
+| --- | --- | --- | --- | --- |
+| Unicast | One-to-one | Any unique IP, e.g., 192.168.1.10 | Direct host communication | Delivered to a single device |
+| Multicast | One-to-many | 224.0.0.0 – 239.255.255.255 | Group communication (streaming) | Routers forward to interested groups |
+| Broadcast | One-to-all | 255.255.255.255 (limited), subnet broadcast (e.g., 192.168.1.255) | Network-wide messages (DHCP, ARP) | Not forwarded beyond local subnet |
+
+---
+
+###### 🧠 Interview Summary:
+
+> Unicast addresses identify a single device for one-to-one communication. Multicast addresses target a group of devices for efficient one-to-many data distribution. Broadcast addresses send data to all devices on a local subnet but are not routed beyond it.
+
+#### What is the loopback address in IPv4? What is it used for?
+
+##### What is the Loopback Address in IPv4?
+
+---
+
+###### Definition:
+
+- The **loopback address** is a special IPv4 address used to test the network stack on a device **internally**, without sending traffic on the physical network.
+- The entire **127.0.0.0/8** block is reserved for loopback, but the most commonly used address is:
     
     ```
-    
-    - Resulting network address: `192.168.10.0`
-    
-    ---
-    
-    ### What Happens Next?
-    
-    - Hosts use the subnet mask to **determine if the destination IP is in the same subnet**:
-        - If `(Destination IP & Subnet Mask) == (Source IP & Subnet Mask)`, then destination is local.
-        - Otherwise, traffic is sent to the default gateway/router.
-    
-    ---
-    
-    ## Summary Table:
-    
-    | Aspect | Explanation |
-    | --- | --- |
-    | Purpose | Separate network and host portions |
-    | Format | 32-bit binary mask |
-    | Operation | Bitwise AND with IP to get network ID |
-    | Helps With | Routing, subnetting, IP allocation |
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > The subnet mask distinguishes the network portion from the host portion of an IP address by using a bitwise AND operation. It enables devices to determine if a destination IP is local or requires routing, facilitating efficient IP management and routing.
-    > 
-- Explain the difference between unicast, multicast, and broadcast IPv4 addresses.
-    
-    ### Summary Table
-    
-    | Address Type | Communication | Address Range / Examples | Use Case | Routing Behavior |
-    | --- | --- | --- | --- | --- |
-    | Unicast | One-to-one | Any unique IP, e.g., 192.168.1.10 | Direct host communication | Delivered to a single device |
-    | Multicast | One-to-many | 224.0.0.0 – 239.255.255.255 | Group communication (streaming) | Routers forward to interested groups |
-    | Broadcast | One-to-all | 255.255.255.255 (limited), subnet broadcast (e.g., 192.168.1.255) | Network-wide messages (DHCP, ARP) | Not forwarded beyond local subnet |
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > Unicast addresses identify a single device for one-to-one communication. Multicast addresses target a group of devices for efficient one-to-many data distribution. Broadcast addresses send data to all devices on a local subnet but are not routed beyond it.
-    > 
-- What is the loopback address in IPv4? What is it used for?
-    
-    # What is the Loopback Address in IPv4?
-    
-    ---
-    
-    ### Definition:
-    
-    - The **loopback address** is a special IPv4 address used to test the network stack on a device **internally**, without sending traffic on the physical network.
-    - The entire **127.0.0.0/8** block is reserved for loopback, but the most commonly used address is:
-        
-        ```
-        CopyEdit
-        127.0.0.1
-        
-        ```
-        
-    
-    ---
-    
-    ### Purpose and Use Cases:
-    
-    1. **Testing the local TCP/IP stack:**
-        - Allows a device to send packets to itself to verify that the IP software and networking stack are working properly.
-        - Example: Pinging `127.0.0.1` tests if the network software is installed and functioning.
-    2. **Software Development and Debugging:**
-        - Developers use the loopback address to run network services locally without exposing them to the external network.
-    3. **Local Communication:**
-        - Some applications use loopback for inter-process communication on the same machine.
-    
-    ---
-    
-    ### Important Characteristics:
-    
-    - Packets sent to the loopback address **never leave the host**.
-    - Loopback interfaces are **virtual**, meaning no physical hardware is involved.
-    - The loopback address is standardized and guaranteed not to conflict with any real network.
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > The IPv4 loopback address (commonly 127.0.0.1) is used for internal testing of the TCP/IP stack on a device. It enables sending packets to oneself without using the physical network, useful for diagnostics, development, and local inter-process communication.
-    > 
+    127.0.0.1
+    ```
+
+---
+
+###### Purpose and Use Cases:
+
+1. **Testing the local TCP/IP stack:**
+    - Allows a device to send packets to itself to verify that the IP software and networking stack are working properly.
+    - Example: Pinging `127.0.0.1` tests if the network software is installed and functioning.
+2. **Software Development and Debugging:**
+    - Developers use the loopback address to run network services locally without exposing them to the external network.
+3. **Local Communication:**
+    - Some applications use loopback for inter-process communication on the same machine.
+
+---
+
+###### Important Characteristics:
+
+- Packets sent to the loopback address **never leave the host**.
+- Loopback interfaces are **virtual**, meaning no physical hardware is involved.
+- The loopback address is standardized and guaranteed not to conflict with any real network.
+
+---
+
+###### 🧠 Interview Summary:
+
+> The IPv4 loopback address (commonly 127.0.0.1) is used for internal testing of the TCP/IP stack on a device. It enables sending packets to oneself without using the physical network, useful for diagnostics, development, and local inter-process communication.
 
 ### Advanced Subnetting & Addressing
 
-- Given an IP and subnet mask, how do you find the network address, broadcast address, and host range?
-- How do you perform Variable Length Subnet Masking (VLSM)?
-- What is supernetting? When and why is it used?
+#### Given an IP and subnet mask, how do you find the network address, broadcast address, and host range?
+
+#### How do you perform Variable Length Subnet Masking (VLSM)?
+
+#### What is supernetting? When and why is it used?
+
+##### What is Supernetting?
+
+---
+
+###### Definition:
+
+- **Supernetting** is the process of combining multiple contiguous smaller IP networks (subnets) into a **larger single network (supernet)**.
+- It is essentially the **opposite of subnetting**.
+- Supernetting uses a **shorter subnet mask** (fewer network bits) than the default classful mask to aggregate several networks.
+
+---
+
+###### How It Works:
+
+- In subnetting, you **borrow bits** from the host portion to create more networks.
+- In supernetting, you **"give back" bits** from the network portion to combine multiple networks.
+- This allows routers to use **route summarization**, reducing the size of routing tables.
+
+---
+
+###### Example:
+
+- Suppose you have four Class C networks:
     
-    # What is Supernetting?
+    ```
+    192.168.16.0/24
+    192.168.17.0/24
+    192.168.18.0/24
+    192.168.19.0/24
+    ```
     
-    ---
+- These can be combined into a single supernet:
     
-    ### Definition:
+    ```
+    192.168.16.0/22
+    ```
     
-    - **Supernetting** is the process of combining multiple contiguous smaller IP networks (subnets) into a **larger single network (supernet)**.
-    - It is essentially the **opposite of subnetting**.
-    - Supernetting uses a **shorter subnet mask** (fewer network bits) than the default classful mask to aggregate several networks.
+- The `/22` mask covers the range from `192.168.16.0` to `192.168.19.255`.
+
+---
+
+##### When and Why is Supernetting Used?
+
+1. **Route Aggregation:**
+    - To reduce the number of routing table entries in routers by summarizing multiple routes into one.
+    - This improves router performance and scalability.
+2. **Efficient Use of Address Space:**
+    - Helps optimize routing policies and IP address assignments.
+3. **Internet Service Providers (ISPs):**
+    - ISPs use supernetting to advertise fewer routes to the Internet backbone, simplifying global routing tables.
+
+---
+
+###### Key Points:
+
+- Supernetting is mainly used with **Classless Inter-Domain Routing (CIDR)**.
+- It requires the combined networks to be **contiguous and aligned** on the new supernet mask boundary.
+
+---
+
+###### 🧠 Interview Summary:
+
+> Supernetting aggregates multiple smaller contiguous IP networks into a larger single network by shortening the subnet mask. It reduces routing table size, improves efficiency, and is widely used in route summarization, especially by ISPs.
+
+#### Explain how subnetting can optimize IP address allocation in a large organization.
+
+#### What is the difference between subnet mask and wildcard mask? Where is each used?
+
+##### Difference Between Subnet Mask and Wildcard Mask
+
+| Aspect | Subnet Mask | Wildcard Mask |
+| --- | --- | --- |
+| **Purpose** | Defines the **network and host portions** of an IP address by masking bits | Defines which bits to **ignore or match** in access control and routing policies |
+| **Representation** | A 32-bit mask with **1s for network bits** and **0s for host bits** | A 32-bit mask with **0s where bits must match** and **1s where bits can vary** |
+| **Example** | 255.255.255.0 (`1111...0000`) | 0.0.0.255 (`0000...1111`) |
+| **Usage** | Used for IP addressing and subnetting to separate network and host IDs | Primarily used in Cisco Access Control Lists (ACLs) and route matching to specify IP ranges |
+| **Operation** | Bitwise AND with IP address to extract network portion | Bitwise comparison with IP address to allow wildcard matching |
+| **Notation** | Standard dotted-decimal subnet mask or CIDR (e.g., /24) | Dotted-decimal format (no CIDR) specifying bits to ignore |
+
+---
+
+##### How Each is Used
+
+###### Subnet Mask:
+
+- Used by hosts and routers to identify **which part of an IP address is network vs host**.
+- Essential for **routing decisions** and **IP address allocation**.
+- Helps determine if a destination IP is local or remote.
+
+---
+
+###### Wildcard Mask:
+
+- Used mostly in **Cisco networking**, especially in:
+    - **Access Control Lists (ACLs):** to define ranges of IP addresses to permit or deny.
+    - **Routing protocols (e.g., OSPF):** to specify network ranges for routing updates.
+- Wildcard mask bits set to **0** mean "this bit must match,"
     
-    ---
+    bits set to **1** mean "ignore this bit."
+
+---
+
+##### Example to Illustrate:
+
+- Subnet Mask: `255.255.255.0`
     
-    ### How It Works:
+    Means the first 24 bits are network bits.
     
-    - In subnetting, you **borrow bits** from the host portion to create more networks.
-    - In supernetting, you **"give back" bits** from the network portion to combine multiple networks.
-    - This allows routers to use **route summarization**, reducing the size of routing tables.
+- Wildcard Mask: `0.0.0.255`
     
-    ---
+    Means the first 24 bits must match exactly, and the last 8 bits can be any value.
+
+---
+
+###### 🧠 Interview Summary:
+
+> A subnet mask separates the network and host portions of an IP address and is used in routing and addressing. A wildcard mask specifies which bits to ignore or match in IP addresses and is mainly used in ACLs and routing policies, especially on Cisco devices.
+
+#### How do you design an IPv4 addressing scheme for a multi-site enterprise?
+
+##### Designing an IPv4 Addressing Scheme for a Multi-Site Enterprise
+
+---
+
+###### Key Objectives:
+
+- Avoid IP conflicts across sites.
+- Efficient address space utilization.
+- Simplify routing and management.
+- Support future growth and scalability.
+- Facilitate security segmentation.
+
+---
+
+###### Step 1: Understand Requirements
+
+- **Number of sites:** How many locations/offices?
+- **Size of each site:** Number of devices per site (current and projected).
+- **Network hierarchy:** VLANs, subnets, departments.
+- **Routing strategy:** Centralized or distributed.
+- **Security:** Segmentation, VPNs, firewall zones.
+
+---
+
+###### Step 2: Choose Address Space
+
+- Use **private IP address ranges** per RFC 1918:
     
-    ### Example:
-    
-    - Suppose you have four Class C networks:
-        
-        ```
-        CopyEdit
-        192.168.16.0/24
-        192.168.17.0/24
-        192.168.18.0/24
-        192.168.19.0/24
-        
-        ```
-        
-    - These can be combined into a single supernet:
-        
-        ```
-        CopyEdit
-        192.168.16.0/22
-        
-        ```
-        
-    - The `/22` mask covers the range from `192.168.16.0` to `192.168.19.255`.
-    
-    ---
-    
-    ### When and Why is Supernetting Used?
-    
-    1. **Route Aggregation:**
-        - To reduce the number of routing table entries in routers by summarizing multiple routes into one.
-        - This improves router performance and scalability.
-    2. **Efficient Use of Address Space:**
-        - Helps optimize routing policies and IP address assignments.
-    3. **Internet Service Providers (ISPs):**
-        - ISPs use supernetting to advertise fewer routes to the Internet backbone, simplifying global routing tables.
-    
-    ---
-    
-    ### Key Points:
-    
-    - Supernetting is mainly used with **Classless Inter-Domain Routing (CIDR)**.
-    - It requires the combined networks to be **contiguous and aligned** on the new supernet mask boundary.
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > Supernetting aggregates multiple smaller contiguous IP networks into a larger single network by shortening the subnet mask. It reduces routing table size, improves efficiency, and is widely used in route summarization, especially by ISPs.
-    > 
-- Explain how subnetting can optimize IP address allocation in a large organization.
-- What is the difference between subnet mask and wildcard mask? Where is each used?
-    
-    # Difference Between Subnet Mask and Wildcard Mask
-    
-    ---
-    
-    | Aspect | Subnet Mask | Wildcard Mask |
+    | Range | CIDR | Addresses |
     | --- | --- | --- |
-    | **Purpose** | Defines the **network and host portions** of an IP address by masking bits | Defines which bits to **ignore or match** in access control and routing policies |
-    | **Representation** | A 32-bit mask with **1s for network bits** and **0s for host bits** | A 32-bit mask with **0s where bits must match** and **1s where bits can vary** |
-    | **Example** | 255.255.255.0 (`11111111.11111111.11111111.00000000`) | 0.0.0.255 (`00000000.00000000.00000000.11111111`) |
-    | **Usage** | Used for IP addressing and subnetting to separate network and host IDs | Primarily used in Cisco Access Control Lists (ACLs) and route matching to specify IP ranges |
-    | **Operation** | Bitwise AND with IP address to extract network portion | Bitwise comparison with IP address to allow wildcard matching |
-    | **Notation** | Standard dotted-decimal subnet mask or CIDR (e.g., /24) | Dotted-decimal format (no CIDR) specifying bits to ignore |
+    | 10.0.0.0 – 10.255.255.255 | 10.0.0.0/8 | 16 million+ addresses |
+    | 172.16.0.0 – 172.31.255.255 | 172.16.0.0/12 | 1 million+ addresses |
+    | 192.168.0.0 – 192.168.255.255 | 192.168.0.0/16 | 65,536 addresses |
+- Typically, **10.0.0.0/8** is chosen for large multi-site networks due to its size and flexibility.
+
+---
+
+###### Step 3: Allocate Address Blocks per Site
+
+- Divide the overall private range into **site-specific subnets**.
+- For example, allocate a **/16 or /20 block per site** depending on size.
+- Example:
     
-    ---
-    
-    # How Each is Used
-    
-    ### Subnet Mask:
-    
-    - Used by hosts and routers to identify **which part of an IP address is network vs host**.
-    - Essential for **routing decisions** and **IP address allocation**.
-    - Helps determine if a destination IP is local or remote.
-    
-    ---
-    
-    ### Wildcard Mask:
-    
-    - Used mostly in **Cisco networking**, especially in:
-        - **Access Control Lists (ACLs):** to define ranges of IP addresses to permit or deny.
-        - **Routing protocols (e.g., OSPF):** to specify network ranges for routing updates.
-    - Wildcard mask bits set to **0** mean "this bit must match,"
-        
-        bits set to **1** mean "ignore this bit."
-        
-    
-    ---
-    
-    # Example to Illustrate:
-    
-    - Subnet Mask: `255.255.255.0`
-        
-        Means the first 24 bits are network bits.
-        
-    - Wildcard Mask: `0.0.0.255`
-        
-        Means the first 24 bits must match exactly, and the last 8 bits can be any value.
-        
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > A subnet mask separates the network and host portions of an IP address and is used in routing and addressing. A wildcard mask specifies which bits to ignore or match in IP addresses and is mainly used in ACLs and routing policies, especially on Cisco devices.
-    > 
-- How do you design an IPv4 addressing scheme for a multi-site enterprise?
-    
-    # Designing an IPv4 Addressing Scheme for a Multi-Site Enterprise
-    
-    ---
-    
-    ### Key Objectives:
-    
-    - Avoid IP conflicts across sites.
-    - Efficient address space utilization.
-    - Simplify routing and management.
-    - Support future growth and scalability.
-    - Facilitate security segmentation.
-    
-    ---
-    
-    ### Step 1: Understand Requirements
-    
-    - **Number of sites:** How many locations/offices?
-    - **Size of each site:** Number of devices per site (current and projected).
-    - **Network hierarchy:** VLANs, subnets, departments.
-    - **Routing strategy:** Centralized or distributed.
-    - **Security:** Segmentation, VPNs, firewall zones.
-    
-    ---
-    
-    ### Step 2: Choose Address Space
-    
-    - Use **private IP address ranges** per RFC 1918:
-        
-        
-        | Range | CIDR | Addresses |
-        | --- | --- | --- |
-        | 10.0.0.0 – 10.255.255.255 | 10.0.0.0/8 | 16 million+ addresses |
-        | 172.16.0.0 – 172.31.255.255 | 172.16.0.0/12 | 1 million+ addresses |
-        | 192.168.0.0 – 192.168.255.255 | 192.168.0.0/16 | 65,536 addresses |
-    - Typically, **10.0.0.0/8** is chosen for large multi-site networks due to its size and flexibility.
-    
-    ---
-    
-    ### Step 3: Allocate Address Blocks per Site
-    
-    - Divide the overall private range into **site-specific subnets**.
-    - For example, allocate a **/16 or /20 block per site** depending on size.
-    - Example:
-        
-        
-        | Site | Allocated Block | Number of Hosts |
-        | --- | --- | --- |
-        | Site A | 10.1.0.0/16 | 65,534 |
-        | Site B | 10.2.0.0/16 | 65,534 |
-        | Site C | 10.3.0.0/20 | 4,094 |
-    - Use hierarchical addressing for easy routing and summarization.
-    
-    ---
-    
-    ### Step 4: Subnet Design Within Each Site
-    
-    - Divide each site block into smaller **subnets/VLANs** for departments or functions.
-    - Use subnet masks to allocate appropriate host counts (e.g., /24 for up to 254 hosts).
-    - Example for Site A (10.1.0.0/16):
-        - HR: 10.1.10.0/24
-        - Engineering: 10.1.20.0/24
-        - Guest Wi-Fi: 10.1.30.0/24
-    
-    ---
-    
-    ### Step 5: Routing and Aggregation
-    
-    - Use **route summarization** at WAN edge routers to reduce routing table size.
-    - For example, advertise **10.1.0.0/16** for Site A instead of individual subnets.
-    
-    ---
-    
-    ### Step 6: Address Management and Documentation
-    
-    - Maintain a **centralized IP address management (IPAM)** system.
-    - Document:
-        - Site allocations
-        - Subnet assignments
-        - Reserved addresses (servers, network devices)
-        - DHCP scopes
-    
-    ---
-    
-    ### Step 7: Plan for Security and Segmentation
-    
-    - Use **VLANs and firewalls** to isolate sensitive subnets.
-    - Assign different IP ranges to critical infrastructure.
-    
-    ---
-    
-    ### Step 8: Consider Future Growth
-    
-    - Leave **room for subnet expansion** within site blocks.
-    - Use flexible subnet masks (CIDR) to accommodate changes.
-    
-    ---
-    
-    ### Additional Tips
-    
-    - Avoid overlapping IP ranges between sites to prevent VPN conflicts.
-    - Consider IPv6 adoption for future-proofing.
-    - Use DHCP with proper scopes and reservations per site.
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > Design an IPv4 addressing scheme for a multi-site enterprise by selecting appropriate private address space, allocating site-specific subnets, subdividing into department VLANs, planning routing with summarization, and managing IPs centrally. Ensure scalability, security, and ease of management for future growth.
-    > 
+    | Site | Allocated Block | Number of Hosts |
+    | --- | --- | --- |
+    | Site A | 10.1.0.0/16 | 65,534 |
+    | Site B | 10.2.0.0/16 | 65,534 |
+    | Site C | 10.3.0.0/20 | 4,094 |
+- Use hierarchical addressing for easy routing and summarization.
+
+---
+
+###### Step 4: Subnet Design Within Each Site
+
+- Divide each site block into smaller **subnets/VLANs** for departments or functions.
+- Use subnet masks to allocate appropriate host counts (e.g., /24 for up to 254 hosts).
+- Example for Site A (10.1.0.0/16):
+    - HR: 10.1.10.0/24
+    - Engineering: 10.1.20.0/24
+    - Guest Wi-Fi: 10.1.30.0/24
+
+---
+
+###### Step 5: Routing and Aggregation
+
+- Use **route summarization** at WAN edge routers to reduce routing table size.
+- For example, advertise **10.1.0.0/16** for Site A instead of individual subnets.
+
+---
+
+###### Step 6: Address Management and Documentation
+
+- Maintain a **centralized IP address management (IPAM)** system.
+- Document:
+    - Site allocations
+    - Subnet assignments
+    - Reserved addresses (servers, network devices)
+    - DHCP scopes
+
+---
+
+###### Step 7: Plan for Security and Segmentation
+
+- Use **VLANs and firewalls** to isolate sensitive subnets.
+- Assign different IP ranges to critical infrastructure.
+
+---
+
+###### Step 8: Consider Future Growth
+
+- Leave **room for subnet expansion** within site blocks.
+- Use flexible subnet masks (CIDR) to accommodate changes.
+
+---
+
+###### Additional Tips
+
+- Avoid overlapping IP ranges between sites to prevent VPN conflicts.
+- Consider IPv6 adoption for future-proofing.
+- Use DHCP with proper scopes and reservations per site.
+
+---
+
+###### 🧠 Interview Summary:
+
+> Design an IPv4 addressing scheme for a multi-site enterprise by selecting appropriate private address space, allocating site-specific subnets, subdividing into department VLANs, planning routing with summarization, and managing IPs centrally. Ensure scalability, security, and ease of management for future growth.
 
 ### Routing & Protocols
 
-- How does IPv4 routing work?
-    
-    # How IPv4 Routing Works
-    
-    ---
-    
-    ### 1. **What is IPv4 Routing?**
-    
-    - Routing is the process of **forwarding IP packets from a source to a destination across interconnected networks**.
-    - IPv4 routing determines the **best path** for a packet to reach its destination IP address.
-    
-    ---
-    
-    ### 2. **Key Components of IPv4 Routing**
-    
-    - **Router:** A network device that forwards packets between different IP networks based on routing tables.
-    - **Routing Table:** Contains network prefixes and the next-hop or interface to reach those networks.
-    - **Routing Protocols:** Algorithms that help routers learn network topology and update routing tables dynamically (e.g., OSPF, BGP, RIP).
-    
-    ---
-    
-    ### 3. **Routing Process**
-    
-    ### Step 1: Packet Arrival
-    
-    - A router receives an IPv4 packet on an incoming interface.
-    
-    ### Step 2: Examine Destination IP
-    
-    - The router extracts the **destination IP address** from the packet header.
-    
-    ### Step 3: Longest Prefix Match Lookup
-    
-    - Router searches its routing table for the route with the **longest matching prefix** for the destination IP.
-    - The longest prefix match means the most specific route (largest subnet mask) is chosen.
-    
-    ### Step 4: Forwarding Decision
-    
-    - The router determines the **next-hop IP address** or **outgoing interface** based on the matched route.
-    - If the destination is directly connected, it sends the packet out on the corresponding interface.
-    - Otherwise, it forwards the packet to the next-hop router.
-    
-    ### Step 5: Packet Forwarding
-    
-    - The router forwards the packet towards the destination based on the routing decision.
-    - Each router along the path repeats this process until the packet reaches the destination network.
-    
-    ---
-    
-    ### 4. **Routing Table Entries**
-    
-    - Each entry typically includes:
-        - **Destination network (prefix) and subnet mask**
-        - **Next-hop IP address**
-        - **Outgoing interface**
-        - **Metric/Cost** (used to choose best route)
-    
-    ---
-    
-    ### 5. **Static vs Dynamic Routing**
-    
-    - **Static Routing:** Manually configured routes; simple but less scalable.
-    - **Dynamic Routing:** Routes learned and maintained automatically by routing protocols, adapting to network changes.
-    
-    ---
-    
-    ### 6. **Routing Example**
-    
-    - Packet destined for `10.2.3.4` arrives at Router A.
-    - Router A’s routing table has:
-        - `10.2.0.0/16` → next-hop Router B
-        - `10.2.3.0/24` → directly connected interface
-    - Router A uses the **longest prefix match** (`10.2.3.0/24`) and forwards packet directly to that subnet.
-    
-    ---
-    
-    ### 7. **What if No Route Matches?**
-    
-    - Router uses the **default route** (often `0.0.0.0/0`) to forward the packet.
-    - If no default route exists, the packet is dropped.
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > IPv4 routing works by routers examining the destination IP of incoming packets, performing a longest prefix match against their routing table, and forwarding packets to the next-hop or outgoing interface towards the destination network. Routing tables can be populated manually or dynamically through routing protocols.
-    > 
-- Explain ARP (Address Resolution Protocol) and its role in IPv4 networks.
-    
-    # What is ARP (Address Resolution Protocol)?
-    
-    ---
-    
-    ### Definition:
-    
-    - **ARP** is a network protocol used to **map an IPv4 address (Layer 3 address) to a MAC address (Layer 2 address)**.
-    - It enables devices on a **local Ethernet network** to discover the hardware (MAC) address of another device when only its IPv4 address is known.
-    
-    ---
-    
-    # Why is ARP Important?
-    
-    - IPv4 uses IP addresses for logical addressing, but actual data delivery on Ethernet requires MAC addresses.
-    - Before sending a packet to a local device, a host must know the MAC address associated with the destination IP.
-    - ARP solves this by translating IP addresses into MAC addresses within the same broadcast domain.
-    
-    ---
-    
-    # How Does ARP Work?
-    
-    ---
-    
-    ### 1. **ARP Request**
-    
-    - When a device wants to send a packet to a local IP address but doesn’t know its MAC address:
-        - It broadcasts an **ARP Request** to the entire local network.
-        - The ARP Request contains the sender’s IP and MAC, and the target IP address it wants to resolve.
-    
-    ---
-    
-    ### 2. **ARP Reply**
-    
-    - The device with the requested IP address responds with an **ARP Reply**:
-        - It is a **unicast** message directly sent back to the requester.
-        - Contains the MAC address associated with the requested IP.
-    
-    ---
-    
-    ### 3. **Caching**
-    
-    - The requester stores this IP-to-MAC mapping in its **ARP cache** to avoid repeated broadcasts.
-    - Entries have a timeout and are refreshed or removed as needed.
-    
-    ---
-    
-    # ARP Packet Structure (Simplified)
-    
-    | Field | Purpose |
-    | --- | --- |
-    | Hardware Type | Type of hardware (Ethernet=1) |
-    | Protocol Type | Protocol (IPv4=0x0800) |
-    | Hardware Size | Length of MAC address (6 bytes) |
-    | Protocol Size | Length of IP address (4 bytes) |
-    | Opcode | Request (1) or Reply (2) |
-    | Sender MAC | MAC address of sender |
-    | Sender IP | IP address of sender |
-    | Target MAC | MAC address of target (empty in request) |
-    | Target IP | IP address of target |
-    
-    ---
-    
-    # When is ARP Used?
-    
-    - When sending packets **within the same subnet** or broadcast domain.
-    - For example, to send an IP packet from Host A to Host B on the same LAN, ARP resolves Host B’s MAC.
-    
-    ---
-    
-    # Limitations of ARP
-    
-    - Works only on the **local subnet** (Layer 2 broadcast domain).
-    - Not used to resolve MAC addresses beyond the router (for remote IPs).
-    - Vulnerable to spoofing attacks (ARP poisoning).
-    
-    ---
-    
-    # Summary Table
-    
-    | Aspect | Description |
-    | --- | --- |
-    | Protocol | Address Resolution Protocol (ARP) |
-    | Function | Resolves IPv4 address to MAC address |
-    | Operation | Broadcast request, unicast reply |
-    | Scope | Local subnet only |
-    | Cache | Stores resolved IP-MAC mappings |
-    | Vulnerabilities | Susceptible to spoofing |
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > ARP maps IPv4 addresses to MAC addresses on a local subnet. When a device needs to communicate with an IP on the same LAN but lacks the MAC, it broadcasts an ARP request. The device owning that IP responds with its MAC, enabling local delivery of Ethernet frames.
-    > 
-- What are the differences between static routing and dynamic routing?
-    
-    # Differences Between Static Routing and Dynamic Routing
-    
-    | Feature | Static Routing | Dynamic Routing |
-    | --- | --- | --- |
-    | **Definition** | Routes are manually configured by a network admin | Routes are automatically learned and updated by routing protocols |
-    | **Configuration** | Manual configuration on each router | Routers exchange routing info via protocols (e.g., OSPF, BGP, RIP) |
-    | **Scalability** | Limited scalability; hard to manage in large networks | Highly scalable; adapts well to network growth and changes |
-    | **Adaptability** | Does **not** adapt automatically to network changes or failures | Automatically updates routes based on topology changes |
-    | **Overhead** | Minimal CPU and bandwidth overhead | Generates control traffic, consuming bandwidth and CPU |
-    | **Security** | More secure as routes don’t change unless admin modifies | Vulnerable to incorrect routing info or attacks if not secured |
-    | **Use Cases** | Small or simple networks, stub networks, or specific routes | Large, complex networks requiring fault tolerance and load balancing |
-    | **Complexity** | Simpler to understand and implement | More complex; requires knowledge of routing protocols |
-    | **Troubleshooting** | Easier to troubleshoot due to static, predictable routes | Harder due to dynamic route changes and multiple protocol interactions |
-    | **Example Protocols** | N/A (manual routes) | OSPF, EIGRP, RIP, BGP, IS-IS |
-    
-    ---
-    
-    ## Summary:
-    
-    - **Static routing** is straightforward but inflexible and better for small or stable networks.
-    - **Dynamic routing** is complex but provides scalability, redundancy, and automatic adjustment to network changes.
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > Static routing requires manual setup and is suitable for small or simple networks. Dynamic routing uses protocols to automatically discover and update routes, providing scalability and resilience for larger networks.
-    > 
-- How does NAT (Network Address Translation) work in IPv4? Explain different types of NAT.
-- What problems does NAT solve, and what are its limitations?
-- Explain fragmentation in IPv4. When and how does it occur?
-    
-    # What is Fragmentation in IPv4?
-    
-    ---
-    
-    ### Definition:
-    
-    - **Fragmentation** is the process of breaking a large IP packet into smaller pieces (fragments) so that they can pass through a network with a smaller **Maximum Transmission Unit (MTU)** than the original packet size.
-    
-    ---
-    
-    ### Why is Fragmentation Needed?
-    
-    - Different network links have different MTU sizes (maximum packet size that can be transmitted without being broken).
-    - If an IPv4 packet exceeds the MTU of a network segment along its path, it must be fragmented to traverse that segment.
-    - IPv4 routers or the sending host perform fragmentation.
-    
-    ---
-    
-    # When Does IPv4 Fragmentation Occur?
-    
-    - **At the sender or router** when the packet size > MTU of the outgoing interface.
-    - Happens **only if the "Don't Fragment" (DF) flag in the IPv4 header is NOT set**.
-    - If the DF flag is set and the packet is too large, the packet is dropped, and an ICMP "Fragmentation Needed" message is sent back (used in Path MTU Discovery).
-    
-    ---
-    
-    # How Does IPv4 Fragmentation Work?
-    
-    ---
-    
-    ### IPv4 Packet Header Fields Used:
-    
-    - **Identification:** Unique ID to associate all fragments of a packet.
-    - **Flags:** 3 bits including the DF (Don't Fragment) and MF (More Fragments) flags.
-    - **Fragment Offset:** Indicates the position of the fragment’s data relative to the start of the original packet, measured in 8-byte blocks.
-    
-    ---
-    
-    ### Fragmentation Process:
-    
-    1. **Packet Larger Than MTU Detected:**
-        - The packet is split into smaller fragments, each fitting within the MTU (typically MTU minus IPv4 header size).
-    2. **Setting Headers for Each Fragment:**
-        - Each fragment gets a copy of the original IPv4 header.
-        - The **Identification field** is the same for all fragments of the original packet.
-        - The **Fragment Offset** indicates where the fragment belongs in the original payload.
-        - The **More Fragments (MF) flag** is set on all fragments except the last one.
-    3. **Transmission:**
-        - Fragments are sent separately over the network.
-    
-    ---
-    
-    ### Example:
-    
-    - Original packet size: 4000 bytes
-    - MTU size: 1500 bytes
-    - IPv4 header size: 20 bytes
-    - Maximum fragment data size: 1500 – 20 = 1480 bytes
-    
-    Number of fragments:
-    
+#### How does IPv4 routing work?
+
+##### How IPv4 Routing Works
+
+---
+
+###### 1. **What is IPv4 Routing?**
+
+- Routing is the process of **forwarding IP packets from a source to a destination across interconnected networks**.
+- IPv4 routing determines the **best path** for a packet to reach its destination IP address.
+
+---
+
+###### 2. **Key Components of IPv4 Routing**
+
+- **Router:** A network device that forwards packets between different IP networks based on routing tables.
+- **Routing Table:** Contains network prefixes and the next-hop or interface to reach those networks.
+- **Routing Protocols:** Algorithms that help routers learn network topology and update routing tables dynamically (e.g., OSPF, BGP, RIP).
+
+---
+
+###### 3. **Routing Process**
+
+###### Step 1: Packet Arrival
+
+- A router receives an IPv4 packet on an incoming interface.
+
+###### Step 2: Examine Destination IP
+
+- The router extracts the **destination IP address** from the packet header.
+
+###### Step 3: Longest Prefix Match Lookup
+
+- Router searches its routing table for the route with the **longest matching prefix** for the destination IP.
+- The longest prefix match means the most specific route (largest subnet mask) is chosen.
+
+###### Step 4: Forwarding Decision
+
+- The router determines the **next-hop IP address** or **outgoing interface** based on the matched route.
+- If the destination is directly connected, it sends the packet out on the corresponding interface.
+- Otherwise, it forwards the packet to the next-hop router.
+
+###### Step 5: Packet Forwarding
+
+- The router forwards the packet towards the destination based on the routing decision.
+- Each router along the path repeats this process until the packet reaches the destination network.
+
+---
+
+###### 4. **Routing Table Entries**
+
+- Each entry typically includes:
+    - **Destination network (prefix) and subnet mask**
+    - **Next-hop IP address**
+    - **Outgoing interface**
+    - **Metric/Cost** (used to choose best route)
+
+---
+
+###### 5. **Static vs Dynamic Routing**
+
+- **Static Routing:** Manually configured routes; simple but less scalable.
+- **Dynamic Routing:** Routes learned and maintained automatically by routing protocols, adapting to network changes.
+
+---
+
+###### 6. **Routing Example**
+
+- Packet destined for `10.2.3.4` arrives at Router A.
+- Router A’s routing table has:
+    - `10.2.0.0/16` → next-hop Router B
+    - `10.2.3.0/24` → directly connected interface
+- Router A uses the **longest prefix match** (`10.2.3.0/24`) and forwards packet directly to that subnet.
+
+---
+
+###### 7. **What if No Route Matches?**
+
+- Router uses the **default route** (often `0.0.0.0/0`) to forward the packet.
+- If no default route exists, the packet is dropped.
+
+---
+
+###### 🧠 Interview Summary:
+
+> IPv4 routing works by routers examining the destination IP of incoming packets, performing a longest prefix match against their routing table, and forwarding packets to the next-hop or outgoing interface towards the destination network. Routing tables can be populated manually or dynamically through routing protocols.
+
+#### Explain ARP (Address Resolution Protocol) and its role in IPv4 networks.
+
+##### What is ARP (Address Resolution Protocol)?
+
+---
+
+###### Definition:
+
+- **ARP** is a network protocol used to **map an IPv4 address (Layer 3 address) to a MAC address (Layer 2 address)**.
+- It enables devices on a **local Ethernet network** to discover the hardware (MAC) address of another device when only its IPv4 address is known.
+
+---
+
+##### Why is ARP Important?
+
+- IPv4 uses IP addresses for logical addressing, but actual data delivery on Ethernet requires MAC addresses.
+- Before sending a packet to a local device, a host must know the MAC address associated with the destination IP.
+- ARP solves this by translating IP addresses into MAC addresses within the same broadcast domain.
+
+---
+
+##### How Does ARP Work?
+
+---
+
+###### 1. **ARP Request**
+
+- When a device wants to send a packet to a local IP address but doesn’t know its MAC address:
+    - It broadcasts an **ARP Request** to the entire local network.
+    - The ARP Request contains the sender’s IP and MAC, and the target IP address it wants to resolve.
+
+---
+
+###### 2. **ARP Reply**
+
+- The device with the requested IP address responds with an **ARP Reply**:
+    - It is a **unicast** message directly sent back to the requester.
+    - Contains the MAC address associated with the requested IP.
+
+---
+
+###### 3. **Caching**
+
+- The requester stores this IP-to-MAC mapping in its **ARP cache** to avoid repeated broadcasts.
+- Entries have a timeout and are refreshed or removed as needed.
+
+---
+
+##### ARP Packet Structure (Simplified)
+
+| Field | Purpose |
+| --- | --- |
+| Hardware Type | Type of hardware (Ethernet=1) |
+| Protocol Type | Protocol (IPv4=0x0800) |
+| Hardware Size | Length of MAC address (6 bytes) |
+| Protocol Size | Length of IP address (4 bytes) |
+| Opcode | Request (1) or Reply (2) |
+| Sender MAC | MAC address of sender |
+| Sender IP | IP address of sender |
+| Target MAC | MAC address of target (empty in request) |
+| Target IP | IP address of target |
+
+---
+
+##### When is ARP Used?
+
+- When sending packets **within the same subnet** or broadcast domain.
+- For example, to send an IP packet from Host A to Host B on the same LAN, ARP resolves Host B’s MAC.
+
+---
+
+##### Limitations of ARP
+
+- Works only on the **local subnet** (Layer 2 broadcast domain).
+- Not used to resolve MAC addresses beyond the router (for remote IPs).
+- Vulnerable to spoofing attacks (ARP poisoning).
+
+---
+
+##### Summary Table
+
+| Aspect | Description |
+| --- | --- |
+| Protocol | Address Resolution Protocol (ARP) |
+| Function | Resolves IPv4 address to MAC address |
+| Operation | Broadcast request, unicast reply |
+| Scope | Local subnet only |
+| Cache | Stores resolved IP-MAC mappings |
+| Vulnerabilities | Susceptible to spoofing |
+
+---
+
+###### 🧠 Interview Summary:
+
+> ARP maps IPv4 addresses to MAC addresses on a local subnet. When a device needs to communicate with an IP on the same LAN but lacks the MAC, it broadcasts an ARP request. The device owning that IP responds with its MAC, enabling local delivery of Ethernet frames.
+
+#### What are the differences between static routing and dynamic routing?
+
+##### Differences Between Static Routing and Dynamic Routing
+
+| Feature | Static Routing | Dynamic Routing |
+| --- | --- | --- |
+| **Definition** | Routes are manually configured by a network admin | Routes are automatically learned and updated by routing protocols |
+| **Configuration** | Manual configuration on each router | Routers exchange routing info via protocols (e.g., OSPF, BGP, RIP) |
+| **Scalability** | Limited scalability; hard to manage in large networks | Highly scalable; adapts well to network growth and changes |
+| **Adaptability** | Does **not** adapt automatically to network changes or failures | Automatically updates routes based on topology changes |
+| **Overhead** | Minimal CPU and bandwidth overhead | Generates control traffic, consuming bandwidth and CPU |
+| **Security** | More secure as routes don’t change unless admin modifies | Vulnerable to incorrect routing info or attacks if not secured |
+| **Use Cases** | Small or simple networks, stub networks, or specific routes | Large, complex networks requiring fault tolerance and load balancing |
+| **Complexity** | Simpler to understand and implement | More complex; requires knowledge of routing protocols |
+| **Troubleshooting** | Easier to troubleshoot due to static, predictable routes | Harder due to dynamic route changes and multiple protocol interactions |
+| **Example Protocols** | N/A (manual routes) | OSPF, EIGRP, RIP, BGP, IS-IS |
+
+---
+
+###### Summary:
+
+- **Static routing** is straightforward but inflexible and better for small or stable networks.
+- **Dynamic routing** is complex but provides scalability, redundancy, and automatic adjustment to network changes.
+
+---
+
+###### 🧠 Interview Summary:
+
+> Static routing requires manual setup and is suitable for small or simple networks. Dynamic routing uses protocols to automatically discover and update routes, providing scalability and resilience for larger networks.
+
+#### How does NAT (Network Address Translation) work in IPv4? Explain different types of NAT.
+
+#### What problems does NAT solve, and what are its limitations?
+
+#### Explain fragmentation in IPv4. When and how does it occur?
+
+##### What is Fragmentation in IPv4?
+
+---
+
+###### Definition:
+
+- **Fragmentation** is the process of breaking a large IP packet into smaller pieces (fragments) so that they can pass through a network with a smaller **Maximum Transmission Unit (MTU)** than the original packet size.
+
+---
+
+###### Why is Fragmentation Needed?
+
+- Different network links have different MTU sizes (maximum packet size that can be transmitted without being broken).
+- If an IPv4 packet exceeds the MTU of a network segment along its path, it must be fragmented to traverse that segment.
+- IPv4 routers or the sending host perform fragmentation.
+
+---
+
+##### When Does IPv4 Fragmentation Occur?
+
+- **At the sender or router** when the packet size > MTU of the outgoing interface.
+- Happens **only if the "Don't Fragment" (DF) flag in the IPv4 header is NOT set**.
+- If the DF flag is set and the packet is too large, the packet is dropped, and an ICMP "Fragmentation Needed" message is sent back (used in Path MTU Discovery).
+
+---
+
+##### How Does IPv4 Fragmentation Work?
+
+---
+
+###### IPv4 Packet Header Fields Used:
+
+- **Identification:** Unique ID to associate all fragments of a packet.
+- **Flags:** 3 bits including the DF (Don't Fragment) and MF (More Fragments) flags.
+- **Fragment Offset:** Indicates the position of the fragment’s data relative to the start of the original packet, measured in 8-byte blocks.
+
+---
+
+###### Fragmentation Process:
+
+1. **Packet Larger Than MTU Detected:**
+    - The packet is split into smaller fragments, each fitting within the MTU (typically MTU minus IPv4 header size).
+2. **Setting Headers for Each Fragment:**
+    - Each fragment gets a copy of the original IPv4 header.
+    - The **Identification field** is the same for all fragments of the original packet.
+    - The **Fragment Offset** indicates where the fragment belongs in the original payload.
+    - The **More Fragments (MF) flag** is set on all fragments except the last one.
+3. **Transmission:**
+    - Fragments are sent separately over the network.
+
+---
+
+###### Example:
+
+- Original packet size: 4000 bytes
+- MTU size: 1500 bytes
+- IPv4 header size: 20 bytes
+- Maximum fragment data size: 1500 – 20 = 1480 bytes Number of fragments:
     - Fragment 1: Offset 0, length 1480 bytes, MF=1
     - Fragment 2: Offset 185 (1480/8), length 1480 bytes, MF=1
     - Fragment 3: Offset 370, length remaining bytes, MF=0 (last fragment)
-    
-    ---
-    
-    # Reassembly:
-    
-    - The destination host collects all fragments using the Identification field.
-    - Fragments are ordered by Fragment Offset.
-    - Once all fragments are received, the original packet is reassembled.
-    - If any fragment is missing or corrupted, the whole packet is discarded.
-    
-    ---
-    
-    # Important Notes:
-    
-    - **IPv6** handles fragmentation differently; routers do NOT fragment packets, only the sender.
-    - Fragmentation can cause performance issues and is generally avoided through Path MTU Discovery.
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > IPv4 fragmentation occurs when a packet exceeds the MTU of a network segment and is broken into smaller fragments, each with its own header and offset. Fragments travel independently and are reassembled at the destination. Fragmentation is controlled by flags in the IPv4 header and can be prevented by setting the DF flag.
-    > 
 
-# IPv4 Header & Field-Focused Interview Questions
+---
 
-- **What is the purpose of the IPv4 header?**
-    
-    # Purpose of the IPv4 Header
-    
-    ---
-    
-    ### 1. **Encapsulates Control Information**
-    
-    - The IPv4 header contains **essential control information** required to deliver a packet from the source to the destination across networks.
-    - It includes data for routing, fragmentation, error checking, and more.
-    
-    ---
-    
-    ### 2. **Identifies Source and Destination**
-    
-    - The header holds the **Source IP address** and **Destination IP address**, which identify where the packet comes from and where it must be delivered.
-    
-    ---
-    
-    ### 3. **Manages Packet Fragmentation and Reassembly**
-    
-    - Fields like **Identification**, **Flags**, and **Fragment Offset** enable routers and hosts to fragment large packets to fit smaller MTUs and reassemble them correctly at the destination.
-    
-    ---
-    
-    ### 4. **Ensures Packet Lifetime Control**
-    
-    - The **Time To Live (TTL)** field prevents packets from circulating endlessly by limiting the number of hops a packet can traverse.
-    
-    ---
-    
-    ### 5. **Indicates the Upper-Layer Protocol**
-    
-    - The **Protocol** field specifies the type of transport-layer protocol (TCP, UDP, ICMP, etc.) carried in the payload, allowing correct processing at the destination.
-    
-    ---
-    
-    ### 6. **Supports Quality of Service**
-    
-    - The **Differentiated Services (DS) field** (formerly Type of Service) allows classification and prioritization of packets for QoS.
-    
-    ---
-    
-    ### 7. **Verifies Header Integrity**
-    
-    - The **Header Checksum** field helps routers detect errors in the header during transit to discard corrupted packets.
-    
-    ---
-    
-    ### 8. **Defines Header Length and Options**
-    
-    - The **Internet Header Length (IHL)** specifies the size of the header, supporting optional fields for advanced features.
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > The IPv4 header provides all the control information needed for packet delivery, including source/destination addressing, fragmentation control, TTL for loop prevention, protocol identification, QoS support, and error checking.
-    > 
-- **What are the main fields in an IPv4 header?**
-    
-    # Main Fields in an IPv4 Header
-    
-    | Field Name | Size (bits) | Description |
-    | --- | --- | --- |
-    | **Version** | 4 | Specifies the IP version (for IPv4, this is 4). |
-    | **Internet Header Length (IHL)** | 4 | Length of the IPv4 header in 32-bit words (minimum 5). |
-    | **Differentiated Services (DS) / Type of Service (ToS)** | 8 | Specifies packet priority and QoS. |
-    | **Total Length** | 16 | Total length of the IP packet (header + data) in bytes. |
-    | **Identification** | 16 | Unique ID to help reassemble fragmented packets. |
-    | **Flags** | 3 | Control flags for fragmentation (DF, MF bits). |
-    | **Fragment Offset** | 13 | Position of the fragment in the original packet (for fragmentation). |
-    | **Time To Live (TTL)** | 8 | Limits packet lifetime to avoid routing loops. |
-    | **Protocol** | 8 | Indicates the upper-layer protocol (TCP=6, UDP=17, ICMP=1, etc.). |
-    | **Header Checksum** | 16 | Error-checking for the header only. |
-    | **Source IP Address** | 32 | IPv4 address of the sender. |
-    | **Destination IP Address** | 32 | IPv4 address of the receiver. |
-    | **Options (optional)** | Variable | Optional fields for control and debugging (if any). |
-    | **Padding** | Variable | Added to ensure header length is a multiple of 32 bits. |
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > The IPv4 header consists of fields for versioning, header length, service quality, packet size, fragmentation control, TTL, protocol identification, checksum, source and destination addresses, and optional fields for extra control.
-    > 
-- **Explain the significance of the Version field in the IPv4 header.**
-    
-    # Significance of the Version Field in the IPv4 Header
-    
-    ---
-    
-    ### What is the Version Field?
-    
-    - The **Version** field is a **4-bit** field located at the very beginning of the IPv4 header.
-    - It specifies the **IP protocol version** used in the packet.
-    
-    ---
-    
-    ### Why is the Version Field Important?
-    
-    1. **Protocol Identification:**
-        - It tells the network devices and receiving hosts **which IP protocol** the packet conforms to.
-        - For IPv4 packets, the value is **4**.
-        - For IPv6 packets, the value is **6**.
-    2. **Packet Processing:**
-        - Routers and hosts use this field to **interpret the rest of the header correctly**.
-        - Since IPv4 and IPv6 headers have different formats and lengths, knowing the version is essential to parse the packet accurately.
-    3. **Backward and Forward Compatibility:**
-        - Helps in **handling mixed IP environments** where both IPv4 and IPv6 may coexist.
-        - Ensures devices can quickly determine how to process the incoming packet or discard unknown versions.
-    4. **Security and Filtering:**
-        - Network devices and firewalls often inspect the version field to apply protocol-specific rules.
-    
-    ---
-    
-    ### Example:
-    
-    - If the version field is `4` → process as IPv4.
-    - If the version field is `6` → process as IPv6.
-    - Any other value → packet is invalid or unsupported.
-    
-    ---
-    
-    ## 🧠 Interview Summary:
-    
-    > The 4-bit Version field in the IPv4 header identifies the IP protocol version (4 for IPv4). It enables devices to correctly interpret the packet format, ensuring proper routing, processing, and compatibility in mixed network environments.
-    > 
+##### Reassembly:
+
+- The destination host collects all fragments using the Identification field.
+- Fragments are ordered by Fragment Offset.
+- Once all fragments are received, the original packet is reassembled.
+- If any fragment is missing or corrupted, the whole packet is discarded.
+
+---
+
+##### Important Notes:
+
+- **IPv6** handles fragmentation differently; routers do NOT fragment packets, only the sender.
+- Fragmentation can cause performance issues and is generally avoided through Path MTU Discovery.
+
+---
+
+###### 🧠 Interview Summary:
+
+> IPv4 fragmentation occurs when a packet exceeds the MTU of a network segment and is broken into smaller fragments, each with its own header and offset. Fragments travel independently and are reassembled at the destination. Fragmentation is controlled by flags in the IPv4 header and can be prevented by setting the DF flag.
+
+### IPv4 Header & Field-Focused Interview Questions
+
+#### **What is the purpose of the IPv4 header?**
+
+##### Purpose of the IPv4 Header
+
+---
+
+###### 1. **Encapsulates Control Information**
+
+- The IPv4 header contains **essential control information** required to deliver a packet from the source to the destination across networks.
+- It includes data for routing, fragmentation, error checking, and more.
+
+---
+
+###### 2. **Identifies Source and Destination**
+
+- The header holds the **Source IP address** and **Destination IP address**, which identify where the packet comes from and where it must be delivered.
+
+---
+
+###### 3. **Manages Packet Fragmentation and Reassembly**
+
+- Fields like **Identification**, **Flags**, and **Fragment Offset** enable routers and hosts to fragment large packets to fit smaller MTUs and reassemble them correctly at the destination.
+
+---
+
+###### 4. **Ensures Packet Lifetime Control**
+
+- The **Time To Live (TTL)** field prevents packets from circulating endlessly by limiting the number of hops a packet can traverse.
+
+---
+
+###### 5. **Indicates the Upper-Layer Protocol**
+
+- The **Protocol** field specifies the type of transport-layer protocol (TCP, UDP, ICMP, etc.) carried in the payload, allowing correct processing at the destination.
+
+---
+
+###### 6. **Supports Quality of Service**
+
+- The **Differentiated Services (DS) field** (formerly Type of Service) allows classification and prioritization of packets for QoS.
+
+---
+
+###### 7. **Verifies Header Integrity**
+
+- The **Header Checksum** field helps routers detect errors in the header during transit to discard corrupted packets.
+
+---
+
+###### 8. **Defines Header Length and Options**
+
+- The **Internet Header Length (IHL)** specifies the size of the header, supporting optional fields for advanced features.
+
+---
+
+###### 🧠 Interview Summary:
+
+> The IPv4 header provides all the control information needed for packet delivery, including source/destination addressing, fragmentation control, TTL for loop prevention, protocol identification, QoS support, and error checking.
+
+#### **What are the main fields in an IPv4 header?**
+
+##### Main Fields in an IPv4 Header
+
+| Field Name | Size (bits) | Description |
+| --- | --- | --- |
+| **Version** | 4 | Specifies the IP version (for IPv4, this is 4). |
+| **Internet Header Length (IHL)** | 4 | Length of the IPv4 header in 32-bit words (minimum 5). |
+| **Differentiated Services (DS) / Type of Service (ToS)** | 8 | Specifies packet priority and QoS. |
+| **Total Length** | 16 | Total length of the IP packet (header + data) in bytes. |
+| **Identification** | 16 | Unique ID to help reassemble fragmented packets. |
+| **Flags** | 3 | Control flags for fragmentation (DF, MF bits). |
+| **Fragment Offset** | 13 | Position of the fragment in the original packet (for fragmentation). |
+| **Time To Live (TTL)** | 8 | Limits packet lifetime to avoid routing loops. |
+| **Protocol** | 8 | Indicates the upper-layer protocol (TCP=6, UDP=17, ICMP=1, etc.). |
+| **Header Checksum** | 16 | Error-checking for the header only. |
+| **Source IP Address** | 32 | IPv4 address of the sender. |
+| **Destination IP Address** | 32 | IPv4 address of the receiver. |
+| **Options (optional)** | Variable | Optional fields for control and debugging (if any). |
+| **Padding** | Variable | Added to ensure header length is a multiple of 32 bits. |
+
+---
+
+###### 🧠 Interview Summary:
+
+> The IPv4 header consists of fields for versioning, header length, service quality, packet size, fragmentation control, TTL, protocol identification, checksum, source and destination addresses, and optional fields for extra control.
+
+#### **Explain the significance of the Version field in the IPv4 header.**
+
+##### Significance of the Version Field in the IPv4 Header
+
+---
+
+###### What is the Version Field?
+
+- The **Version** field is a **4-bit** field located at the very beginning of the IPv4 header.
+- It specifies the **IP protocol version** used in the packet.
+
+---
+
+###### Why is the Version Field Important?
+
+1. **Protocol Identification:**
+    - It tells the network devices and receiving hosts **which IP protocol** the packet conforms to.
+    - For IPv4 packets, the value is **4**.
+    - For IPv6 packets, the value is **6**.
+2. **Packet Processing:**
+    - Routers and hosts use this field to **interpret the rest of the header correctly**.
+    - Since IPv4 and IPv6 headers have different formats and lengths, knowing the version is essential to parse the packet accurately.
+3. **Backward and Forward Compatibility:**
+    - Helps in **handling mixed IP environments** where both IPv4 and IPv6 may coexist.
+    - Ensures devices can quickly determine how to process the incoming packet or discard unknown versions.
+4. **Security and Filtering:**
+    - Network devices and firewalls often inspect the version field to apply protocol-specific rules.
+
+---
+
+###### Example:
+
+- If the version field is `4` → process as IPv4.
+- If the version field is `6` → process as IPv6.
+- Any other value → packet is invalid or unsupported.
+
+---
+
+###### 🧠 Interview Summary:
+
+> The 4-bit Version field in the IPv4 header identifies the IP protocol version (4 for IPv4). It enables devices to correctly interpret the rest of the packet header for processing and routing.
 - **What does the Internet Header Length (IHL) field represent?**
     
     # What Does the Internet Header Length (IHL) Field Represent?
