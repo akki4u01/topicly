@@ -1,3 +1,11 @@
+---
+id: VLAN
+title: VLAN Related Questions
+---
+
+# VLAN
+This is VLAN contents
+
 # VLAN
 
 ## **Basic VLAN Interview Questions**

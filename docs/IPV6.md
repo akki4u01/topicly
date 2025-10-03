@@ -1,3 +1,11 @@
+---
+id: IPv6
+title: IPv6 Related Questions
+---
+
+# IPv6
+This is IPv6 contents
+
 # IPV6
 
 - What is IPv6 and why was it developed?

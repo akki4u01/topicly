@@ -1,3 +1,11 @@
+---
+id: Python Fundamental
+title: Python Fundamental Related Questions
+---
+
+# Python Fundamental
+This is Python Fundamental contents
+
 # Python Fundamental
 
 ## 🧠 1. **Variables & Data Types**

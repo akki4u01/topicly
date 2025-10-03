@@ -1,3 +1,11 @@
+---
+id: Python
+title: Python Related Questions
+---
+
+# Python
+This is Python contents
+
 # Python
 
 - **Fundamentals:** Master Python basics:

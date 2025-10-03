@@ -1,3 +1,11 @@
+---
+id: NAT
+title: NAT Related Questions
+---
+
+# NAT
+This is NAT contents
+
 # NAT
 
 ### NAT Interview Questions (FAANG Style)
