@@ -8,7 +8,7 @@ This is DNS contents
 
 # DNS
 
-![image.png](image.png)
+![DNS Flow Diagram](/img/DNS-Flow.png)
 
 Components of DNS
 
@@ -26,11 +26,11 @@ Components of DNS
         - Second level domain
             - edu-resources1
         
-        ![image.png](image%201.png)
+        ![Domain Names](/img/DomainNames.png)
         
         - Country Domain
         
-        ![image.png](image%202.png)
+        ![Domain Names](/img/DomainNames2.png)
         
         - Inverse Domain - mapping an IP address to a name
             - User will send the IP address to the root server
