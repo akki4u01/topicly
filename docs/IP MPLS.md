@@ -139,4 +139,4 @@ This is MPLS contents
     > “The separation of control plane (RIB/LIB) and data plane (FIB/LFIB) ensures efficient forwarding performance while allowing flexible routing and label distribution.”
     > 
 
-![MPLS+Fundamentals+-+RIB+,+LIB+,+FIB+,+LFIB+-+GNS3.png](MPLSFundamentals-RIBLIBFIBLFIB-GNS3.png)
+![MPLS Diagram](/img/MPLSFundamentals.png)
