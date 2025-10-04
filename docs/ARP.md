@@ -539,28 +539,22 @@ A secure ARP system is like:
     - Prevents every ARP from hitting the destination directly.
     
     ✅ Minimizes unnecessary broadcast
-    
     ✅ Good for virtualized environments
     
-    ---
+
     
-    ### 🔸 **5. Use Static ARP for Critical Infrastructure**
+5. **Use Static ARP for Critical Infrastructure**
     
     - Servers, routers, and gateways can have **static ARP entries** for frequently accessed systems.
-    
     ✅ No broadcast needed
-    
     ❌ Not scalable for dynamic hosts
+
     
-    ---
-    
-    ### 🔸 **6. Control ARP Flooding at the Edge**
-    
+6. **Control ARP Flooding at the Edge**
     - Use **port-based broadcast storm control** to limit ARP storms caused by faulty/malicious devices.
+
     
-    ---
-    
-    ### 🔸 **7. Monitoring and Detection Tools**
+7. **Monitoring and Detection Tools**
     
     - Use tools like:
         - **NetFlow / sFlow**
@@ -570,9 +564,8 @@ A secure ARP system is like:
     
     ✅ Identify and isolate ARP anomalies quickly
     
-    ---
     
-    ## 🔚 **Summary Table**
+#### **Summary Table**
     
     | Method | Description | Benefit |
     | --- | --- | --- |
@@ -584,45 +577,36 @@ A secure ARP system is like:
     | **Storm Control** | Blocks ARP floods at port level | Protects switch CPU |
     | **Monitoring Tools** | Detect misbehavior early | Prevent widespread impact |
     
-    ---
-    
-    ### ⚙️ Real-World Data Center Protocols That Help:
+#### **Real-World Data Center Protocols That Help**
     
     - **VXLAN with BGP EVPN** ➜ Control-plane MAC/IP learning
     - **Cisco ACI / Juniper Contrail / Arista CloudVision** ➜ Use ARP suppression & segmentation
     - **VMware NSX / OpenStack Neutron** ➜ ARP proxying and isolation
-- Use of proxy ARP, ARP suppression in VXLAN/EVPN, control-plane learning, reducing L2 broadcast domains.
+	
+	
+### **Use of proxy ARP, ARP suppression in VXLAN/EVPN, control-plane learning, reducing L2 broadcast domains.**
     
-    ## 🔹 **1. Proxy ARP**
+1. **Proxy ARP**
+	- **What it is ?**
+    > A router or gateway (or sometimes a switch) replies to ARP Requests **on behalf of another device**.
     
-    **What it is:**
-    
-    A router or gateway (or sometimes a switch) replies to ARP Requests **on behalf of another device**.
-    
-    ### 🔧 How It Works:
-    
+    #### How It Works    
     - Host A sends an ARP request for IP `192.168.1.1`.
     - Instead of waiting for Host B, the **router replies with its own MAC** (or the destination MAC it knows).
     - Host A updates its ARP cache and sends traffic to the proxy.
     
-    ### ✅ Use Cases:
-    
+    #### Use Cases    
     - Subnet gatewaying without changing host configuration
     - Mobile IP, NAT
     - Security: prevent broadcast exposure
     
-    ### ✅ Benefits:
-    
+    #### Benefits:    
     - Limits **ARP broadcast propagation**
     - Provides **more control** over ARP resolution
     
-    ---
-    
-    ## 🔹 **2. ARP Suppression in VXLAN/EVPN**
-    
-    **What it is:**
-    
-    A feature in overlay networks where **VXLAN Tunnel Endpoints (VTEPs)** **answer ARP requests locally** using information learned via **EVPN control plane**, without flooding the network.
+2. **ARP Suppression in VXLAN/EVPN**    
+    - **What it is ?**
+    > A feature in overlay networks where **VXLAN Tunnel Endpoints (VTEPs)** **answer ARP requests locally** using information learned via **EVPN control plane**, without flooding the network.
     
     ### 🔧 How It Works:
     
