@@ -1,7 +1,7 @@
 ## Docusaurus Front Matter
 ---
-id: Guideline-ID       # Unique page id
-title: Guideline-title    # Page title
+id: Guideline-ID
+title: Guideline-title
 sidebar_label: Guideline-sidebar
 description: Guideline-description markdown guidelines.
 ---
