@@ -1,10 +1,10 @@
-## Docusaurus Front Matter
 ---
 id: Guideline-ID
 title: Guideline-title
 sidebar_label: Guideline-sidebar
 description: Guideline-description markdown guidelines.
 ---
+## Docusaurus Front Matter
 
 # Guideline comment
 Guideline comments
