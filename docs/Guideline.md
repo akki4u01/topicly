@@ -58,6 +58,11 @@ Use `npm start` to run the project.
 > This is a blockquote.
 > It can span multiple lines.
 
+## Tip
+:::tip
+Use the power of React to create interactive blog posts.
+:::
+
 ## Organizing Content in Docusaurus
 
 Put Markdown files inside the `docs` folder.  
