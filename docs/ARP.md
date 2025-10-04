@@ -246,100 +246,80 @@ Nobody asked, but you said it so **everyone updates their address book** just in
     
 2. **In a Switched Network (Modern, Layer 2 device):**
     
-    ### 🧠 Switches are smart:
+    - **Switches are smart** 
+		- They learn **MAC-to-port** mappings using the **CAM table**.
+		- They **forward frames** only to the port where the destination MAC resides.
     
-    - They learn **MAC-to-port** mappings using the **CAM table**.
-    - They **forward frames** only to the port where the destination MAC resides.
+    - **ARP Behavior in Switches**    
+		- **ARP Request** is still a **broadcast** (Layer 2 broadcast → goes to all ports).
+		- **ARP Reply** is a **unicast**, so the switch sends it **only to the intended port** based on its MAC table.
     
-    ### 📡 ARP Behavior in Switches:
+    - **Benefits**		
+		- Better **performance** (no unnecessary traffic on other ports).
+		- Better **security** — prevents sniffing of unicast replies.
+		- Efficient **MAC learning** helps manage traffic.
     
-    - **ARP Request** is still a **broadcast** (Layer 2 broadcast → goes to all ports).
-    - **ARP Reply** is a **unicast**, so the switch sends it **only to the intended port** based on its MAC table.
-    
-    ### 🛡️ Benefits:
-    
-    - Better **performance** (no unnecessary traffic on other ports).
-    - Better **security** — prevents sniffing of unicast replies.
-    - Efficient **MAC learning** helps manage traffic.
-    
-    ### 🔄 Summary:
+    - **Summary**
     
     | ARP Traffic | Switch Behavior |
     | --- | --- |
     | ARP Request | Broadcast to all ports |
     | ARP Reply | Sent only to correct port (unicast) |
     
-    ---
+
+    > **Analogy**
+    >   - A **hub** is like a group chat: you say something, **everyone hears it**, whether it’s for them or not.
+    >	- A **switch** is like a phone call: you can call one specific person once you know their number (MAC address), and others don't hear the call.
     
-    ### 🔸 **ELI5 Analogy:**
     
-    - A **hub** is like a group chat: you say something, **everyone hears it**, whether it’s for them or not.
-    - A **switch** is like a phone call: you can call one specific person once you know their number (MAC address), and others don't hear the call.
-    
-    ---
-    
-    ### 🔚 In Summary:
+3. *In Summary*
     
     | Feature | Hub | Switch |
     | --- | --- | --- |
     | Device type | Layer 1 (Physical) | Layer 2 (Data Link) |
-    | MAC learning | ❌ No | ✅ Yes |
+    | MAC learning | No | Yes |
     | ARP Request | Broadcast to all | Broadcast to all |
     | ARP Reply | Broadcast (flooded) | Unicast (to one port) |
     | Security | Poor (anyone can sniff) | Better (isolated traffic) |
     | Performance | Low (collision domain) | High (collision isolation) |
-- **What is ARP poisoning/spoofing? How can it be mitigated?**
+	
+	
+### **What is ARP poisoning/spoofing? How can it be mitigated?**
     - Fake ARP replies trick machines into associating wrong MAC with IP.
     - Mitigation: Static ARP entries, Dynamic ARP Inspection (DAI), port security.
-    - 
     
-    ### ✅ **What is ARP Poisoning / ARP Spoofing?**
     
+#### **What is ARP Poisoning / ARP Spoofing?**    
     **ARP poisoning (or ARP spoofing)** is a **man-in-the-middle (MITM) attack** where an attacker sends **fake ARP messages** on a local network to **trick devices** into associating the attacker’s MAC address with another device’s IP (usually the default gateway or a high-value target).
     
-    ---
-    
-    ### 🔹 **Goal of the Attacker:**
-    
-    To **intercept**, **modify**, or **drop** traffic between two legitimate devices — often between:
-    
+#### **Goal of the Attacker:**    
+    To **intercept**, **modify**, or **drop** traffic between two legitimate devices — often between:    
     - A user’s device and the **default gateway** (router)
     - Or between **two critical servers**
     
-    ---
-    
-    ### 🔸 **How It Works (Step-by-Step):**
-    
-    Let’s say:
-    
+#### **How It Works (Step-by-Step):**    
+    Let’s say:    
     - Victim’s IP: `192.168.1.10`
     - Gateway IP: `192.168.1.1`
     - Attacker’s MAC: `AA:AA:AA:AA:AA:AA`
     
-    ### 🔁 The attacker sends:
-    
-    1. **To the victim**:
-        
+#### The attacker sends:    
+    1. **To the victim**        
         > “I am 192.168.1.1 (Gateway), my MAC is AA:AA:AA:AA:AA:AA”
-        > 
-    2. **To the gateway**:
         
+    2. **To the gateway**        
         > “I am 192.168.1.10 (Victim), my MAC is AA:AA:AA:AA:AA:AA”
-        > 
     
-    Now:
+    3. Now,
+		> The **victim sends all traffic to the attacker**, thinking it’s the gateway.
+		> The **gateway sends replies to the attacker**, thinking it’s the victim.
     
-    - The **victim sends all traffic to the attacker**, thinking it’s the gateway.
-    - The **gateway sends replies to the attacker**, thinking it’s the victim.
+    4. The attacker can    
+		- **Intercept** and **log** data
+		- **Modify** packets (DNS spoofing, credential theft)
+		- **Drop** packets (DoS attack)
     
-    The attacker can:
-    
-    - **Intercept** and **log** data
-    - **Modify** packets (DNS spoofing, credential theft)
-    - **Drop** packets (DoS attack)
-    
-    ---
-    
+       
     ### 🔹 **ELI5 Analogy:**
     
     Imagine someone in your office shouts:
