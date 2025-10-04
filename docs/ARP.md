@@ -452,12 +452,9 @@ Nobody asked, but you said it so **everyone updates their address book** just in
         - RSA signatures
         - Certificates
     
-    ✅ Secure, modern
-    
-    ❌ Not widely adopted yet
-    
+    ✅ Secure, modern    
+    ❌ Not widely adopted yet    
     ❌ Only applicable to IPv6
-    
     
 #### **Design Summary (Hybrid Model):**
     
@@ -468,22 +465,19 @@ Nobody asked, but you said it so **everyone updates their address book** just in
     | Protocol | S-ARP / SEND | Cryptographic trust |
     | Architecture | Central ARP resolver | Control and validation |
     
-    
-    ### 🔸 **ELI5 Analogy**:
-    
-    Think of ARP as sending **postcards** saying “Hi, I live at this address.” Anyone can fake that.
-    
-    A secure ARP system is like:
-    
+
+## Think of it like this
+:::tip
+Think of ARP as sending **postcards** saying “Hi, I live at this address.” Anyone can fake that.
+A secure ARP system is like:
     - Only accepting postcards **signed and sealed**
     - Having a **trusted directory** that confirms who lives where
     - Only allowing letters from **verified neighbors**
-- **In a large-scale data center, how would excessive ARP traffic be handled?**
+:::  
+
     
-    ### ✅ **How Would Excessive ARP Traffic Be Handled in a Large-Scale Data Center?**
-    
+### **How Would Excessive ARP Traffic Be Handled in a Large-Scale Data Center?**
     In a **large-scale data center**, especially with thousands of servers and virtual machines (VMs), **excessive ARP traffic** (aka *ARP storms*) can cause:
-    
     - **High CPU usage on switches/routers**
     - **Flooding of broadcast domains**
     - **ARP table overflows**
@@ -491,77 +485,55 @@ Nobody asked, but you said it so **everyone updates their address book** just in
     
     To address this, modern data centers use a combination of **design strategies**, **L2/L3 optimizations**, and **control-plane techniques**.
     
-    ---
     
-    ### 🔹 Why ARP Becomes a Problem at Scale
-    
+### **Why ARP Becomes a Problem at Scale**
     - Every new IP–MAC resolution causes a **broadcast ARP Request**.
     - With thousands of hosts, frequent bootups, or short ARP timeouts, this adds up quickly.
     - Broadcasts don’t scale — they hit **every device** in the VLAN.
     - If ARP storms occur (e.g., due to misconfigured devices), network performance can degrade badly.
     
-    ---
+	
+### **How to Handle ARP at Scale**
     
-    ## 🔐 **How to Handle ARP at Scale**
+1. **ARP Suppression**
+    - What it is ?
+    > Instead of broadcasting ARP Requests to the entire network, **intermediate devices (like switches or VTEPs)** reply on behalf of VMs or hosts using a **local cache**.
     
-    ---
-    
-    ### 🔸 **1. ARP Suppression**
-    
-    ### 🔹 What it is:
-    
-    - Instead of broadcasting ARP Requests to the entire network, **intermediate devices (like switches or VTEPs)** reply on behalf of VMs or hosts using a **local cache**.
-    
-    ### 📦 Example:
-    
+    #### **Example**    
     - In **VXLAN-EVPN (Overlay networks)**, **VTEPs** maintain a **MAC-IP mapping table** using **control-plane learning** via BGP EVPN.
     - So when Host A wants to ARP for Host B’s IP, the VTEP replies **locally** without flooding the network.
     
-    ✅ Reduces broadcast
-    
-    ✅ Improves scalability
-    
+    ✅ Reduces broadcast    
+    ✅ Improves scalability    
     ✅ Standard in modern leaf-spine data center fabrics
+
     
-    ---
+2. **L2 Domain Segmentation (L3 Clos Fabric)**
+	- What it is ?    
+    > Break the data center into **smaller Layer 2 domains** and route traffic at **Layer 3** as much as possible.
     
-    ### 🔸 **2. L2 Domain Segmentation (L3 Clos Fabric)**
+    - How ?    
+    > Use **leaf-spine topology**
+    > Each rack is a **small L2 island**
+    > Use **IP routing between racks** (no ARP needed for inter-rack traffic)
     
-    ### 🔹 What it is:
-    
-    - Break the data center into **smaller Layer 2 domains** and route traffic at **Layer 3** as much as possible.
-    
-    ### 🔸 How:
-    
-    - Use **leaf-spine topology**
-    - Each rack is a **small L2 island**
-    - Use **IP routing between racks** (no ARP needed for inter-rack traffic)
-    
-    ✅ Limits ARP scope
-    
-    ✅ Localizes broadcast
-    
+    ✅ Limits ARP scope    
+    ✅ Localizes broadcast    
     ✅ Speeds up convergence and scalability
     
-    ---
+        
+3. **Longer ARP Cache Timeout**
     
-    ### 🔸 **3. Longer ARP Cache Timeout**
+    - What it is ?    
+    > Increase the **ARP cache TTL** so devices don’t flood the network with repeated ARP Requests.
     
-    ### 🔹 What it is:
-    
-    - Increase the **ARP cache TTL** so devices don’t flood the network with repeated ARP Requests.
-    
-    ### ⚠️ Consideration:
-    
+    #### Consideration    
     - Must balance with accuracy — longer TTL means **stale entries** if MACs change.
     
-    ✅ Reduces ARP traffic
-    
+    ✅ Reduces ARP traffic    
     ❌ Could cause issues with fast-moving or dynamic environments (e.g., containers, mobility)
     
-    ---
-    
-    ### 🔸 **4. Proxy ARP / ARP Filtering**
+4. **Proxy ARP / ARP Filtering**
     
     - A **router or switch responds to ARP requests** on behalf of another device.
     - Prevents every ARP from hitting the destination directly.
