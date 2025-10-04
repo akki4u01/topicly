@@ -116,7 +116,7 @@ sidebar_label: Address Resolution Protocol (ARP)
     - Could result in **blackholing traffic** or routing loops in larger setups.
 
 
-#Think of it like this(with routers and switches)
+##Think of it like this(with routers and switches)
 :::Analogy
 Imagine a teacher (switch) has two students (devices) who both say their name is "Alice" (same IP). The teacher knows students by face (MAC address), so they keep changing who they think is Alice. Now, when someone gives a message to "Alice," the teacher may deliver it to the wrong person — or not at all. If the **principal (router)** also thinks they are Alice, the whole school’s system can break, especially if "Alice" was meant to forward homework (internet traffic).
 :::
