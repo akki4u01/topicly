@@ -6,7 +6,7 @@ sidebar_label: Address Resolution Protocol (ARP)
 
 # **Basic ARP Questions**
 
-> Address Resolution Protocol(ARP) resolve MAC address from the known IP Address, It sends sends a broadcast message (ARP Request) across the local network, asking "Who has this IP address?" The device with the matching IP address then replies with its unique MAC address (ARP Reply) in a unicast message, allowing the requesting device to create an entry in its ARP table (or cache) for future communication.
+> **Address Resolution Protocol(ARP) resolve MAC address from the known IP Address**, It sends sends a broadcast message (ARP Request) across the local network, asking "Who has this IP address?" The device with the matching IP address then replies with its unique MAC address (ARP Reply) in a unicast message, allowing the requesting device to create an entry in its ARP table (or cache) for future communication.
 
 
 ### **What is ARP and why is it used?** 
