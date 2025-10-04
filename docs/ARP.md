@@ -8,12 +8,14 @@ sidebar_label: Address Resolution Protocol (ARP)
 
 > **Address Resolution Protocol(ARP) resolve MAC address from the known IP Address**, It sends sends a broadcast message (ARP Request) across the local network, asking "Who has this IP address?" The device with the matching IP address then replies with its unique MAC address (ARP Reply) in a unicast message, allowing the requesting device to create an entry in its ARP table (or cache) for future communication.
 
+
 ### **What is ARP and why is it used?** 
     - **ARP (Address Resolution Protocol)** is a protocol used to **map an IP address to a MAC (Media Access Control) address** within a local area network (LAN).
     - When a device wants to communicate with another device on the same network, it knows the **IP address** of the target, but it needs the **MAC address** to actually send data over Ethernet (Layer 2). ARP helps **resolve this mapping**.
     - Think of IP addresses like someone’s name, and MAC addresses like their exact home address. You may know someone’s name (IP), but to send them a letter, you need their full home address (MAC). ARP is like a phonebook you ask:
     “What’s the house address of the person named John?”
     ARP replies: “Here’s the house address (MAC) of John (IP)”
+ 
  
 ### **How does the ARP process work step-by-step?**
     - You send a broadcast ARP Request: “Who has IP X.X.X.X?”
@@ -26,9 +28,10 @@ sidebar_label: Address Resolution Protocol (ARP)
         > “I have 192.168.1.10. My MAC is AA:BB:CC:DD:EE:FF”
     - Device A stores this IP–MAC mapping in its **ARP cache** and sends the data.
 
+
 ### **What is the difference between ARP and RARP?**
     - ARP maps IP → MAC, RARP does MAC → IP (mostly obsolete now).
-#### **Difference Between ARP and RARP**
+#### **Difference between ARP and RARP**
     
     | Feature | **ARP (Address Resolution Protocol)** | **RARP (Reverse Address Resolution Protocol)** |
     | --- | --- | --- |
@@ -37,24 +40,27 @@ sidebar_label: Address Resolution Protocol (ARP)
     | **Direction** | IP ➡️ MAC | MAC ➡️ IP |
     | **Who uses it?** | Any device that wants to send data on a local network | Old diskless systems at boot time |
     | **Communication Type** | ARP Request is a **broadcast**; ARP Reply is **unicast** | RARP Request is **broadcast**; Reply is **unicast** from RARP server |
-    | **Still used today?** | ✅ **Yes**, in all IPv4 networks | ❌ **No**, replaced by **DHCP** |
+    | **Still used today?** | **Yes**, in all IPv4 networks | **No**, replaced by **DHCP** |
     | **Layer** | Works at **Layer 2.5** | Also at **Layer 2.5**, but less commonly implemented |
+
 
 ### **What is an ARP Cache and Why it exists?**
 - The **ARP cache** is a small, temporary **memory table** stored in a device (like a computer, router, or switch) that keeps track of **recent IP-to-MAC address mappings**.
 - Without an ARP cache, a device would have to **send an ARP request every time** it wants to communicate with another device — which would generate **a lot of unnecessary traffic**.
 - So, once a device learns a mapping (IP ➡️ MAC), it stores it in the ARP cache to reuse it later **without repeating the request**.
 
+
 ### **What's inside the ARP Cache?**
     
-    It typically contains entries like:
-    
+    It typically contains entries like:    
     | IP Address | MAC Address | Type | Timestamp / TTL |
     | --- | --- | --- | --- |
     | 192.168.0.1 | AA:BB:CC:DD:EE:FF | Dynamic | 2 minutes |
     | 192.168.0.100 | 11:22:33:44:55:66 | Static | Permanent |
+	
     - **Dynamic**: Learned via ARP request/response
     - **Static**: Manually configured and won’t expire
+
     
 ### **How long is an entry valid?**    
     - **Dynamic ARP entries** usually **expire after 1–5 minutes** of inactivity, depending on the operating system:
@@ -64,73 +70,57 @@ sidebar_label: Address Resolution Protocol (ARP)
 
 ---
 
-### 🔹 **Intermediate-Level Questions**
+## **Intermediate-Level Questions**
 
-- **What happens when two devices on the same LAN have the same IP?**
-    - ARP conflicts. May cause unpredictable behavior; some OSes log "duplicate IP" errors.
+### **What happens when two devices on the same LAN have the same IP?**
+    - ARP conflicts. May cause unpredictable behavior; some shows "duplicate IP" errors.    
+    - When two devices (e.g., computers, routers, or switches with L3 capability) on the same LAN have **identical IP addresses**, it causes an **IP address conflict**, leading to **unpredictable network behavior**, **connectivity issues**, and potential **network outages**.
     
-    When two devices (e.g., computers, routers, or switches with L3 capability) on the same LAN have **identical IP addresses**, it causes an **IP address conflict**, leading to **unpredictable network behavior**, **connectivity issues**, and potential **network outages**.
-    
-    ---
-    
-    ### 🔹 **Key Network Players:**
-    
+   
+#### **Key Network Players:**    
     - **End devices:** PCs, servers, printers, VMs, etc.
     - **Switches:** Work at Layer 2 (MAC level), forward Ethernet frames.
     - **Routers:** Work at Layer 3 (IP level), route packets between subnets.
     - **L3 Switches:** Act like routers, can also have IP addresses for management or routing.
     
-    ---
-    
-    ### 🔸 **How ARP plays into this conflict:**
-    
+
+### **How ARP plays into this conflict:**    
     - Devices on a LAN use **ARP (Address Resolution Protocol)** to resolve IP → MAC.
-    - When a device (e.g., a PC or router) wants to send a packet to IP `192.168.1.100`, it sends a **broadcast ARP request** asking:
-        
+    - When a device (e.g., a PC or router) wants to send a packet to IP `192.168.1.100`, it sends a **broadcast ARP request** asking:        
         > “Who has IP 192.168.1.100?”
-        > 
     - **Both conflicting devices respond** with their own MAC addresses, and the sender will update its **ARP cache** with the **most recent** reply received — meaning:
         - **The MAC address in the cache keeps flipping** depending on who answered last.
+        
     
-    ---
-    
-    ### 🔹 **Consequences of Duplicate IPs on LAN**
-    
-    ### 💻 **End Devices (PCs, Servers, VMs):**
-    
+### **Consequences of Duplicate IPs on LAN**
+
+1. **End Devices (PCs, Servers, VMs):**    
     - Cannot maintain stable network connections.
     - May lose internet or intranet access.
     - Data meant for one device might go to the other.
-    - Users may see OS warnings like:
-        
+    - Users may see OS warnings like:        
         > “Another device on this network is using your computer's IP address.”
-        > 
+        
     
-    ### 🔄 **Switches (Layer 2 devices):**
-    
+2. **Switches (Layer 2 devices):**    
     - **Switches forward frames** based on **MAC addresses**, not IPs, so they don’t detect IP conflicts directly.
     - However, if ARP updates cause frequent MAC address changes on a port, the switch may:
         - Rapidly **update its MAC address table (CAM table)**.
         - Appear as if there’s **MAC flapping**, which can trigger security alerts or port shutdown (if configured).
         - Increase **CPU usage** due to excessive learning/unlearning.
     
-    ### 🌐 **Routers / L3 Switches:**
-    
+3. **Routers / L3 Switches:**    
     - If a **router interface** has a conflicting IP, it can disrupt routing entirely.
     - Default gateway IP conflict will break internet access for multiple users.
     - Routing protocol neighbors may **fail to establish or flap** (e.g., OSPF neighbors down/up).
     - Could result in **blackholing traffic** or routing loops in larger setups.
-    
-    ---
-    
-    ### 🔹 **ELI5 Analogy (with routers and switches):**
-    
-    Imagine a teacher (switch) has two students (devices) who both say their name is "Alice" (same IP). The teacher knows students by face (MAC address), so they keep changing who they think is Alice. Now, when someone gives a message to "Alice," the teacher may deliver it to the wrong person — or not at all.
-    
-    If the **principal (router)** also thinks they are Alice, the whole school’s system can break, especially if "Alice" was meant to forward homework (internet traffic).
-    
-    ---
-    
+
+
+#Think of it like this(with routers and switches)
+:::Analogy
+Imagine a teacher (switch) has two students (devices) who both say their name is "Alice" (same IP). The teacher knows students by face (MAC address), so they keep changing who they think is Alice. Now, when someone gives a message to "Alice," the teacher may deliver it to the wrong person — or not at all. If the **principal (router)** also thinks they are Alice, the whole school’s system can break, especially if "Alice" was meant to forward homework (internet traffic).
+:::
+ 
     ### 🔹 **Why It Happens:**
     
     - Two devices manually set with the **same static IP**
