@@ -84,7 +84,7 @@ sidebar_label: Address Resolution Protocol (ARP)
     - **L3 Switches:** Act like routers, can also have IP addresses for management or routing.
     
 
-### **How ARP plays into this conflict:**    
+#### **How ARP plays into this conflict:**    
     - Devices on a LAN use **ARP (Address Resolution Protocol)** to resolve IP → MAC.
     - When a device (e.g., a PC or router) wants to send a packet to IP `192.168.1.100`, it sends a **broadcast ARP request** asking:        
         > “Who has IP 192.168.1.100?”
@@ -92,7 +92,7 @@ sidebar_label: Address Resolution Protocol (ARP)
         - **The MAC address in the cache keeps flipping** depending on who answered last.
         
     
-### **Consequences of Duplicate IPs on LAN**
+#### **Consequences of Duplicate IPs on LAN**
 
 1. **End Devices (PCs, Servers, VMs):**    
     - Cannot maintain stable network connections.
@@ -116,23 +116,19 @@ sidebar_label: Address Resolution Protocol (ARP)
     - Could result in **blackholing traffic** or routing loops in larger setups.
 
 
-## Think of it like this
+## Think of it like this that How ARP plays into this conflict
 :::tip
 Imagine a teacher (switch) has two students (devices) who both say their name is "Alice" (same IP). The teacher knows students by face (MAC address), so they keep changing who they think is Alice. Now, when someone gives a message to "Alice," the teacher may deliver it to the wrong person — or not at all. If the **principal (router)** also thinks they are Alice, the whole school’s system can break, especially if "Alice" was meant to forward homework (internet traffic).
 :::
  
-    ### 🔹 **Why It Happens:**
-    
+#### **Why It Happens:**    
     - Two devices manually set with the **same static IP**
     - DHCP server misconfiguration (e.g., **overlapping ranges**)
     - Cloning VM snapshots or device images without changing IPs
     - Backup router or L3 switch **restores old config**
     - Misbehaving device or **spoofing**
     
-    ---
-    
-    ### 🔹 **How to Detect It:**
-    
+#### **How to Detect It:**    
     - OS logs / error messages
     - Tools like:
         - `arp -a` → check for **same IP, different MAC**
@@ -141,159 +137,114 @@ Imagine a teacher (switch) has two students (devices) who both say their name is
     - Switch logs: **MAC flapping**, port security alerts
     - Router logs: **duplicate IP detection**, OSPF neighbor loss
     
-    ---
-    
-    ### 🔹 **How to Resolve It:**
-    
-    1. 🛠 **Manually check IPs** on conflicting devices.
-    2. 🔄 **Release and renew IP** (for DHCP clients):
-        
+#### **How to Resolve It:**    
+- **Manually check IPs** on conflicting devices.
+- **Release and renew IP** (for DHCP clients):
         `ipconfig /release` → `ipconfig /renew`
-        
-    3. 🧼 **Flush ARP cache**:
+- **Flush ARP cache**:
         - Windows: `arp -d *`
         - Linux/macOS: `ip -s -s neigh flush all`
-    4. 📜 **Configure static IPs carefully**, avoiding DHCP pool overlap.
-    5. 🔐 **Enable port security** on switches to prevent MAC spoofing.
-    6. 📶 In larger networks, use **DHCP snooping** or **Dynamic ARP Inspection (DAI)** to prevent malicious ARP replies.
+- **Configure static IPs carefully**, avoiding DHCP pool overlap.
+- **Enable port security** on switches to prevent MAC spoofing.
+- In larger networks, use **DHCP snooping** or **Dynamic ARP Inspection (DAI)** to prevent malicious ARP replies.
     
-    ---
-    
-    ### 🔚 In Summary:
-    
+
+### Summary of ARP Conflict:    
     > When two devices share the same IP on a LAN:
-    > 
     > - ARP confusion causes traffic misdelivery.
     > - Switches may experience MAC flapping.
     > - Routers or L3 switches may fail, causing routing and gateway issues.
     > - The network becomes unreliable until the conflict is resolved.
-- **What is Gratuitous ARP?**
-    - ARP reply sent without a request. Used to update other hosts' ARP tables (e.g., after failover or IP change).
-    - 
+
+
+### **What is Gratuitous ARP?**
+    - A **Gratuitous ARP (GARP)** is a special type of ARP message that a device sends **without being asked**, to **announce or update** its IP-to-MAC mapping to the entire network.
+	
+#### **Key Points:**
+    > - It’s an ARP **Request or Reply** sent by a device **for its own IP address**.
+    > - Sent as a **broadcast**:        
+        > - “Who has IP 192.168.1.10? I do!”
+    > - Used **not to resolve** an address, but to **inform others**.
     
-    ### ✅ **What is Gratuitous ARP?**
+  
+#### **Why is it used?**
     
-    A **Gratuitous ARP (GARP)** is a special type of ARP message that a device sends **without being asked**, to **announce or update** its IP-to-MAC mapping to the entire network.
-    
-    ---
-    
-    ### 🔹 **Key Points:**
-    
-    - It’s an ARP **Request or Reply** sent by a device **for its own IP address**.
-    - Sent as a **broadcast**:
-        
-        > “Who has IP 192.168.1.10? I do!”
-        > 
-    - Used **not to resolve** an address, but to **inform others**.
-    
-    ---
-    
-    ### 🔹 **Why is it used?**
-    
-    ### 🔄 1. **Detect IP conflicts**
-    
+1. **Detect IP conflicts**    
     - A device sends a GARP for its own IP.
     - If it receives a reply, that IP is already in use ➜ **Conflict detected**.
     
-    ### 📢 2. **Announce IP-MAC mapping to update ARP tables**
-    
+2. **Announce IP-MAC mapping to update ARP tables**  
     - Especially after:
         - Booting up
         - Interface coming up
         - IP change (manual or DHCP)
     - Example: In **failover scenarios**, the backup device sends a GARP so others update its new MAC.
     
-    ### 🔄 3. **Update switches' MAC tables**
-    
+3. **Update switches' MAC tables**    
     - Some L2 switches use GARP frames to **learn the MAC address and associated port** quickly.
     
-    ### 🔁 4. **Trigger ARP cache update on peer devices**
-    
+4. **Trigger ARP cache update on peer devices**    
     - Prevents devices from sending out new ARP Requests by proactively **pushing the new mapping**.
     
-    ---
-    
-    ### 🔸 **Example Packet (GARP Request)**:
+####**Example Packet (GARP Request)**:
     
     ```
-    ruby
-    CopyEdit
     Sender IP:     192.168.1.10
     Sender MAC:    AA:BB:CC:DD:EE:FF
     Target IP:     192.168.1.10
     Target MAC:    00:00:00:00:00:00 (ARP Request)
     
     ```
-    
     > It’s saying: “I am 192.168.1.10, my MAC is AA:BB:CC:DD:EE:FF — everyone, please take note!”
-    > 
+
+## Think of it like this that What is GARP
+:::tip
+“Hey everyone! Just letting you know — my name is Alex and I live at 123 Apple Street!”    
+Nobody asked, but you said it so **everyone updates their address book** just in case.
+:::    
+
     
-    ---
-    
-    ### 🔹 **ELI5 Analogy:**
-    
-    Imagine you walk into a room and loudly say,
-    
-    > “Hey everyone! Just letting you know — my name is Alex and I live at 123 Apple Street!”
-    > 
-    
-    Nobody asked, but you said it so **everyone updates their address book** just in case.
-    
-    ---
-    
-    ### 🔹 **Use Cases in Real Networks:**
-    
+#### **Use Cases in Real Networks:**
+   
     | Scenario | Why GARP is used |
     | --- | --- |
     | **HA/Failover** (e.g., VRRP, HSRP, CARP) | When standby becomes active, it sends GARP to claim the virtual IP |
     | **Dynamic IP assignment (DHCP)** | DHCP clients may send a GARP to check for conflict or update peers |
     | **NIC Teaming / Bonding** | Interfaces send GARP when link state changes to re-announce the IP |
-- **How does ARP behave in switched vs. hub-based networks?**
-    
-    ### ✅ **How ARP Behaves in Switched vs. Hub-Based Networks**
-    
-    ARP (Address Resolution Protocol) always works the same way **logically**:
+
+### **How does ARP behave in switched vs. hub-based networks?**
+- ARP (Address Resolution Protocol) always works the same way **logically**
     
     > A device sends a broadcast ARP Request to ask:
-    > 
-    > 
     > *“Who has IP X.X.X.X? Tell me your MAC address.”*
     > 
     > The device owning that IP sends an **ARP Reply** back with its MAC.
     > 
+	> But the **physical behavior** of this broadcast and reply differs depending on whether the network uses a **hub** or a **switch**.
     
-    But the **physical behavior** of this broadcast and reply differs depending on whether the network uses a **hub** or a **switch**.
+	
+1. **In a Hub-Based Network (Legacy, Layer 1 device):**
+    - **Hubs are dumb devices**
+		- They don’t understand MAC addresses.
+		- They simply **repeat (broadcast)** all electrical signals to **all ports**.
     
-    ---
+    - **ARP Behavior in Hubs**
+		- **ARP Request (broadcast)** goes to **all devices**.
+		- **ARP Reply (unicast)** also goes to **all ports**, because the hub doesn’t know which port the destination is on.
     
-    ### 🔹 **1. In a Hub-Based Network (Legacy, Layer 1 device):**
+    - **Drawbacks**
+		- **No security** — any device can eavesdrop on all traffic (ARP replies, normal traffic, etc.).
+		- **High collision domain** — leads to more **packet collisions** and degraded performance.
+		- No MAC learning.
     
-    ### 🧠 Hubs are dumb devices:
-    
-    - They don’t understand MAC addresses.
-    - They simply **repeat (broadcast)** all electrical signals to **all ports**.
-    
-    ### 📡 ARP Behavior in Hubs:
-    
-    - **ARP Request (broadcast)** goes to **all devices**.
-    - **ARP Reply (unicast)** also goes to **all ports**, because the hub doesn’t know which port the destination is on.
-    
-    ### ⚠️ Drawbacks:
-    
-    - **No security** — any device can eavesdrop on all traffic (ARP replies, normal traffic, etc.).
-    - **High collision domain** — leads to more **packet collisions** and degraded performance.
-    - No MAC learning.
-    
-    ### 🔄 Summary:
-    
+    - **Summary:**    
     | ARP Traffic | Hub Behavior |
     | --- | --- |
     | ARP Request | Broadcast to all ports |
     | ARP Reply | Flooded to all ports |
+
     
-    ---
-    
-    ### 🔹 **2. In a Switched Network (Modern, Layer 2 device):**
+2. **In a Switched Network (Modern, Layer 2 device):**
     
     ### 🧠 Switches are smart:
     
