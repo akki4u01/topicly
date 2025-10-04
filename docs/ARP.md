@@ -1,26 +1,25 @@
 ---
 id: ARP
-title: ARP Related Questions
+title: Address Rosultion Protocol Related Questions
+sidebar_label: Address Resolution Protocol (ARP)
 ---
 
-# ARP
-This is ARP contents
+# **Basic ARP Questions**
 
-# ARP/ICMP
+::: Notes
+ARP maps an IP address to a MAC address within a local network.
+:::
 
-### **Basic ARP Questions**
-
-- **What is ARP and why is it used?** Expected: ARP maps an IP address to a MAC address within a local network.
+### - **What is ARP and why is it used?** 
     - **ARP (Address Resolution Protocol)** is a protocol used to **map an IP address to a MAC (Media Access Control) address** within a local area network (LAN).
     - When a device wants to communicate with another device on the same network, it knows the **IP address** of the target, but it needs the **MAC address** to actually send data over Ethernet (Layer 2). ARP helps **resolve this mapping**.
     - Think of IP addresses like someone’s name, and MAC addresses like their exact home address. You may know someone’s name (IP), but to send them a letter, you need their full home address (MAC). ARP is like a phonebook you ask:
     “What’s the house address of the person named John?”
     ARP replies: “Here’s the house address (MAC) of John (IP)”
-    - 
-- **How does the ARP process work step-by-step?**
+ 
+### - **How does the ARP process work step-by-step?**
     - You send a broadcast ARP Request: “Who has IP X.X.X.X?”
-    - The host with that IP replies with an ARP Reply: “I am X.X.X.X, my MAC is YY:YY:YY:YY”
-    
+    - The host with that IP replies with an ARP Reply: “I am X.X.X.X, my MAC is YY:YY:YY:YY”   
     - Device A wants to send data to **IP 192.168.1.10**
     - It checks its **ARP cache** – no MAC found.
     - It sends a **broadcast ARP Request**:
@@ -33,7 +32,7 @@ This is ARP contents
         > 
     - Device A stores this IP–MAC mapping in its **ARP cache** and sends the data.
     - 
-- **What is the difference between ARP and RARP?**
+### - **What is the difference between ARP and RARP?**
     - ARP maps IP → MAC, RARP does MAC → IP (mostly obsolete now).
     
     ### ✅ **Difference Between ARP and RARP**
