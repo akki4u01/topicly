@@ -289,15 +289,15 @@ Nobody asked, but you said it so **everyone updates their address book** just in
     - Mitigation: Static ARP entries, Dynamic ARP Inspection (DAI), port security.
     
     
-#### **What is ARP Poisoning / ARP Spoofing?**    
+#### **ARP Poisoning / ARP Spoofing**    
     **ARP poisoning (or ARP spoofing)** is a **man-in-the-middle (MITM) attack** where an attacker sends **fake ARP messages** on a local network to **trick devices** into associating the attacker’s MAC address with another device’s IP (usually the default gateway or a high-value target).
     
-#### **Goal of the Attacker:**    
+#### **Goal of the Attacker**    
     To **intercept**, **modify**, or **drop** traffic between two legitimate devices — often between:    
     - A user’s device and the **default gateway** (router)
     - Or between **two critical servers**
     
-#### **How It Works (Step-by-Step):**    
+#### **How It Works (Step-by-Step)**    
     Let’s say:    
     - Victim’s IP: `192.168.1.10`
     - Gateway IP: `192.168.1.1`
@@ -320,18 +320,14 @@ Nobody asked, but you said it so **everyone updates their address book** just in
 		- **Drop** packets (DoS attack)
     
        
-    ### 🔹 **ELI5 Analogy:**
+    > **Analogy**
     
-    Imagine someone in your office shouts:
+		> Imagine someone in your office shouts:
+		> “Hey, I’m the network printer now. Send all your print jobs to me!”
+		> Everyone believes them and sends documents — but instead of printing, that person reads or throws them away.
     
-    > “Hey, I’m the network printer now. Send all your print jobs to me!”
-    > 
-    
-    Everyone believes them and sends documents — but instead of printing, that person reads or throws them away.
-    
-    ---
-    
-    ### ⚠️ **Consequences:**
+
+#### **Consequences**
     
     - Password theft (HTTP, FTP, Telnet)
     - Session hijacking
@@ -339,54 +335,44 @@ Nobody asked, but you said it so **everyone updates their address book** just in
     - Traffic manipulation
     - Denial of Service (DoS)
     
-    ---
+
+#### **How to Mitigate ARP Poisoning**
     
-    ### 🛡️ **How to Mitigate ARP Poisoning**
-    
-    ### 🔐 1. **Use Static ARP Entries (when possible):**
-    
+1. **Use Static ARP Entries (when possible):**
     - Manually configure IP-MAC mappings on critical devices like servers or routers.
     - Prevents them from accepting spoofed replies.
     - Not scalable in large networks.
     
-    ### 🧰 2. **Enable Dynamic ARP Inspection (DAI)** *(on enterprise switches)*
-    
+2. **Enable Dynamic ARP Inspection (DAI)** *(on enterprise switches)*
     - Works with **DHCP snooping**.
     - Switch **checks ARP packets** against trusted bindings.
     - Blocks invalid ARP replies.
     
-    ### 🧍‍♂️ 3. **Implement Port Security (on switches):**
-    
+3. **Implement Port Security (on switches):**
     - Limit the number of MAC addresses per port.
     - Lock down expected MACs per port.
     
-    ### 🔎 4. **Use ARP monitoring tools:**
-    
+4. **Use ARP monitoring tools:**
     - Detect ARP cache changes or multiple IPs using the same MAC:
         - `arpwatch`
         - `XArp`
         - `Wireshark` with ARP filters
     
-    ### 🔐 5. **Use HTTPS, SSH, VPNs, and encryption:**
-    
+5. **Use HTTPS, SSH, VPNs, and encryption:**
     - Even if the attacker intercepts traffic, they can’t read encrypted content.
-    
-    ### 🌐 6. **IPv6 Networks:**
-    
+
+6. **IPv6 Networks:**
     - ARP is replaced with **NDP (Neighbor Discovery Protocol)**.
     - Use **Secure Neighbor Discovery (SEND)** to add cryptographic protection.
+
     
-    ---
-    
-    ### 🧪 **Detection Signs of ARP Spoofing:**
-    
+#### **Detection Signs of ARP Spoofing**    
     - Multiple ARP replies from the same IP but different MACs
     - Sudden loss of connectivity or slowness
     - Gateway MAC in your ARP cache suddenly changes (`arp -a`)
     
-    ---
-    
-    ### ✅ In Summary:
+
+#### In Summary
     
     | Aspect | ARP Poisoning |
     | --- | --- |
@@ -397,51 +383,35 @@ Nobody asked, but you said it so **everyone updates their address book** just in
 
 ---
 
-### 🔹 **Advanced/Systems-Level Questions**
+### **Advanced/Systems-Level Questions**
 
-- **How would you design a secure ARP mechanism?**
+### **How would you design a secure ARP mechanism?**
     - Could suggest authenticated ARP (e.g., S-ARP), use of certificates, or moving to IPv6 with NDP and SEND.
-    - 
+    - Designing a **secure ARP mechanism** involves addressing the core issue: **ARP is unauthenticated and trust-based**, making it vulnerable to spoofing and poisoning. A secure design would **prevent unauthorized ARP updates**, **verify legitimacy**, and **scale efficiently** in enterprise or data center networks.
     
-    Designing a **secure ARP mechanism** involves addressing the core issue: **ARP is unauthenticated and trust-based**, making it vulnerable to spoofing and poisoning. A secure design would **prevent unauthorized ARP updates**, **verify legitimacy**, and **scale efficiently** in enterprise or data center networks.
+
     
-    ---
+#### **Goal**: Prevent ARP spoofing/poisoning while preserving ARP’s function — IP-to-MAC resolution on a local network.
+
+#### **Secure ARP Design Approaches**
     
-    ### ✅ **Goal**: Prevent ARP spoofing/poisoning while preserving ARP’s function — IP-to-MAC resolution on a local network.
-    
-    ---
-    
-    ## 🔐 **Secure ARP Design Approaches**
-    
-    ### 🔹 **1. Use Static ARP Entries (Limited Use)**
-    
+1. **Use Static ARP Entries (Limited Use)**    
     - Pre-configure IP–MAC mappings on critical devices (e.g., routers, servers).
     - Prevents accepting fake ARP replies.
-    - ✅ Very secure
-    - ❌ Not scalable in large or dynamic networks
+    - Very secure
+    - Not scalable in large or dynamic networks
     
-    ---
-    
-    ### 🔹 **2. Deploy a Centralized ARP Authority**
-    
+       
+2. **Deploy a Centralized ARP Authority**
     - Designate a **trusted ARP server** (like DHCP server or ARP proxy).
     - Devices send **ARP queries** to this server instead of broadcasting.
     - Server validates and replies with correct MAC addresses.
     - Similar to **proxy ARP** or **DHCP-based ARP resolution**.
     
-    ✅ Prevents spoofed replies
     
-    ❌ Adds complexity, needs trusted infrastructure
-    
-    ---
-    
-    ### 🔹 **3. Implement ARP Authentication**
-    
-    > Add cryptographic protection to ARP packets, similar to DNSSEC or IPsec.
-    > 
-    
-    ### Example: **S-ARP (Secure ARP)** — a proposed enhancement
-    
+3. **Implement ARP Authentication**
+    - Add cryptographic protection to ARP packets, similar to DNSSEC or IPsec.
+    - Example: **S-ARP (Secure ARP)** — a proposed enhancement    
     - Each host signs ARP messages using a **digital signature**.
     - All devices trust a **certificate authority (CA)**.
     - ARP reply includes:
@@ -450,44 +420,32 @@ Nobody asked, but you said it so **everyone updates their address book** just in
         - Signature
         - Public key
     
-    Receiving devices:
-    
+    **Receiving devices**    
     - Verify the signature using the public key.
     - Accept only authenticated responses.
-    
     ✅ High integrity
-    
     ❌ High overhead, requires PKI, not natively supported in most OSes
     
-    ---
+4. **Switch-Based Defense: Use Layer 2 Security Features**
+    - Mostly found in enterprise or data center networks (e.g., Cisco, Juniper)
+	a. **Dynamic ARP Inspection (DAI)**
+		- Available on managed switches.
+		- Works with DHCP snooping to validate ARP replies.
+		- Switch **drops spoofed ARP packets** if they don’t match known DHCP bindings.
     
-    ### 🔹 **4. Switch-Based Defense: Use Layer 2 Security Features**
+    b. **Port Security**
+		- Limit the number of MAC addresses allowed per port.
+		- Helps prevent spoofing by unknown MACs.
     
-    Mostly found in enterprise or data center networks (e.g., Cisco, Juniper)
+		✅ No need to change end devices
+		
+		✅ Scalable and practical
+		
+		❌ Switch-specific configuration needed
     
-    ### 🔸 a. **Dynamic ARP Inspection (DAI)**
     
-    - Available on managed switches.
-    - Works with DHCP snooping to validate ARP replies.
-    - Switch **drops spoofed ARP packets** if they don’t match known DHCP bindings.
-    
-    ### 🔸 b. **Port Security**
-    
-    - Limit the number of MAC addresses allowed per port.
-    - Helps prevent spoofing by unknown MACs.
-    
-    ✅ No need to change end devices
-    
-    ✅ Scalable and practical
-    
-    ❌ Switch-specific configuration needed
-    
-    ---
-    
-    ### 🔹 **5. Move to IPv6 with Secure Neighbor Discovery (SEND)**
-    
-    ARP doesn’t exist in IPv6 — replaced with **NDP (Neighbor Discovery Protocol)**.
-    
+5. **Move to IPv6 with Secure Neighbor Discovery (SEND)**
+    - ARP doesn’t exist in IPv6 — replaced with **NDP (Neighbor Discovery Protocol)**.
     - NDP is also vulnerable to spoofing.
     - **SEND (Secure Neighbor Discovery)** uses:
         - Cryptographically generated addresses (CGA)
@@ -500,9 +458,8 @@ Nobody asked, but you said it so **everyone updates their address book** just in
     
     ❌ Only applicable to IPv6
     
-    ---
     
-    ### 🧠 **Design Summary (Hybrid Model):**
+#### **Design Summary (Hybrid Model):**
     
     | Layer | Secure Mechanism | Why |
     | --- | --- | --- |
@@ -511,7 +468,6 @@ Nobody asked, but you said it so **everyone updates their address book** just in
     | Protocol | S-ARP / SEND | Cryptographic trust |
     | Architecture | Central ARP resolver | Control and validation |
     
-    ---
     
     ### 🔸 **ELI5 Analogy**:
     
