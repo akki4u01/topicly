@@ -4,10 +4,9 @@ title: Address Rosultion Protocol Related Questions
 sidebar_label: Address Resolution Protocol (ARP)
 ---
 
-# **Basic ARP Questions**
+## **Basic ARP Questions**
 
 > **Address Resolution Protocol(ARP) resolve MAC address from the known IP Address**, It sends sends a broadcast message (ARP Request) across the local network, asking "Who has this IP address?" The device with the matching IP address then replies with its unique MAC address (ARP Reply) in a unicast message, allowing the requesting device to create an entry in its ARP table (or cache) for future communication.
-
 
 ### **What is ARP and why is it used?** 
     - **ARP (Address Resolution Protocol)** is a protocol used to **map an IP address to a MAC (Media Access Control) address** within a local area network (LAN).
@@ -21,20 +20,15 @@ sidebar_label: Address Resolution Protocol (ARP)
     - The host with that IP replies with an ARP Reply: “I am X.X.X.X, my MAC is YY:YY:YY:YY”   
     - Device A wants to send data to **IP 192.168.1.10**
     - It checks its **ARP cache** – no MAC found.
-    - It sends a **broadcast ARP Request**:
-        
-        > “Who has 192.168.1.10? Tell me.”
-        > 
-    - The device with that IP responds with an **ARP Reply**:
-        
+    - It sends a **broadcast ARP Request**:        
+        > “Who has 192.168.1.10? Tell me.”        
+    - The device with that IP responds with an **ARP Reply**:        
         > “I have 192.168.1.10. My MAC is AA:BB:CC:DD:EE:FF”
-        > 
     - Device A stores this IP–MAC mapping in its **ARP cache** and sends the data.
-    - 
-### - **What is the difference between ARP and RARP?**
+
+### **What is the difference between ARP and RARP?**
     - ARP maps IP → MAC, RARP does MAC → IP (mostly obsolete now).
-    
-    ### ✅ **Difference Between ARP and RARP**
+#### **Difference Between ARP and RARP**
     
     | Feature | **ARP (Address Resolution Protocol)** | **RARP (Reverse Address Resolution Protocol)** |
     | --- | --- | --- |
@@ -45,23 +39,13 @@ sidebar_label: Address Resolution Protocol (ARP)
     | **Communication Type** | ARP Request is a **broadcast**; ARP Reply is **unicast** | RARP Request is **broadcast**; Reply is **unicast** from RARP server |
     | **Still used today?** | ✅ **Yes**, in all IPv4 networks | ❌ **No**, replaced by **DHCP** |
     | **Layer** | Works at **Layer 2.5** | Also at **Layer 2.5**, but less commonly implemented |
-- **What is an ARP cache and how long is an entry valid?**
-    
-    ### ✅ What is an ARP Cache?
-    
-    The **ARP cache** is a small, temporary **memory table** stored in a device (like a computer, router, or switch) that keeps track of **recent IP-to-MAC address mappings**.
-    
-    ---
-    
-    ### 🔹 Why it exists:
-    
-    Without an ARP cache, a device would have to **send an ARP request every time** it wants to communicate with another device — which would generate **a lot of unnecessary traffic**.
-    
-    So, once a device learns a mapping (IP ➡️ MAC), it stores it in the ARP cache to reuse it later **without repeating the request**.
-    
-    ---
-    
-    ### 🔹 What's inside the ARP Cache?
+
+### **What is an ARP Cache and Why it exists?**
+- The **ARP cache** is a small, temporary **memory table** stored in a device (like a computer, router, or switch) that keeps track of **recent IP-to-MAC address mappings**.
+- Without an ARP cache, a device would have to **send an ARP request every time** it wants to communicate with another device — which would generate **a lot of unnecessary traffic**.
+- So, once a device learns a mapping (IP ➡️ MAC), it stores it in the ARP cache to reuse it later **without repeating the request**.
+
+### **What's inside the ARP Cache?**
     
     It typically contains entries like:
     
@@ -72,10 +56,7 @@ sidebar_label: Address Resolution Protocol (ARP)
     - **Dynamic**: Learned via ARP request/response
     - **Static**: Manually configured and won’t expire
     
-    ---
-    
-    ### ⏱️ How long is an entry valid?
-    
+### **How long is an entry valid?**    
     - **Dynamic ARP entries** usually **expire after 1–5 minutes** of inactivity, depending on the operating system:
         - Windows: ~2 minutes (can be adjusted)
         - Linux/macOS: ~60 seconds default
