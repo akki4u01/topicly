@@ -6,18 +6,18 @@ sidebar_label: Address Resolution Protocol (ARP)
 
 # **Basic ARP Questions**
 
-::: Notes
-ARP maps an IP address to a MAC address within a local network.
+:::Notes
+Address Resolution Protocol(ARP) resolve MAC address from the known IP Address, It sends sends a broadcast message (ARP Request) across the local network, asking "Who has this IP address?" The device with the matching IP address then replies with its unique MAC address (ARP Reply) in a unicast message, allowing the requesting device to create an entry in its ARP table (or cache) for future communication.
 :::
 
-### - **What is ARP and why is it used?** 
+### **What is ARP and why is it used?** 
     - **ARP (Address Resolution Protocol)** is a protocol used to **map an IP address to a MAC (Media Access Control) address** within a local area network (LAN).
     - When a device wants to communicate with another device on the same network, it knows the **IP address** of the target, but it needs the **MAC address** to actually send data over Ethernet (Layer 2). ARP helps **resolve this mapping**.
     - Think of IP addresses like someone’s name, and MAC addresses like their exact home address. You may know someone’s name (IP), but to send them a letter, you need their full home address (MAC). ARP is like a phonebook you ask:
     “What’s the house address of the person named John?”
     ARP replies: “Here’s the house address (MAC) of John (IP)”
  
-### - **How does the ARP process work step-by-step?**
+### **How does the ARP process work step-by-step?**
     - You send a broadcast ARP Request: “Who has IP X.X.X.X?”
     - The host with that IP replies with an ARP Reply: “I am X.X.X.X, my MAC is YY:YY:YY:YY”   
     - Device A wants to send data to **IP 192.168.1.10**
