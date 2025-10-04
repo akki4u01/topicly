@@ -59,18 +59,21 @@ Use `npm start` to run the project.
 > It can span multiple lines.
 
 ## Organizing Content in Docusaurus
-Put Markdown files inside docs folder.
-Sidebar configuration is in sidebars.js:
 
+Put Markdown files inside the `docs` folder.  
+Sidebar configuration is in **sidebars.js**:
+
+```javascript
 module.exports = {
   mySidebar: [
     'intro',               // docs/intro.md
     {
       type: 'category',
       label: 'Guidelines',
-      items: ['guidelines/markdown', 'guidelines/layout']
+      items: ['guidelines/markdown', 'guidelines/layout'],
     },
   ],
 };
+
 
 Use folders to structure by category. E.g., docs/guidelines/markdown.md
