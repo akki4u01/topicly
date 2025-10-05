@@ -600,7 +600,7 @@ A secure ARP system is like:
     - Mobile IP, NAT
     - Security: prevent broadcast exposure
     
-    #### Benefits:    
+    #### Benefits  
     - Limits **ARP broadcast propagation**
     - Provides **more control** over ARP resolution
     
@@ -608,47 +608,37 @@ A secure ARP system is like:
     - **What it is ?**
     > A feature in overlay networks where **VXLAN Tunnel Endpoints (VTEPs)** **answer ARP requests locally** using information learned via **EVPN control plane**, without flooding the network.
     
-    ### 🔧 How It Works:
-    
+    ####How It Works    
     - VTEPs maintain **MAC+IP mappings** from EVPN updates.
     - When a VM sends an ARP request, the **VTEP intercepts** and replies directly (without flooding the BUM — Broadcast, Unknown unicast, Multicast — traffic).
     
-    ### 📦 Example:
-    
+    ####Example    
     - VM1 on VTEP1 sends ARP for VM2 (same VXLAN segment).
     - VTEP1 has VM2's IP+MAC from EVPN BGP update.
     - VTEP1 sends **local unicast ARP reply**, suppressing broadcast.
     
-    ### ✅ Benefits:
-    
+    ####Benefits    
     - **Eliminates ARP flooding** in overlays
     - Saves bandwidth and switch CPU
     - Helps scale **multi-tenant networks**
     
-    ---
     
-    ## 🔹 **3. Control-Plane Learning in EVPN**
+3. **Control-Plane Learning in EVPN**
+    - **What it is ?**
+	> Instead of learning MAC addresses through data-plane (like legacy switching), **control-plane learning** uses **BGP EVPN routes** to distribute MAC/IP information across VTEPs.
     
-    **What it is:**
-    
-    Instead of learning MAC addresses through data-plane (like legacy switching), **control-plane learning** uses **BGP EVPN routes** to distribute MAC/IP information across VTEPs.
-    
-    ### 🔧 How It Works:
-    
+    ####How It Works    
     - When a VM joins, its VTEP **advertises its MAC and IP** over BGP to other VTEPs.
     - Other VTEPs build a **complete MAC/IP table** from these advertisements.
     - No need for flooding to discover MACs.
     
-    ### ✅ Benefits:
-    
+    #### Benefits    
     - Faster convergence
     - No unknown unicast flooding
     - **Supports mobility** (MAC move tracking, multi-homing)
     - **Foundation for ARP suppression**
     
-    ---
-    
-    ## 🔹 **4. Reducing L2 Broadcast Domains**
+4. **Reducing L2 Broadcast Domains**
     
     **What it is:**
     
