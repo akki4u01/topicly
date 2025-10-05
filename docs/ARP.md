@@ -116,7 +116,7 @@ sidebar_label: Address Resolution Protocol (ARP)
     - Could result in **blackholing traffic** or routing loops in larger setups.
 
 
-## Think of it like this that How ARP plays into this conflict
+## **Think of it like this that How ARP plays into this conflict**
 :::tip
 Imagine a teacher (switch) has two students (devices) who both say their name is "Alice" (same IP). The teacher knows students by face (MAC address), so they keep changing who they think is Alice. Now, when someone gives a message to "Alice," the teacher may deliver it to the wrong person — or not at all. If the **principal (router)** also thinks they are Alice, the whole school’s system can break, especially if "Alice" was meant to forward homework (internet traffic).
 :::
@@ -149,7 +149,7 @@ Imagine a teacher (switch) has two students (devices) who both say their name is
 - In larger networks, use **DHCP snooping** or **Dynamic ARP Inspection (DAI)** to prevent malicious ARP replies.
     
 
-### Summary of ARP Conflict:    
+### **Summary of ARP Conflict**    
     > When two devices share the same IP on a LAN:
     > - ARP confusion causes traffic misdelivery.
     > - Switches may experience MAC flapping.
@@ -186,7 +186,7 @@ Imagine a teacher (switch) has two students (devices) who both say their name is
 4. **Trigger ARP cache update on peer devices**    
     - Prevents devices from sending out new ARP Requests by proactively **pushing the new mapping**.
     
-####**Example Packet (GARP Request)**:
+#### **Example Packet (GARP Request)**
     
     ```
     Sender IP:     192.168.1.10
@@ -197,7 +197,7 @@ Imagine a teacher (switch) has two students (devices) who both say their name is
     ```
     > It’s saying: “I am 192.168.1.10, my MAC is AA:BB:CC:DD:EE:FF — everyone, please take note!”
 
-## Think of it like this that What is GARP
+## **Think of it like this that What is GARP**
 :::tip
 “Hey everyone! Just letting you know — my name is Alex and I live at 123 Apple Street!”    
 Nobody asked, but you said it so **everyone updates their address book** just in case.
@@ -272,7 +272,7 @@ Nobody asked, but you said it so **everyone updates their address book** just in
     >	- A **switch** is like a phone call: you can call one specific person once you know their number (MAC address), and others don't hear the call.
     
     
-3. *In Summary*
+3. **In Summary**
     
     | Feature | Hub | Switch |
     | --- | --- | --- |
