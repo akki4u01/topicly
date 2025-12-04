@@ -4,7 +4,7 @@ title: Asked Questions
 ---
 
 # Interview Question
-Following Questions 
+Following Questions were asked by **AMD**
 
 
 # PC1 -------- SW1 -------- PC2
@@ -109,3 +109,49 @@ Example:
 - Mask: 255.255.255.0  
 - Destination: 192.168.2.20  
 
+# What happens if ARP request is sent, MAC learning happens, but the switch MAC table flushes before ARP response arrives?
+
+## Scenario
+- PC1 sends an **ARP request** to learn PC2's MAC.
+- Switch **learns PC1’s MAC** from the ARP request.
+- Before PC2 replies, the switch’s **MAC address table is cleared**.
+
+---
+
+## What happens next?
+
+### 1. PC2 sends ARP Response
+- **Source MAC:** PC2 MAC  
+- **Destination MAC:** PC1 MAC  
+- This is a **unicast** frame.
+
+### 2. Switch receives the ARP reply
+- The switch now **does NOT have PC1’s MAC** in its MAC table.
+
+### 3. What does the switch do?
+When a switch receives a **unicast frame with unknown destination MAC**, it performs:
+
+# 👉 **Unknown Unicast Flooding**
+The switch sends the ARP reply out **all ports in the VLAN** (except the incoming port).
+
+---
+
+## 4. PC1 receives the ARP reply
+- PC1 updates its **ARP table** with PC2’s MAC.
+- Switch learns **PC2’s MAC** from the reply.
+- When PC1 sends the next packet (like the IP packet), the switch learns **PC1’s MAC again**.
+
+---
+
+## Final Outcome
+- Communication still works correctly.
+- Only temporary network impact: **switch floods the ARP reply**.
+- No packet drop unless special features exist (port security, PVLAN, etc.).
+
+---
+
+## Summary
+- ARP Request → PC1 MAC learned  
+- MAC Table flushed → no stored MACs  
+- ARP Reply arrives → switch floods unknown unicast  
+- PC1 receives reply → communication continues normally  
