@@ -27,12 +27,12 @@ const sidebars = {
     {
       type: 'category',
       label: '🔌 Layer 2 (Switching)',
-      items: ['ARP', 'VLAN', 'STP RSTP MSTP', 'NAT'],
+      items: ['ARP', 'VLAN', 'VLAN_Explain', 'STP RSTP MSTP', 'STP_Explain', 'NAT'],
     },
     {
       type: 'category',
       label: '🌐 Layer 3 (Routing)',
-      items: ['IPv6', 'OSPF', 'BGP', 'MPLS'], // Verified: IP MPLS.md has id 'MPLS', IPV6.md has id 'IPv6'
+      items: ['IPv6', 'OSPF', 'OSPF_Explain', 'BGP', 'BGP_Explain', 'LifeOfAPacket', 'MPLS'],
     },
     {
       type: 'category',
