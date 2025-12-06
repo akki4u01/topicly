@@ -3,6 +3,42 @@ id: TCP UDP
 title: TCP UDP Related Questions
 ---
 
+import Quiz from '@site/src/components/Quiz';
+
+<Quiz 
+  questions={[
+    {
+      questionText: 'Is TCP connection-oriented or connectionless?',
+      options: ['Connection-oriented', 'Connectionless', 'Both', 'Neither'],
+      answer: 'Connection-oriented',
+    },
+    {
+      questionText: 'Which protocol is faster?',
+      options: ['UDP', 'TCP', 'Both are same', 'Depends on cable'],
+      answer: 'UDP',
+    },
+    {
+      questionText: 'Which flag initiates a TCP connection?',
+      options: ['SYN', 'ACK', 'FIN', 'RST'],
+      answer: 'SYN',
+    },
+    {
+      questionText: 'What is the 3-Way Handshake?',
+      options: ['SYN, SYN-ACK, ACK', 'SYN, ACK, FIN', 'ACK, ACK, SYN', 'Connect, Accept, Send'],
+      answer: 'SYN, SYN-ACK, ACK',
+    },
+    {
+      questionText: 'Does UDP guarantee delivery?',
+      options: ['No', 'Yes', 'Sometimes', 'Only on LAN'],
+      answer: 'No',
+    }
+  ]}
+/>
+
+<br/>
+
+
+
 # TCP UDP
 This is TCP UDP contents
 
@@ -1406,3 +1442,32 @@ UDP
 - Show what happens during a TCP handshake using Wireshark.
 - Write a Python socket program that implements TCP client/server.
 - Simulate a TCP retransmission scenario — what logs or metrics would you look at?
+
+---
+
+## 📝 Test Your Knowledge
+
+<Quiz 
+  questions={[
+    {
+      questionText: 'Which protocol is connection-oriented and reliable?',
+      options: ['UDP', 'TCP', 'IP', 'ICMP'],
+      answer: 'TCP',
+    },
+    {
+      questionText: 'What is the first step of the TCP 3-Way Handshake?',
+      options: ['SYN-ACK', 'ACK', 'SYN', 'FIN'],
+      answer: 'SYN',
+    },
+    {
+      questionText: 'Which windowing mechanism is used for flow control?',
+      options: ['Congestion Window', 'Sliding Window', 'Scaling Window', 'Fixed Window'],
+      answer: 'Sliding Window',
+    },
+    {
+      questionText: 'Which protocol is best for real-time video streaming?',
+      options: ['TCP', 'UDP', 'HTTP', 'FTP'],
+      answer: 'UDP',
+    }
+  ]}
+/>

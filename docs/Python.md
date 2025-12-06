@@ -3,6 +3,40 @@ id: Python
 title: Python Related Questions
 ---
 
+import Quiz from '@site/src/components/Quiz';
+
+<Quiz 
+  questions={[
+    {
+      questionText: 'What is a List in Python?',
+      options: ['Mutable sequence', 'Immutable sequence', 'Key-Value pair', 'Unordered set'],
+      answer: 'Mutable sequence',
+    },
+    {
+      questionText: 'Which bracket is used for Dictionaries?',
+      options: ['{}', '[]', '()', '<>'],
+      answer: '{}',
+    },
+    {
+      questionText: 'Is a Tuple mutable or immutable?',
+      options: ['Immutable', 'Mutable', 'Depends on content', 'Both'],
+      answer: 'Immutable',
+    },
+    {
+      questionText: 'What is the "GIL"?',
+      options: ['Global Interpreter Lock', 'General Interface Loop', 'Global Interval Log', 'Graphic Interface Layer'],
+      answer: 'Global Interpreter Lock',
+    },
+    {
+      questionText: 'What does PEP 8 define?',
+      options: ['Python style guide', 'Performance standards', 'Package indexing', 'Parallel execution'],
+      answer: 'Python style guide',
+    }
+  ]}
+/>
+
+<br/>
+
 # Python
 This is Python contents
 
@@ -798,6 +832,10 @@ This is Python contents
     python
     CopyEdit
     print(greet("Akash"))  # Output: Hello, Akash
+
+---
+
+
     
     ```
     

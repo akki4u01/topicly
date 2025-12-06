@@ -1,0 +1,641 @@
+---
+sidebar_position: 1
+title: Networking Master Class
+sidebar_label: Interactive Master Class
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Quiz from '@site/src/components/Quiz';
+import Flashcard from '@site/src/components/Flashcard';
+
+# 🎓 Networking Master Class
+
+Welcome to the ultimate interactive networking drill! Select a domain below to test your knowledge with **Flashcards** and **Quizzes**.
+
+<Tabs>
+  <TabItem value="switching" label="L2 / Switching" default>
+    
+    ## 🔌 Ethernet
+    <Flashcard cards={[
+      { term: "Ethernet", definition: "A family of wired computer networking technologies commonly used in LANs (IEEE 802.3)." },
+      { term: "MAC Address", definition: "Media Access Control address; unique 48-bit hardware identifier." },
+      { term: "Frame", definition: "The PDU (Protocol Data Unit) at Layer 2." },
+      { term: "CSMA/CD", definition: "Carrier Sense Multiple Access with Collision Detection; legacy Ethernet media access method." },
+      { term: "Full Duplex", definition: "Simultaneous transmission and reception of data (collision-free)." },
+      { term: "Half Duplex", definition: "Data can move in two directions, but not at the same time (collision risk)." },
+      { term: "Preamble", definition: "7 bytes of alternating 1s and 0s at the start of an Ethernet frame for synchronization." },
+      { term: "SFD", definition: "Start Frame Delimiter; 1 byte (10101011) signaling end of preamble." },
+      { term: "FCS", definition: "Frame Check Sequence; 4-byte CRC for error detection at the trailer." },
+      { term: "MTU", definition: "Maximum Transmission Unit; default 1500 bytes for Ethernet payload." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "What is the standard IEEE number for Ethernet?", options: ["802.11", "802.3", "802.1Q", "802.1D"], answer: "802.3" },
+      { questionText: "How long is a standard MAC address?", options: ["32 bits", "48 bits", "64 bits", "128 bits"], answer: "48 bits" },
+      { questionText: "Which field is used for error detection in an Ethernet frame?", options: ["TTL", "FCS", "Sequence Number", "Ack Number"], answer: "FCS" },
+      { questionText: "What is the default MTU size for Ethernet?", options: ["1400 bytes", "1500 bytes", "1518 bytes", "9000 bytes"], answer: "1500 bytes" },
+      { questionText: "What does CSMA/CD stand for?", options: ["Carrier Sense Multiple Access / Collision Detection", "Computer Sense Media Access / Collision Drop", "Carrier System Main Access / Carrier Detect", "Control Sense Multiple Access / Collision Domain"], answer: "Carrier Sense Multiple Access / Collision Detection" },
+      { questionText: "Which addresses does a switch use to forward frames?", options: ["IP Addresses", "MAC Addresses", "Port Numbers", "URL"], answer: "MAC Addresses" },
+      { questionText: "What represents a Broadcast MAC address?", options: ["00:00:00:00:00:00", "FF:FF:FF:FF:FF:FF", "192.168.1.1", "255.255.255.0"], answer: "FF:FF:FF:FF:FF:FF" },
+      { questionText: "Which cable type is most common for modern Ethernet LANs?", options: ["Coaxial", "Twisted Pair (UTP)", "Serial", "Parallel"], answer: "Twisted Pair (UTP)" },
+      { questionText: "What happens in a collision domain?", options: ["Packets are routed", "Data collisions can occur", "Only one device exists", "VLANs act as barriers"], answer: "Data collisions can occur" },
+      { questionText: "What is the purpose of the Preamble?", options: ["Error checking", "Synchronization", "Addressing", "Routing"], answer: "Synchronization" }
+    ]} />
+
+    <hr/>
+
+    ## 📡 ARP (Address Resolution Protocol)
+    <Flashcard cards={[
+      { term: "ARP", definition: "Maps IP address (L3) to MAC address (L2)." },
+      { term: "ARP Cache", definition: "Local table storing IP-to-MAC mappings." },
+      { term: "ARP Request", definition: "Broadcast message asking 'Who has this IP?'" },
+      { term: "ARP Reply", definition: "Unicast message saying 'I have that IP, here is my MAC.'" },
+      { term: "Gratuitous ARP", definition: "ARP announcement without a request; used for duplicate IP detection/HSRP." },
+      { term: "Proxy ARP", definition: "Router answers ARP requests for a remote host." },
+      { term: "RARP", definition: "Reverse ARP; maps MAC to IP (Obsolete)." },
+      { term: "ARP Poisoning", definition: "Spoofing attack linking attacker's MAC to legitimate IP." },
+      { term: "DAI", definition: "Dynamic ARP Inspection; security feature to validate ARP." },
+      { term: "InARP", definition: "Inverse ARP; maps DLCI to IP in Frame Relay." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "What does ARP revolve?", options: ["IP to MAC", "MAC to IP", "Domain to IP", "Port to Service"], answer: "IP to MAC" },
+      { questionText: "Is an ARP Request Broadcast or Unicast?", options: ["Broadcast", "Unicast", "Multicast", "Anycast"], answer: "Broadcast" },
+      { questionText: "What command shows ARP table on Windows?", options: ["show ip arp", "arp -a", "ip neighbor", "get-mac"], answer: "arp -a" },
+      { questionText: "What is Gratuitous ARP used for?", options: ["Routing", "Duplicate IP Detection & Failover", "Error Checking", "Encryption"], answer: "Duplicate IP Detection & Failover" },
+      { questionText: "Which security feature mitigates ARP Spoofing?", options: ["Port Security", "DAI (Dynamic ARP Inspection)", "BPDU Guard", "Root Guard"], answer: "DAI (Dynamic ARP Inspection)" },
+      { questionText: "What layer does ARP operate at (effectively)?", options: ["Layer 1", "Layer 2.5 (Between 2 & 3)", "Layer 4", "Layer 7"], answer: "Layer 2.5 (Between 2 & 3)" },
+      { questionText: "What happens if no ARP reply is received?", options: ["Packet is dropped (encapsulation fail)", "Packet is flooded", "Packet is routed anyway", "Default gateway is used"], answer: "Packet is dropped (encapsulation fail)" },
+      { questionText: "How long do dynamic ARP entries typically stay in cache (Cisco default)?", options: ["1 min", "5 mins", "4 hours", "24 hours"], answer: "4 hours" },
+      { questionText: "Which attack involves flooding a switch with fake MACs?", options: ["ARP Poisoning", "MAC Flooding", "DHCP Starvation", "VLAN Hopping"], answer: "MAC Flooding" },
+      { questionText: "What is the target MAC in an ARP Request?", options: ["Target's MAC", "Router's MAC", "FF:FF:FF:FF:FF:FF", "00:00:00:00:00:00"], answer: "FF:FF:FF:FF:FF:FF" }
+    ]} />
+
+    <hr/>
+
+    ## 🏷️ VLAN (Virtual LAN)
+    <Flashcard cards={[
+      { term: "VLAN", definition: "Logical segmentation of a Layer 2 broadcast domain." },
+      { term: "802.1Q", definition: "Standard tagging protocol; inserts 4-byte tag into frame." },
+      { term: "Trunk Port", definition: "Carries traffic for multiple VLANs." },
+      { term: "Access Port", definition: "Carries traffic for one VLAN (untagged)." },
+      { term: "Native VLAN", definition: "VLAN that traverses a trunk untagged (Default 1)." },
+      { term: "Voice VLAN", definition: "Dedicated VLAN for VoIP traffic, often with QoS." },
+      { term: "VTP", definition: "VLAN Trunking Protocol; syncs VLAN databases across switches (Cisco)." },
+      { term: "DTP", definition: "Dynamic Trunking Protocol; negotiates trunk links." },
+      { term: "SVI", definition: "Switch Virtual Interface; L3 interface for a VLAN." },
+      { term: "VLAN Hopping", definition: "Attack to bypass VLAN segmentation (Double Tagging)." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "What is the max VLAN ID range?", options: ["1-1005", "1-4094", "1-255", "1-10000"], answer: "1-4094" },
+      { questionText: "Which VLAN is untagged on a trunk?", options: ["Data VLAN", "Voice VLAN", "Native VLAN", "Management VLAN"], answer: "Native VLAN" },
+      { questionText: "What is the 802.1Q tag size?", options: ["2 bytes", "4 bytes", "18 bytes", "64 bytes"], answer: "4 bytes" },
+      { questionText: "Which command assigns a port to VLAN 10?", options: ["switchport access vlan 10", "vlan 10 enable", "encapsulation dot1q 10", "trunk allowed vlan 10"], answer: "switchport access vlan 10" },
+      { questionText: "What component is needed to route between VLANs?", options: ["Hub", "Router or L3 Switch", "Repeater", "Bridge"], answer: "Router or L3 Switch" },
+      { questionText: "What is VTP Pruning?", options: ["Deleting VLANs", "Restricting flood traffic to links that need it", "Disabling VTP", "Cuttings cables"], answer: "Restricting flood traffic to links that need it" },
+      { questionText: "What is the default VLAN on a Cisco switch?", options: ["VLAN 0", "VLAN 1", "VLAN 100", "VLAN 99"], answer: "VLAN 1" },
+      { questionText: "What separates broadcast domains?", options: ["Repeater", "Hub", "VLAN / Router", "Switch Access Port"], answer: "VLAN / Router" },
+      { questionText: "Which command shows trunk status?", options: ["show ip interface brief", "show interfaces trunk", "show vlan brief", "show spanning-tree"], answer: "show interfaces trunk" },
+      { questionText: "What is 'Router-on-a-Stick'?", options: ["A wireless router", "Router with subinterfaces for Inter-VLAN routing", "A portable router", "VPN Router"], answer: "Router with subinterfaces for Inter-VLAN routing" }
+    ]} />
+
+    <hr/>
+
+    ## 🌳 STP (Spanning Tree Protocol)
+    <Flashcard cards={[
+      { term: "Loop Protection", definition: "STP prevents Layer 2 loops in redundant topologies." },
+      { term: "Root Bridge", definition: "The master switch with the lowest Bridge ID." },
+      { term: "Answer", definition: "Bridge ID = Priority (32768 default) + MAC." },
+      { term: "BPDU", definition: "Bridge Protocol Data Unit; STP control message." },
+      { term: "Root Port", definition: "Best path to the Root Bridge on non-root switches." },
+      { term: "Designated Port", definition: "Forwarding port for a segment away from Root." },
+      { term: "Blocking Port", definition: "Redundant port kept in blocking state to prevent loop." },
+      { term: "Forward Delay", definition: "15 seconds (Listening -> Learning -> Forwarding)." },
+      { term: "Max Age", definition: "20 seconds; time to wait before declaring root dead." },
+      { term: "PortFast", definition: "Bypasses listening/learning for end-host ports." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "Which IEEE standard is original STP?", options: ["802.1w", "802.1D", "802.1s", "802.1Q"], answer: "802.1D" },
+      { questionText: "How is the Root Bridge elected?", options: ["Highest MAC", "Highest Priority", "Lowest Bridge ID", "Fastest CPU"], answer: "Lowest Bridge ID" },
+      { questionText: "What is the default Bridge Priority?", options: ["1", "4096", "32768", "65535"], answer: "32768" },
+      { questionText: "Which port state actually sends user data?", options: ["Blocking", "Listening", "Learning", "Forwarding"], answer: "Forwarding" },
+      { questionText: "How long is the default Forward Delay?", options: ["2 sec", "15 sec", "20 sec", "50 sec"], answer: "15 sec" },
+      { questionText: "What multicast address does STP use?", options: ["01:80:C2:00:00:00", "FF:FF:FF:FF:FF:FF", "224.0.0.5", "Genereic Broadcast"], answer: "01:80:C2:00:00:00" },
+      { questionText: "What feature protects PortFast ports from BPDU reception?", options: ["Root Guard", "BPDU Guard", "Loop Guard", "UDLD"], answer: "BPDU Guard" },
+      { questionText: "Does the Root Bridge have a Root Port?", options: ["Yes", "No", "Only if redundant", "Only in MST"], answer: "No" },
+      { questionText: "What is the cost of a 1 Gbps link in standard STP?", options: ["19", "4", "100", "2"], answer: "4" },
+      { questionText: "Which state does a port enter first when link comes up?", options: ["Forwarding", "Listening", "Blocking", "Learning"], answer: "Blocking" }
+    ]} />
+
+    <hr/>
+
+    ## ⚡ RSTP (Rapid STP)
+    <Flashcard cards={[
+      { term: "RSTP", definition: "IEEE 802.1w; Faster convergence than STP." },
+      { term: "Convergence", definition: "Time to recover from link failure (sub-second in RSTP)." },
+      { term: "Alternate Port", definition: "Backup path to Root Bridge (blocks BPDUs)." },
+      { term: "Backup Port", definition: "Redundant path to same segment (rare)." },
+      { term: "Edge Port", definition: "Port connected to end device (immediate forwarding, like PortFast)." },
+      { term: "Point-to-Point", definition: "Link type connecting two routers/switches (full duplex)." },
+      { term: "Proposal/Agreement", definition: "Handshake mechanism for fast transition." },
+      { term: "Discarding", definition: "Replaces Blocking and Listening states of 802.1D." },
+      { term: "UplinkFast", definition: "Cisco proprietary feature baked into RSTP." },
+      { term: "BackboneFast", definition: "Cisco proprietary feature baked into RSTP." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "What is the IEEE standard for RSTP?", options: ["802.1D", "802.1w", "802.1s", "802.3ad"], answer: "802.1w" },
+      { questionText: "Which state is NOT in RSTP?", options: ["Listening", "Discarding", "Learning", "Forwarding"], answer: "Listening" },
+      { questionText: "What does an Edge Port connect to?", options: ["Another Switch", "End Host (PC/Server)", "Router", "Firewall"], answer: "End Host (PC/Server)" },
+      { questionText: "What replaces the Blocking state in RSTP?", options: ["Discarding", "Waiting", "Alternate", "Disabled"], answer: "Discarding" },
+      { questionText: "How fast is RSTP convergence typical?", options: ["30-50 sec", "Sub-second / few secs", "5 mins", "1 hour"], answer: "Sub-second / few secs" },
+      { questionText: "Is RSTP compatible with STP?", options: ["Yes (backwards compatible)", "No", "Only on Cisco", "Only on Juniper"], answer: "Yes (backwards compatible)" },
+      { questionText: "What mechanism allows RSTP to converge quickly?", options: ["Proposal/Agreement Handshake", "Faster Timers only", "More bandwidth", "Static Routes"], answer: "Proposal/Agreement Handshake" },
+      { questionText: "Which port role is a backup to the Root Port?", options: ["Designated", "Alternate", "Backup", "Master"], answer: "Alternate" },
+      { questionText: "Which link type is required for fast transition?", options: ["Half Duplex", "Full Duplex", "Serial", "Shared"], answer: "Full Duplex" },
+      { questionText: "What happens if an Edge Port receives a BPDU?", options: ["Shuts down", "Becomes a normal STP port", "Ignores it", "Explodes"], answer: "Becomes a normal STP port" }
+    ]} />
+
+    <hr/>
+
+    ## ☁️ VxLAN (Virtual Itensible LAN)
+    <Flashcard cards={[
+      { term: "VxLAN", definition: "Overlay technology to extend L2 over L3 network (RFC 7348)." },
+      { term: "VNI", definition: "VxLAN Network Identifier; 24-bit ID (16 million segments)." },
+      { term: "VTEP", definition: "VxLAN Tunnel Endpoint; encapsulates/decapsulates frames." },
+      { term: "Underlay", definition: "The physical IP network (usually OSPF/BGP/IS-IS)." },
+      { term: "Overlay", definition: "The logical virtual network built on top." },
+      { term: "UDP 4789", definition: "Standard destination port for VxLAN." },
+      { term: "Encapsulation", definition: "Original L2 frame is wrapped in UDP/IP header." },
+      { term: "Flood and Learn", definition: "Basic BUM traffic handling without control plane." },
+      { term: "EVPN", definition: "Control plane (BGP) often used with VxLAN to reduce flooding." },
+      { term: "MTU Overhead", definition: "Requires +50 bytes (usually set Jumbo Frames 9000)." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "What is the main problem VxLAN solves?", options: ["VLAN limit (4094)", "Slow speeds", "Cable length", "Router cost"], answer: "VLAN limit (4094)" },
+      { questionText: "How many bits is the VNI?", options: ["12", "24", "32", "48"], answer: "24" },
+      { questionText: "What protocol does VxLAN use for transport?", options: ["TCP", "UDP", "GRE", "ESP"], answer: "UDP" },
+      { questionText: "What port number does VxLAN use?", options: ["4789", "8080", "22", "179"], answer: "4789" },
+      { questionText: "What device performs encapsulation?", options: ["VTEP", "Hub", "Repeater", "Modem"], answer: "VTEP" },
+      { questionText: "What is recommended MTU for VxLAN underlay?", options: ["1500", "Jumbo (e.g., 9000)", "1400", "576"], answer: "Jumbo (e.g., 9000)" },
+      { questionText: "Which control plane is most common with modern VxLAN?", options: ["RIP", "BGP EVPN", "Static", "OSPF"], answer: "BGP EVPN" },
+      { questionText: "VxLAN is a ___ tunneling protocol.", options: ["Layer 2 over Layer 3", "Layer 3 over Layer 2", "Layer 1 over Layer 2", "Layer 4 over Layer 7"], answer: "Layer 2 over Layer 3" },
+      { questionText: "What does BUM stand for?", options: ["Broadcast, Unknown Unicast, Multicast", "Backup, Update, Maintenance", "Basic User Management", "Border Unit Metric"], answer: "Broadcast, Unknown Unicast, Multicast" },
+      { questionText: "Does VxLAN use STP?", options: ["Yes", "No (Loop prevention via L3)", "Only at edge", "Sometimes"], answer: "No (Loop prevention via L3)" }
+    ]} />
+
+  </TabItem>
+
+  <TabItem value="routing" label="L3 / Routing">
+
+    ## 🌐 IPv4
+    <Flashcard cards={[
+      { term: "IPv4", definition: "Internet Protocol version 4; 32-bit address space (approx 4.3 billion)." },
+      { term: "Class A", definition: "Range 1.0.0.0 - 126.255.255.255; Default mask /8." },
+      { term: "Class B", definition: "Range 128.0.0.0 - 191.255.255.255; Default mask /16." },
+      { term: "Class C", definition: "Range 192.0.0.0 - 223.255.255.255; Default mask /24." },
+      { term: "Loopback", definition: "127.0.0.0/8; typically 127.0.0.1 for localhost." },
+      { term: "Private IP", definition: "RFC 1918 addresses not routable on internet (10.x, 172.16-31.x, 192.168.x)." },
+      { term: "APIPA", definition: "169.254.x.x; Self-assigned when DHCP fails." },
+      { term: "TTL", definition: "Time To Live; hop limit to prevent loops." },
+      { term: "Fragment Offset", definition: "Field helping reassembly of fragmented packets." },
+      { term: "Header Length", definition: "Min 20 bytes, Max 60 bytes." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "How many bits in an IPv4 address?", options: ["32", "64", "128", "48"], answer: "32" },
+      { questionText: "Which is a private IP address?", options: ["8.8.8.8", "172.20.10.1", "1.1.1.1", "200.10.10.1"], answer: "172.20.10.1" },
+      { questionText: "What is the loopback address?", options: ["127.0.0.1", "0.0.0.0", "255.255.255.255", "169.254.0.1"], answer: "127.0.0.1" },
+      { questionText: "What is the default mask for Class C?", options: ["/8", "/16", "/24", "/32"], answer: "/24" },
+      { questionText: "What protocol maps IP to MAC?", options: ["ARP", "DNS", "DHCP", "ICMP"], answer: "ARP" },
+      { questionText: "What does TTL prevent?", options: ["Packet Loops", "Duplicate IPs", "Unauthorized Access", "Fragmentation"], answer: "Packet Loops" },
+      { questionText: "Which field indicates the protocol payload (TCP/UDP)?", options: ["Version", "Protocol", "TOS", "IHL"], answer: "Protocol" },
+      { questionText: "What is the broadcast address for 192.168.1.0/24?", options: ["192.168.1.0", "192.168.1.1", "192.168.1.254", "192.168.1.255"], answer: "192.168.1.255" },
+      { questionText: "Which class is used for Multicast?", options: ["A", "B", "C", "D"], answer: "D" },
+      { questionText: "What happens when TTL reaches 0?", options: ["Packet delivered", "Packet dropped & ICMP Time Exceeded sent", "Packet re-routed", "Packet held in buffer"], answer: "Packet dropped & ICMP Time Exceeded sent" }
+    ]} />
+
+    <hr/>
+
+    ## 🌍 IPv6
+    <Flashcard cards={[
+      { term: "IPv6", definition: "128-bit address space; Hexadecimal notation." },
+      { term: "Compression", definition: "Removing leading zeros and using :: once for contiguous zeros." },
+      { term: "Link-Local", definition: "fe80::/10; auto-configured, used for neighbor discovery." },
+      { term: "Global Unicast", definition: "Starts with 2000::/3; public routable addresses." },
+      { term: "Loopback", definition: "::1 (equivalent to 127.0.0.1)." },
+      { term: "SLAAC", definition: "Stateless Address Auto-Configuration." },
+      { term: "NDP", definition: "Neighbor Discovery Protocol; Replaces ARP in IPv6." },
+      { term: "No Broadcast", definition: "IPv6 uses Multicast instead of Broadcast." },
+      { term: "Flow Label", definition: "Header field for QoS/real-time traffic tagging." },
+      { term: "Header Size", definition: "Fixed 40 bytes (simpler processing than IPv4)." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "How many bits in an IPv6 address?", options: ["32", "64", "128", "256"], answer: "128" },
+      { questionText: "What represents the loopback address?", options: ["::1", "127.0.0.1", "fe80::1", "2001::1"], answer: "::1" },
+      { questionText: "What does IPv6 use instead of Broadcast?", options: ["Multicast", "Anycast", "Unicast", "Simulcast"], answer: "Multicast" },
+      { questionText: "Which prefix is for Link-Local addresses?", options: ["fe80", "fc00", "2001", "ff00"], answer: "fe80" },
+      { questionText: "What protocol replaces ARP in IPv6?", options: ["NDP", "ICMPv4", "RIP", "EIGRP"], answer: "NDP" },
+      { questionText: "How many times can you use '::' in an address?", options: ["Once", "Twice", "Unlimited", "Never"], answer: "Once" },
+      { questionText: "What is the fixed header size?", options: ["20 bytes", "40 bytes", "60 bytes", "Variable"], answer: "40 bytes" },
+      { questionText: "Which feature allows auto-configuration without DHCP?", options: ["SLAAC", "BOOTP", "RARP", "Static"], answer: "SLAAC" },
+      { questionText: "How many hexadecimal groups (hextets) in a full address?", options: ["4", "6", "8", "16"], answer: "8" },
+      { questionText: "Are IPv4 and IPv6 compatible by default?", options: ["Yes", "No", "Only on Cisco", "Only on Linux"], answer: "No" }
+    ]} />
+
+    <hr/>
+
+    ## 🔢 Subnetting
+    <Flashcard cards={[
+      { term: "Subnet Mask", definition: "Determines Network vs Host portion of IP." },
+      { term: "CIDR", definition: "Classless Inter-Domain Routing (e.g., /24)." },
+      { term: "VLSM", definition: "Variable Length Subnet Mask; allocating different sizes." },
+      { term: "/24", definition: "255.255.255.0; 254 usable hosts." },
+      { term: "/30", definition: "255.255.255.252; 2 usable hosts (Point-to-Point)." },
+      { term: "/32", definition: "Single Host IP." },
+      { term: "Network Address", definition: "First IP in block; Host bits set to 0." },
+      { term: "Broadcast Address", definition: "Last IP in block; Host bits set to 1." },
+      { term: "Magic Number", definition: "Block size; 256 minus the interesting octet." },
+      { term: "Supernetting", definition: "Aggregating multiple routes into one (Summarization)." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "How many useful hosts in a /24?", options: ["256", "255", "254", "252"], answer: "254" },
+      { questionText: "What is the mask for /30?", options: ["255.255.255.0", "255.255.255.252", "255.255.255.128", "255.255.255.240"], answer: "255.255.255.252" },
+      { questionText: "CIDR notation /16 corresponds to?", options: ["255.0.0.0", "255.255.0.0", "255.255.255.0", "255.255.255.255"], answer: "255.255.0.0" },
+      { questionText: "Given 192.168.1.0/25, how many subnets?", options: ["1", "2", "4", "8"], answer: "2" },
+      { questionText: "What is the broadcast address for 192.168.1.0/24?", options: ["192.168.1.0", "192.168.1.255", "192.168.1.1", "192.168.1.127"], answer: "192.168.1.255" },
+      { questionText: "Is 10.1.1.0/31 valid for a point-to-point link?", options: ["Yes (on modern gear)", "No", "Only IPv6", "Only WiFi"], answer: "Yes (on modern gear)" },
+      { questionText: "Which represents all IP addresses (Default Route)?", options: ["0.0.0.0/0", "255.255.255.255/32", "127.0.0.1", "1.1.1.1"], answer: "0.0.0.0/0" },
+      { questionText: "How many IPs in a /29 block?", options: ["4", "6", "8", "16"], answer: "8" },
+      { questionText: "What do host bits of all 0s represent?", options: ["Broadcast", "Network address", "Gateway", "DNS"], answer: "Network address" },
+      { questionText: "Purpose of Subnetting?", options: ["Conserve IP space & Segment traffic", "Increase speed", "Encrypt data", "Assign MACs"], answer: "Conserve IP space & Segment traffic" }
+    ]} />
+
+    <hr/>
+
+    ## 🏔️ OSPF
+    <Flashcard cards={[
+      { term: "LSA Type 1", definition: "Router LSA; generated by every router for its own links." },
+      { term: "LSA Type 2", definition: "Network LSA; generated by DR on standard segments." },
+      { term: "LSA Type 3", definition: "Summary LSA; generated by ABR to advertise inter-area routes." },
+      { term: "LSA Type 5", definition: "External LSA; generated by ASBR." },
+      { term: "DR/BDR", definition: "Designated Router; reduces full-mesh adjacencies on broadcast." },
+      { term: "Hello Packet", definition: "Keepalive & Discovery (10s default interval)." },
+      { term: "Dead Interval", definition: "4x Hello interval (40s); neighbor declared down." },
+      { term: "Area 0", definition: "The Backbone; all areas must touch it." },
+      { term: "Virtual Link", definition: "Tunnel to connect a disconnected area to Area 0." },
+      { term: "Link State Database", definition: "LSDB; map of topology identical on all routers in area." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "What packet establishes adjacency?", options: ["Hello", "LSU", "LSR", "DBD"], answer: "Hello" },
+      { questionText: "Which router generates Type 5 LSAs?", options: ["ABR", "ASBR", "DR", "Internal Router"], answer: "ASBR" },
+      { questionText: "What is the multicast IP for all OSPF routers?", options: ["224.0.0.5", "224.0.0.6", "224.0.0.10", "224.0.0.2"], answer: "224.0.0.5" },
+      { questionText: "Does OSPF support VLSM?", options: ["Yes", "No", "Only version 3", "Only version 1"], answer: "Yes" },
+      { questionText: "Which area type blocks Type 5 LSAs?", options: ["Standard", "Stub", "Backbone", "Transit"], answer: "Stub" },
+      { questionText: "What is the AD of OSPF?", options: ["90", "110", "120", "170"], answer: "110" },
+      { questionText: "How is Cost calculated default?", options: ["100 Mbps / Bandwidth", "Delay", "Hop Count", "Load"], answer: "100 Mbps / Bandwidth" },
+      { questionText: "Which state comes after 2-Way?", options: ["ExStart", "Init", "Down", "Full"], answer: "ExStart" },
+      { questionText: "Why is DR elected?", options: ["Reduce traffic", "Provide gateway", "Encrypt data", "Monitor links"], answer: "Reduce traffic" },
+      { questionText: "What does Full state mean?", options: ["Adjacency complete, DB synced", "Neighbor seen", "Hello received", "Dead"], answer: "Adjacency complete, DB synced" }
+    ]} />
+
+    <hr/>
+
+    ## 🏛️ IS-IS
+    <Flashcard cards={[
+      { term: "IS-IS", definition: "Intermediate System to Intermediate System; Link-state protocol." },
+      { term: "CLNS", definition: "Connectionless Network Service; OSI protocol stack." },
+      { term: "TLV", definition: "Type Link Value; extensible structure." },
+      { term: "L1 Router", definition: "Intra-area routing (like OSPF non-backbone)." },
+      { term: "L2 Router", definition: "Inter-area routing (Backbone)." },
+      { term: "NET", definition: "Network Entity Title; IS-IS Router ID." },
+      { term: "DIS", definition: "Designated Intermediate System; like OSPF DR but preemptive." },
+      { term: "Metric", definition: "Default metric is 10 per interface (Wide metrics allow more)." },
+      { term: "PDU", definition: "Protocol Data Unit (Hello, LSP, CSNP, PSNP)." },
+      { term: "Overloading (OL)", definition: "Bit set to indicate router cannot transit traffic (maintenance)." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "Is IS-IS an IETF or ISO standard?", options: ["ISO", "IETF", "IEEE", "ITU"], answer: "ISO" },
+      { questionText: "What serves as the backbone in IS-IS?", options: ["Area 0", "Contiguous L2 routers", "L1 Area", "Virtual Links"], answer: "Contiguous L2 routers" },
+      { questionText: "Can an L1 router form adjacency with L2 router?", options: ["Only if L1/L2 capable", "No", "Yes always", "Only via tunnel"], answer: "Only if L1/L2 capable" },
+      { questionText: "Does IS-IS use IP for transport?", options: ["No (Direct L2)", "Yes (UDP)", "Yes (TCP)", "Yes (GRE)"], answer: "No (Direct L2)" },
+      { questionText: "What acts like the OSPF DR in IS-IS?", options: ["DIS", "BDR", "Root", "Master"], answer: "DIS" },
+      { questionText: "Is DIS election preemptive in IS-IS?", options: ["Yes", "No", "Sometimes", "Configurable"], answer: "Yes" },
+      { questionText: "What does the NET address start with?", options: ["Area ID (AFI)", "System ID", "NSEL", "MAC"], answer: "Area ID (AFI)" },
+      { questionText: "Which mechanism ensures DB sync?", options: ["CSNP/PSNP", "ACK", "Hello", "Update"], answer: "CSNP/PSNP" },
+      { questionText: "Why do SPs prefer IS-IS?", options: ["Scalabiltiy & TVL flexibility", "Easy config", "Cisco proprietary", "Cheaper"], answer: "Scalabiltiy & TVL flexibility" },
+      { questionText: "What is System ID length?", options: ["6 bytes", "4 bytes", "8 bytes", "10 bytes"], answer: "6 bytes" }
+    ]} />
+
+    <hr/>
+
+    ## 💀 RIP (Routing Information Protocol)
+    <Flashcard cards={[
+      { term: "Distance Vector", definition: "Routing by rumors; sends full table periodically." },
+      { term: "Hop Count", definition: "Metric used by RIP." },
+      { term: "Max Hops", definition: "15 hops; 16 is unreachable." },
+      { term: "Split Horizon", definition: "Don't advertise route back out the interface it came from." },
+      { term: "Poison Reverse", definition: "Advertise failed route as infinity (16) to kill loops." },
+      { term: "Update Timer", definition: "30 seconds default." },
+      { term: "RIPv1", definition: "Classful, broadcast updates (255.255.255.255)." },
+      { term: "RIPv2", definition: "Classless, multicast updates (224.0.0.9)." },
+      { term: "Triggered Update", definition: "Send update immediately upon change (don't wait for timer)." },
+      { term: "UDP 520", definition: "Port used by RIP." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "What is the max hop count in RIP?", options: ["15", "16", "100", "255"], answer: "15" },
+      { questionText: "Which version supports VLSM?", options: ["RIPv1", "RIPv2", "Both", "Neither"], answer: "RIPv2" },
+      { questionText: "What is the Update Interval?", options: ["30s", "60s", "90s", "10s"], answer: "30s" },
+      { questionText: "What AD is RIP?", options: ["90", "110", "120", "170"], answer: "120" },
+      { questionText: "How does RIP prevent loops?", options: ["Split Horizon / Route Poisoning", "SPF Algorithm", "DUAL", "Feasible Successor"], answer: "Split Horizon / Route Poisoning" },
+      { questionText: "What transport does RIP use?", options: ["UDP 520", "TCP 179", "IP 89", "UDP 4789"], answer: "UDP 520" },
+      { questionText: "Multicast address for RIPv2?", options: ["224.0.0.9", "224.0.0.5", "224.0.0.10", "224.0.0.6"], answer: "224.0.0.9" },
+      { questionText: "Is RIP suitable for large networks?", options: ["No (slow convergence, low max hop)", "Yes", "Best choice", "Only for WAN"], answer: "No (slow convergence, low max hop)" },
+      { questionText: "Does RIPv1 send subnet masks?", options: ["No", "Yes", "Sometimes", "Configurable"], answer: "No" },
+      { questionText: "What does hop count 16 mean?", options: ["Unreachable / Infinity", "Good route", "Loop", "Best path"], answer: "Unreachable / Infinity" }
+    ]} />
+
+    <hr/>
+
+    ## 🌍 BGP (Border Gateway Protocol)
+    <Flashcard cards={[
+      { term: "Path Vector", definition: "Protocol type; uses AS-Path to avoid loops." },
+      { term: "TCP 179", definition: "Port used for BGP sessions." },
+      { term: "eBGP", definition: "AD 20; Peering between ASes." },
+      { term: "iBGP", definition: "AD 200; Peering within AS." },
+      { term: "AS-Path", definition: "List of ASNs traversed; loop detection mechanism." },
+      { term: "Next-Hop Self", definition: "Command to fix reachability for iBGP routes." },
+      { term: "Local Preference", definition: "Attribute to steer OUTBOUND traffic (Higher is better)." },
+      { term: "MED", definition: "Multi-Exit Discriminator; suggest INBOUND path (Lower is better)." },
+      { term: "Weight", definition: "Cisco local attribute (Highest wins)." },
+      { term: "Route Reflector", definition: "Overrides Split Horizon rule for iBGP scaling." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "What layer is BGP?", options: ["Layer 4 (Application)", "Layer 3", "Layer 2", "Layer 7 (Application over TCP)"], answer: "Layer 7 (Application over TCP)" },
+      { questionText: "Which Attribute is checked first?", options: ["Weight", "Local Pref", "AS Path", "MED"], answer: "Weight" },
+      { questionText: "How does BGP prevent loops?", options: ["AS-Path check", "Split Horizon", "TTL", "SPF"], answer: "AS-Path check" },
+      { questionText: "Default Keepalive time?", options: ["60s", "30s", "10s", "180s"], answer: "60s" },
+      { questionText: "eBGP TTL default?", options: ["1", "255", "64", "2"], answer: "1" },
+      { questionText: "Which state is 'Waiting for TCP connection'?", options: ["Connect / Active", "Idle", "Established", "OpenSent"], answer: "Connect / Active" },
+      { questionText: "Effect of 'Higher Local Pref'?", options: ["Preferred path", "Less preferred", "Ignored", "Loop"], answer: "Preferred path" },
+      { questionText: "Requirement for iBGP?", options: ["Full Mesh or Route Reflector", "Direct Link", "Different AS", "Loop prevention"], answer: "Full Mesh or Route Reflector" },
+      { questionText: "What is BGP's table called?", options: ["RIB (Routing Information Base)", "CAM Table", "ARP Table", "MAC Table"], answer: "RIB (Routing Information Base)" },
+      { questionText: "Does BGP discover neighbors automatically?", options: ["No (Manual neighbor statements)", "Yes (Hello packets)", "Via Multicast", "Via Broadcast"], answer: "No (Manual neighbor statements)" }
+    ]} />
+
+    <hr/>
+
+    ## 🔗 MP-BGP (Multiprotocol BGP)
+    <Flashcard cards={[
+      { term: "MP-BGP", definition: "Extensions to BGP to support multiple address families (IPv6, VPNv4, etc.)." },
+      { term: "Address Family", definition: "The type of network protocol (e.g., IPv4 Unicast, L2VPN EVPN)." },
+      { term: "NLRI", definition: "Network Layer Reachability Information; the route content." },
+      { term: "VPNv4", definition: "Address Family for MPLS L3VPN (RD + IPv4)." },
+      { term: "EVPN", definition: "Ethernet VPN family (L2 over L3)." },
+      { term: "Route Distinguisher", definition: "Makes an IP address unique across VRFs (64-bit)." },
+      { term: "Route Target", definition: "BGP Extended Community controlling Import/Export of routes." },
+      { term: "Label", definition: "MPLS label carried in BGP update for VPNs." },
+      { term: "BGP LU", definition: "Labeled Unicast (RFC 3107); carries label for inter-AS MPLS." },
+      { term: "Capability Negotiation", definition: "Peers exchange what capabilities (families) they support." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "What feature allows BGP to carry non-IPv4 routes?", options: ["Multiprotocol Extensions (MP-BGP)", "OSPF", "GRE", "VLANs"], answer: "Multiprotocol Extensions (MP-BGP)" },
+      { questionText: "What defines distinct route types in MP-BGP?", options: ["AFI / SAFI", "TOS", "CoS", "DSCP"], answer: "AFI / SAFI" },
+      { questionText: "What does VPNv4 rely on?", options: ["RD + IPv4", "MAC + IP", "VLAN + IP", "Port + IP"], answer: "RD + IPv4" },
+      { questionText: "Which community controls VRF route leakage?", options: ["Route Target (RT)", "Route Distinguisher (RD)", "BGP Weight", "Standard Community"], answer: "Route Target (RT)" },
+      { questionText: "What does EVPN use BGP for?", options: ["MAC Learning signal", "Data Plane", "Encryption", "Compression"], answer: "MAC Learning signal" },
+      { questionText: "Why use BGP Labeled Unicast?", options: ["Seamless MPLS / Inter-AS", "Local Routing", "Internet Access", "DHCP"], answer: "Seamless MPLS / Inter-AS" },
+      { questionText: "Is MP-BGP a separate protocol?", options: ["No, it's an extension of BGP-4", "Yes", "Replaces BGP", "Only for IPv6"], answer: "No, it's an extension of BGP-4" },
+      { questionText: "What is AFI 2?", options: ["IPv6", "IPv4", "VPN", "L2VPN"], answer: "IPv6" },
+      { questionText: "To enable IPv6 over BGP, what must you activate?", options: ["ipv6 address-family", "ip routing", "mpls ip", "ospf"], answer: "ipv6 address-family" },
+      { questionText: "Where is the Label carried in MP-BGP?", options: ["NLRI field", "TCP Header", "IP Header", "Ethernet Header"], answer: "NLRI field" }
+    ]} />
+
+  </TabItem>
+
+  <TabItem value="transport" label="Transport">
+    
+    ## 🚚 TCP (Transmission Control Protocol)
+    <Flashcard cards={[
+      { term: "Connection-Oriented", definition: "Establishes a session before sending data (Reliable)." },
+      { term: "3-Way Handshake", definition: "SYN -> SYN-ACK -> ACK." },
+      { term: "Flow Control", definition: "Windowing; managing data rate." },
+      { term: "Sequencing", definition: "Reordering packets using Sequence Numbers." },
+      { term: "Error Recovery", definition: "Retransmission of lost segments (ACKs)." },
+      { term: "Window Size", definition: "Amount of bytes allowed in flight before ACK." },
+      { term: "MSS", definition: "Max Segment Size; payload size (MTU - Headers)." },
+      { term: "SYN Flood", definition: "DoS attack exhausting server resources with half-open connections." },
+      { term: "Sliding Window", definition: "Dynamic adjustment of window size." },
+      { term: "Slow Start", definition: "TCP Congestion control algorithm." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "Which flag initiates connection?", options: ["SYN", "ACK", "FIN", "RST"], answer: "SYN" },
+      { questionText: "What protocol number is TCP?", options: ["6", "17", "1", "89"], answer: "6" },
+      { questionText: "Is TCP reliable?", options: ["Yes", "No", "Sometimes", "Only on LAN"], answer: "Yes" },
+      { questionText: "What happens if ACK is missed?", options: ["Retransmission", "Connection Reset", "Nothing", "Packet dropped"], answer: "Retransmission" },
+      { questionText: "What is header size without options?", options: ["20 bytes", "8 bytes", "60 bytes", "40 bytes"], answer: "20 bytes" },
+      { questionText: "Which sequence terminates connection?", options: ["FIN / ACK", "RST", "SYN", "URG"], answer: "FIN / ACK" },
+      { questionText: "What is the purpose of Port Numbers?", options: ["Identify application/service", "Identify Host", "Routing", "Hardware ID"], answer: "Identify application/service" },
+      { questionText: "Web browsing (HTTP/HTTPS) uses?", options: ["TCP", "UDP", "ICMP", "IGMP"], answer: "TCP" },
+      { questionText: "Algorithm to prevent congestion collapse?", options: ["Avoidance / Slow Start", "SPF", "CSMA/CD", "Bellman-Ford"], answer: "Avoidance / Slow Start" },
+      { questionText: "What does RST flag mean?", options: ["Reset / Abort", "Restart", "Rest", "Reliable"], answer: "Reset / Abort" }
+    ]} />
+
+    <hr/>
+
+    ## 🏃 UDP (User Datagram Protocol)
+    <Flashcard cards={[
+      { term: "Connectionless", definition: "Fire and forget; no session setup." },
+      { term: "Unreliable", definition: "No ACKs, no retransmission." },
+      { term: "Low Overhead", definition: "8-byte header." },
+      { term: "Real-Time", definition: "Preferred for VoIP/Video due to low latency." },
+      { term: "No Sequencing", definition: "App layer must handle ordering if needed." },
+      { term: "Broadcast", definition: "UDP supports broadcast/multicast (TCP does not)." },
+      { term: "Ports", definition: "Uses Source/Dest ports like TCP." },
+      { term: "DNS", definition: "Uses UDP 53 for queries (fast)." },
+      { term: "DHCP", definition: "Uses UDP 67/68." },
+      { term: "SNMP", definition: "Uses UDP 161/162." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "What protocol number is UDP?", options: ["17", "6", "1", "88"], answer: "17" },
+      { questionText: "Header size of UDP?", options: ["8 bytes", "20 bytes", "60 bytes", "4 bytes"], answer: "8 bytes" },
+      { questionText: "Does UDP do Flow Control?", options: ["No", "Yes", "Sometimes", "Configurable"], answer: "No" },
+      { questionText: "Why use UDP for VoIP?", options: ["Speed / lower latency", "Reliability", "Security", "Ordering"], answer: "Speed / lower latency" },
+      { questionText: "Does UDP adhere to windowing?", options: ["No", "Yes", "Only explicit", "Dynamic"], answer: "No" },
+      { questionText: "Is handshake required?", options: ["No", "Yes", "3-way", "4-way"], answer: "No" },
+      { questionText: "Used for TFTP?", options: ["Yes (UDP)", "No (TCP)", "No (ICMP)", "No (HTTP)"], answer: "Yes (UDP)" },
+      { questionText: "Best effort delivery means?", options: ["No guarantee of arrival", "Guaranteed", "Premium service", "Slow"], answer: "No guarantee of arrival" },
+      { questionText: "Can UDP send Broadcasts?", options: ["Yes", "No", "Only if routed", "Never"], answer: "Yes" },
+      { questionText: "Checksum in UDP is?", options: ["Optional (IPv4) / Mandatory (IPv6)", "Always mandatory", "Always optional", "Not existing"], answer: "Optional (IPv4) / Mandatory (IPv6)" }
+    ]} />
+
+  </TabItem>
+
+  <TabItem value="sp" label="Service Provider">
+    
+    ## 🏷️ MPLS (Multiprotocol Label Switching)
+    <Flashcard cards={[
+      { term: "Label Switching", definition: "Forwarding based on short labels, not IP lookup." },
+      { term: "LSR", definition: "Label Switch Router (Core router)." },
+      { term: "LER", definition: "Label Edge Router (Ingress/Egress)." },
+      { term: "LSP", definition: "Label Switched Path." },
+      { term: "Push", definition: "Adding a label (Ingress)." },
+      { term: "Pop", definition: "Removing a label (Egress)." },
+      { term: "Swap", definition: "Replacing incoming label with outgoing label." },
+      { term: "PHP", definition: "Penultimate Hop Popping; pop label one hop early." },
+      { term: "LDP", definition: "Label Distribution Protocol." },
+      { term: "Shim Header", definition: "32-bit header between L2 and L3." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "Where is MPLS header inserted?", options: ["Between L2 and L3", "In L2 trailer", "Inside L4", "Before L2"], answer: "Between L2 and L3" },
+      { questionText: "Size of MPLS label field itself?", options: ["20 bits", "32 bits", "24 bits", "16 bits"], answer: "20 bits" },
+      { questionText: "What does PHP do?", options: ["Removes label at penultimate hop", "Encrypts data", "Adds double label", "Routes via IP"], answer: "Removes label at penultimate hop" },
+      { questionText: "Which protocol distributes labels typically?", options: ["LDP", "RIP", "STP", "ARP"], answer: "LDP" },
+      { questionText: "MPLS is often called?", options: ["Layer 2.5", "Layer 3.5", "Layer 7", "Layer 1"], answer: "Layer 2.5" },
+      { questionText: "What is the Experimental (Exp) bits used for?", options: ["QoS / CoS", "Addressing", "TTL", "Flow Control"], answer: "QoS / CoS" },
+      { questionText: "Can MPLS carry non-IP traffic?", options: ["Yes (Any protocol)", "No", "Only Ethernet", "Only ATM"], answer: "Yes (Any protocol)" },
+      { questionText: "What is a Label Stack?", options: ["Multiple labels (e.g., VPN + Transport)", "Database of labels", "Rejected labels", "LDP buffer"], answer: "Multiple labels (e.g., VPN + Transport)" },
+      { questionText: "Reserved label range?", options: ["0-15", "100-200", "16-1000", "None"], answer: "0-15" },
+      { questionText: "Why is MPLS used?", options: ["Traffic Engineering / VPNs", "Security only", "Encryption only", "Web hosting"], answer: "Traffic Engineering / VPNs" }
+    ]} />
+
+    <hr/>
+
+    ## 🔒 L3VPN (Layer 3 VPN)
+    <Flashcard cards={[
+      { term: "L3VPN", definition: "MPLS-based VPN where SP participates in routing (Peering)." },
+      { term: "VRF", definition: "Virtual Routing and Forwarding; separate routing table." },
+      { term: "RD", definition: "Route Distinguisher; makes customer prefixes unique." },
+      { term: "RT", definition: "Route Target; controls import/export of routes into VRFs." },
+      { term: "PE Router", definition: "Provider Edge; holds VRFs and peers with CE." },
+      { term: "CE Router", definition: "Customer Edge; peers with PE via OSPF/BGP/Static." },
+      { term: "P Router", definition: "Provider Core; only switches labels (knows no VPN routes)." },
+      { term: "MP-BGP", definition: "Carries VPNv4 prefixes between PEs." },
+      { term: "VPNv4", definition: "96-bit address (64-bit RD + 32-bit IPv4)." },
+      { term: "Label Stack", definition: "Uses 2 labels: Transport (Top) + VPN (Bottom)." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "Who manages the routing in L3VPN?", options: ["Shared between Customer & SP", "Customer only", "SP only", "No one"], answer: "Shared between Customer & SP" },
+      { questionText: "What makes identical IPs unique in L3VPN?", options: ["RD (Route Distinguisher)", "RT", "VLAN", "MAC"], answer: "RD (Route Distinguisher)" },
+      { questionText: "Which device stores customer routes?", options: ["PE", "P", "Core", "Switch"], answer: "PE" },
+      { questionText: "How many labels in L3VPN packet?", options: ["2 (Transport + VPN)", "1", "3", "0"], answer: "2 (Transport + VPN)" },
+      { questionText: "What dictates which VRF receives a route?", options: ["Route Target (RT)", "RD", "OSPF Area", "Metric"], answer: "Route Target (RT)" },
+      { questionText: "Does P router know VPN IP routes?", options: ["No (Label switching only)", "Yes", "Partially", "Only default"], answer: "No (Label switching only)" },
+      { questionText: "Protocol between PE routers?", options: ["MP-BGP", "OSPF", "RIP", "ISIS"], answer: "MP-BGP" },
+      { questionText: "What connects Customer to Provider?", options: ["CE-PE link", "P-P link", "PE-PE link", "VPN tunnel"], answer: "CE-PE link" },
+      { questionText: "Is L3VPN secure?", options: ["Yes (Isolation), but not Encrypted", "Yes (Encrypted)", "No", "Public"], answer: "Yes (Isolation), but not Encrypted" },
+      { questionText: "Format of RD?", options: ["ASN:NN or IP:NN", "MAC address", "VLAN ID", "IPv6"], answer: "ASN:NN or IP:NN" }
+    ]} />
+
+    <hr/>
+
+    ## 🌉 L2VPN (Layer 2 VPN)
+    <Flashcard cards={[
+      { term: "VPWS", definition: "Virtual Private Wire Service; Point-to-Point (EoMPLS)." },
+      { term: "VPLS", definition: "Virtual Private LAN Service; Multipoint-to-Multipoint (Switching)." },
+      { term: "Pseudowire", definition: "Emulated circuit over packet network." },
+      { term: "Control Word", definition: "Optional header to prevent packet reordering." },
+      { term: "EVPN", definition: "Next-gen L2VPN using BGP for MAC learning (replaces VPLS)." },
+      { term: "Transparent", definition: "SP network looks like a wire/switch to customer." },
+      { term: "MAC Learning", definition: "In VPLS, PEs learn MACs from data plane (flood & learn)." },
+      { term: "Split Horizon", definition: "Used in VPLS mesh to prevent loops." },
+      { term: "A-VPLS", definition: "Advanced VPLS." },
+      { term: "H-VPLS", definition: "Hierarchical VPLS; scales by using access PEs." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "Difference between VPLS and L3VPN?", options: ["VPLS is L2 (Switch), L3VPN is L3 (Router)", "VPLS is encrypted", "L3VPN is faster", "No difference"], answer: "VPLS is L2 (Switch), L3VPN is L3 (Router)" },
+      { questionText: "What does VPLS simulate?", options: ["A giant LAN Switch", "A Router", "A Firewall", "The Internet"], answer: "A giant LAN Switch" },
+      { questionText: "What is a Pseudowire?", options: ["Virtual wire over MPLS", "Physical wire", "Fiber optic", "Copper cable"], answer: "Virtual wire over MPLS" },
+      { questionText: "Technology replacing VPLS?", options: ["EVPN", "ATM", "Frame Relay", "X.25"], answer: "EVPN" },
+      { questionText: "Does SP participate in routing in L2VPN?", options: ["No", "Yes", "Sometimes", "Only static"], answer: "No" },
+      { questionText: "Point-to-Point L2VPN is called?", options: ["VPWS / E-Line", "VPLS", "E-LAN", "IP VPN"], answer: "VPWS / E-Line" },
+      { questionText: "Multipoint L2VPN is called?", options: ["VPLS / E-LAN", "VPWS", "P2P", "Leased Line"], answer: "VPLS / E-LAN" },
+      { questionText: "Does VPLS handle IP addressing?", options: ["No (L2 only)", "Yes", "DHCP only", "NAT only"], answer: "No (L2 only)" },
+      { questionText: "How are MACs learned in basic VPLS?", options: ["Data Plane (Flood & Learn)", "BGP", "Static", "LDP"], answer: "Data Plane (Flood & Learn)" },
+      { questionText: "What label signals the service?", options: ["VC Label (Inner)", "Transport Label", "QoS Label", "Explicit Null"], answer: "VC Label (Inner)" }
+    ]} />
+
+    <hr/>
+
+    ## 🔀 VRF (Virtual Routing & Forwarding)
+    <Flashcard cards={[
+      { term: "VRF", definition: "Virtual Router within a physical router." },
+      { term: "Isolation", definition: "Routes in one VRF cannot see routes in another." },
+      { term: "Overlapping IPs", definition: "VRFs allow same IP ranges to coexist on one router." },
+      { term: "Global Table", definition: "The default routing table (non-VRF)." },
+      { term: "VRF-Lite", definition: "VRF without MPLS (Back-to-back VRFs)." },
+      { term: "Route Leaking", definition: "Controlled sharing of routes between VRFs." },
+      { term: "Mgmt VRF", definition: "Dedicated VRF for management traffic (OOB)." },
+      { term: "rd", definition: "Command to assign Route Distinguisher." },
+      { term: "route-target", definition: "Command to set import/export policies." },
+      { term: "show ip route vrf", definition: "Command to view specific VRF table." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "What does VRF allow?", options: ["Multiple independent routing tables", "Faster switching", "More ports", "Encryption"], answer: "Multiple independent routing tables" },
+      { questionText: "Can VRF A ping VRF B by default?", options: ["No, they are isolated", "Yes", "Only if same IP", "Only if Cisco"], answer: "No, they are isolated" },
+      { questionText: "Common use case for VRF?", options: ["Multi-tenancy / L3VPN", "VLANs", "Port Security", "WiFi"], answer: "Multi-tenancy / L3VPN" },
+      { questionText: "What is VRF-Lite?", options: ["VRF without MPLS", "VRF with 1 route", "Small VRF", "Demo version"], answer: "VRF without MPLS" },
+      { questionText: "How to check VRF routes?", options: ["show ip route vrf <name>", "show ip route", "show ip interface", "ping"], answer: "show ip route vrf <name>" },
+      { questionText: "Does an interface belong to multiple VRFs?", options: ["No, usually one", "Yes, all", "Unlimited", "2 max"], answer: "No, usually one" },
+      { questionText: "What handles overlapping IPs?", options: ["VRF separation", "NAT only", "ARP", "DNS"], answer: "VRF separation" },
+      { questionText: "Management VRF is used for?", options: ["OOB Management isolation", "Data traffic", "Guest wifi", "Load balancing"], answer: "OOB Management isolation" },
+      { questionText: "Is VRF Layer 2 or 3?", options: ["Layer 3", "Layer 2", "Layer 1", "Layer 7"], answer: "Layer 3" },
+      { questionText: "Can dynamic routing run inside a VRF?", options: ["Yes (OSPF/BGP per VRF)", "No", "Static only", "RIP only"], answer: "Yes (OSPF/BGP per VRF)" }
+    ]} />
+  </TabItem>
+
+  <TabItem value="hardware" label="Hardware">
+    
+    ## 🖧 Router
+    <Flashcard cards={[
+      { term: "Router", definition: "L3 device connecting different networks." },
+      { term: "Routing Table", definition: "RIB; stores best paths to networks." },
+      { term: "Control Plane", definition: "Brain; routing protocols (OSPF, BGP) run here." },
+      { term: "Data Plane", definition: "Forwarding Plane; moves packets from ingress to egress." },
+      { term: "ASIC", definition: "Application-Specific Integrated Circuit; hardware acceleration." },
+      { term: "TCAM", definition: "Ternary Content Addressable Memory; fast hardware lookup." },
+      { term: "CEF", definition: "Cisco Express Forwarding; optimized data plane switching." },
+      { term: "Gateway", definition: "Exit point for the LAN." },
+      { term: "Interface", definition: "Physical or logical port (Gi0/0, Loopback)." },
+      { term: "Line Card", definition: "Modular card containing interfaces." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "Primary function of a Router?", options: ["Packet Forwarding between networks", "Frame Switching", "Signal Repeating", "Modulation"], answer: "Packet Forwarding between networks" },
+      { questionText: "Router operates at which OSI layer?", options: ["Layer 3", "Layer 2", "Layer 1", "Layer 5"], answer: "Layer 3" },
+      { questionText: "Separation of Control and Data plane is termed?", options: ["SDN / Disaggregation", "VLAN", "Trunking", "Mirroring"], answer: "SDN / Disaggregation" },
+      { questionText: "What handles high speed packet switching?", options: ["ASIC / Data Plane", "CPU", "RAM", "Hard Drive"], answer: "ASIC / Data Plane" },
+      { questionText: "Does a router break broadcast domains?", options: ["Yes", "No", "Only if configured", "Never"], answer: "Yes" },
+      { questionText: "What is the FIB?", options: ["Forwarding Information Base (derivied from RIB)", "Fake IP Base", "Frame Info Block", "Fast Internet Bus"], answer: "Forwarding Information Base (derivied from RIB)" },
+      { questionText: "Difference between Switch and Router?", options: ["Switch = L2 (Mac), Router = L3 (IP)", "Switch is faster", "Router has more ports", "No difference"], answer: "Switch = L2 (Mac), Router = L3 (IP)" },
+      { questionText: "What is a Loopback interface associated with?", options: ["Logical/Virtual Interface", "Physical Port", "Power Supply", "Fan"], answer: "Logical/Virtual Interface" },
+      { questionText: "Routers forward based on?", options: ["Destination IP", "Source MAC", "Application", "Time"], answer: "Destination IP" },
+      { questionText: "Default Gateway is usually?", options: ["A Router interface on local subnet", "A DNS server", "A Switch", "An ISP"], answer: "A Router interface on local subnet" }
+    ]} />
+
+    <hr/>
+
+    ## 🔌 Switch
+    <Flashcard cards={[
+      { term: "Switch", definition: "L2 device connecting devices on a LAN." },
+      { term: "MAC Table", definition: "CAM table; maps MAC addresses to Ports." },
+      { term: "ASIC", definition: "Used for wire-speed frame switching." },
+      { term: "Collision Domain", definition: "Each switch port is its own collision domain." },
+      { term: "Broadcast Domain", definition: "By default, all ports are in one broadcast domain (unless VLANs)." },
+      { term: "PoE", definition: "Power over Ethernet; IEEE 802.3af/at/bt." },
+      { term: "L3 Switch", definition: "Multilayer switch capable of routing." },
+      { term: "Stacking", definition: "Combining multiple switches to act as one logical unit." },
+      { term: "SFP", definition: "Small Form-factor Pluggable; transceiver module." },
+      { term: "Console Port", definition: "Port for Out-of-band CLI management." }
+    ]} />
+    <Quiz questions={[
+      { questionText: "What does a switch use to make decisions?", options: ["MAC Address Table", "Routing Table", "ARP Table", "DNS Table"], answer: "MAC Address Table" },
+      { questionText: "Does a switch perform error checking?", options: ["Yes (FCS)", "No", "Only L3", "Never"], answer: "Yes (FCS)" },
+      { questionText: "What happens if dest MAC is unknown?", options: ["Flood to all ports except ingress", "Drop frame", "Send back to source", "Ask Router"], answer: "Flood to all ports except ingress" },
+      { questionText: "What is PoE?", options: ["Power over Ethernet", "Point of Entry", "Protocol of Exchange", "Port over Ether"], answer: "Power over Ethernet" },
+      { questionText: "Main benefit of L3 Switch?", options: ["Inter-VLAN routing at hardware speed", "Cheaper", "Less ports", "Wireless"], answer: "Inter-VLAN routing at hardware speed" },
+      { questionText: "Each port on a switch is a separate ___?", options: ["Collision Domain", "Broadcast Domain", "AS", "Network"], answer: "Collision Domain" },
+      { questionText: "What connects switches together for higher bandwidth?", options: ["EtherChannel / LACP", "VLAN", "STP", "PoE"], answer: "EtherChannel / LACP" },
+      { questionText: "Standard console speed?", options: ["9600 baud", "115200", "1200", "100"], answer: "9600 baud" },
+      { questionText: "Does a basic switch understand IP addresses?", options: ["No (L2 only)", "Yes", "For routing", "For NAT"], answer: "No (L2 only)" },
+      { questionText: "What is Stacking?", options: ["Managing multiple switches as one", "Piling them up", "Connecting via trunk", "VLAN tagging"], answer: "Managing multiple switches as one" }
+    ]} />
+
+  </TabItem>
+</Tabs>

@@ -3,6 +3,42 @@ id: OSPF
 title: OSPF Interview Questions
 ---
 
+import Quiz from '@site/src/components/Quiz';
+
+<Quiz 
+  questions={[
+    {
+      questionText: 'What algorithm does OSPF use?',
+      options: ['Dijkstra / SPF', 'Bellman-Ford', 'DUAL', 'Flooding'],
+      answer: 'Dijkstra / SPF',
+    },
+    {
+      questionText: 'What is Area 0 known as?',
+      options: ['Backbone Area', 'Stub Area', 'NSSA', 'Totally Stubby'],
+      answer: 'Backbone Area',
+    },
+    {
+      questionText: 'What is an LSA?',
+      options: ['Link State Advertisement', 'Local Switch Area', 'Link Segment Address', 'Loop State Aware'],
+      answer: 'Link State Advertisement',
+    },
+    {
+      questionText: 'How is a Router ID typically chosen?',
+      options: ['Highest Loopback IP', 'Lowest MAC Address', 'Highest Physical IP', 'Randomly'],
+      answer: 'Highest Loopback IP',
+    },
+    {
+      questionText: 'What is the metric used by OSPF?',
+      options: ['Cost', 'Hop Count', 'Delay', 'Reliability'],
+      answer: 'Cost',
+    }
+  ]}
+/>
+
+<br/>
+
+
+
 # OSPF
 This is OSPF contents
 
@@ -4788,3 +4824,32 @@ This is OSPF contents
 - Are you the only user experiencing this issue, or are others affected as well?
 - Have there been any recent changes or updates to the network or equipment?
 - Are you able to connect to any other devices or applications on the network?
+
+---
+
+## 📝 Test Your Knowledge
+
+<Quiz 
+  questions={[
+    {
+      questionText: 'Which OSPF area is known as the Backbone Area?',
+      options: ['Area 1', 'Area 100', 'Area 0', 'Area 255'],
+      answer: 'Area 0',
+    },
+    {
+      questionText: 'Which LSA Type describes a router and its directly connected links?',
+      options: ['Type 1 (Router LSA)', 'Type 2 (Network LSA)', 'Type 3 (Summary LSA)', 'Type 5 (External LSA)'],
+      answer: 'Type 1 (Router LSA)',
+    },
+    {
+      questionText: 'What is used to connect a disconnected area to the backbone?',
+      options: ['Static Route', 'Virtual Link', 'Redistribution', 'Stub Area'],
+      answer: 'Virtual Link',
+    },
+    {
+      questionText: 'Which algorithm does OSPF use to calculate the best path?',
+      options: ['Bellman-Ford', 'Dijkstra (SPF)', 'DUAL', 'K-Nearest Neighbors'],
+      answer: 'Dijkstra (SPF)',
+    }
+  ]}
+/>

@@ -3,6 +3,40 @@ id: STP RSTP MSTP
 title: STP RSTP MSTP Related Questions
 ---
 
+import Quiz from '@site/src/components/Quiz';
+
+<Quiz 
+  questions={[
+    {
+      questionText: 'What is the main goal of STP?',
+      options: ['Prevent switching loops', 'Increase bandwidth', 'Encrypt data', 'Manage IP addresses'],
+      answer: 'Prevent switching loops',
+    },
+    {
+      questionText: 'Which device becomes the Root Bridge?',
+      options: ['Switch with lowest Bridge ID', 'Switch with highest MAC', 'Switch with most ports', 'Switch with highest IP'],
+      answer: 'Switch with lowest Bridge ID',
+    },
+    {
+      questionText: 'What does "BPDU" stand for?',
+      options: ['Bridge Protocol Data Unit', 'Basic Port Data Unit', 'Bridge Port Direction Unit', 'Broadcast Packet Distribution Unit'],
+      answer: 'Bridge Protocol Data Unit',
+    },
+    {
+      questionText: 'Which port state in STP stops loops?',
+      options: ['Blocking', 'Learning', 'Listening', 'Forwarding'],
+      answer: 'Blocking',
+    },
+    {
+      questionText: 'What is RSTP?',
+      options: ['Rapid Spanning Tree Protocol', 'Reliable Spanning Tree Protocol', 'Routing Spanning Tree Protocol', 'Real-time Spanning Tree'],
+      answer: 'Rapid Spanning Tree Protocol',
+    }
+  ]}
+/>
+
+<br/>
+
 # STP RSTP MSTP
 This is STP RSTP MSTP contents
 
@@ -514,6 +548,36 @@ This is STP RSTP MSTP contents
     
     - These timers are **still defined**, but **RSTP mostly bypasses them** using a handshake mechanism.
     - That's why **RSTP converges in < 1 second** in most cases.
+
+---
+
+## 📝 Test Your Knowledge
+
+<Quiz 
+  questions={[
+    {
+      questionText: 'What is the primary purpose of STP?',
+      options: ['Prevent Layer 2 Loops', 'Route packets', 'Assign IP addresses', 'Encrypt traffic'],
+      answer: 'Prevent Layer 2 Loops',
+    },
+    {
+      questionText: 'Which switch becomes the Root Bridge?',
+      options: ['Highest IP', 'Lowest Bridge ID', 'Highest MAC', 'Newest Switch'],
+      answer: 'Lowest Bridge ID',
+    },
+    {
+      questionText: 'What is the standard for Rapid STP?',
+      options: ['802.1D', '802.1Q', '802.1w', '802.1s'],
+      answer: '802.1w',
+    },
+    {
+      questionText: 'Which port role is unique to RSTP?',
+      options: ['Root Port', 'Designated Port', 'Alternate Port', 'Blocking Port'],
+      answer: 'Alternate Port',
+    }
+  ]}
+/>
+
 - What is a Root Bridge and how is it elected?
     
     ### 🌉 What is a Root Bridge in STP?

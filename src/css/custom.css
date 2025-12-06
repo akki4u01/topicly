@@ -4,27 +4,138 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
+/* Custom Fonts - You can import Google Fonts here if you like, usually done in docusaurus.config.js or head tags, but standard system fonts or a clean sans-serif stack work well too. */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-font-family-base: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  
+  /* Brand Colors - Violet/Indigo Theme */
+  --ifm-color-primary: #6366f1;
+  --ifm-color-primary-dark: #4f46e5;
+  --ifm-color-primary-darker: #4338ca;
+  --ifm-color-primary-darkest: #3730a3;
+  --ifm-color-primary-light: #818cf8;
+  --ifm-color-primary-lighter: #a5b4fc;
+  --ifm-color-primary-lightest: #c7d2fe;
+  
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* Dark Mode Overrides */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #818cf8;
+  --ifm-color-primary-dark: #6366f1;
+  --ifm-color-primary-darker: #4f46e5;
+  --ifm-color-primary-darkest: #4338ca;
+  --ifm-color-primary-light: #a5b4fc;
+  --ifm-color-primary-lighter: #c7d2fe;
+  --ifm-color-primary-lightest: #e0e7ff;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* General Layout Tweaks */
+.main-wrapper {
+  background: linear-gradient(to bottom right, var(--ifm-background-color), var(--ifm-color-emphasis-100));
+}
+
+/* Hero Section Styles */
+.hero-banner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--ifm-color-primary-light) 0%, transparent 70%);
+  opacity: 0.1;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(120deg, var(--ifm-color-primary-dark), var(--ifm-color-primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+[data-theme='dark'] .hero-title {
+  background: linear-gradient(120deg, #fff, var(--ifm-color-primary));
+  -webkit-background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Glassmorphism Cards */
+.card-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+[data-theme='dark'] .card-glass {
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.card-glass:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.2);
+}
+
+/* Button Upgrades */
+.button-primary-gradient {
+  background: linear-gradient(90deg, var(--ifm-color-primary-dark), var(--ifm-color-primary));
+  border: none;
+  color: white;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.button-primary-gradient:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  color: white;
+}
+
+/* Navbar Tweaks */
+.navbar {
+  box-shadow: none;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  backdrop-filter: blur(10px);
+  background-color: rgba(255,255,255,0.8);
+}
+[data-theme='dark'] .navbar {
+  background-color: rgba(0,0,0,0.8);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+/* Footer Tweaks */
+.footer {
+  background-color: var(--ifm-color-emphasis-100);
 }

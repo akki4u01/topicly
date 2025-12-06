@@ -4,6 +4,40 @@ title: Address Rosultion Protocol Related Questions
 sidebar_label: Address Resolution Protocol (ARP)
 ---
 
+import Quiz from '@site/src/components/Quiz';
+
+<Quiz 
+  questions={[
+    {
+      questionText: 'What does ARP stand for?',
+      options: ['Address Resolution Protocol', 'Active Resolution Protocol', 'Address Routing Protocol', 'Automatic Routing Path'],
+      answer: 'Address Resolution Protocol',
+    },
+    {
+      questionText: 'Which layer address does ARP resolve IP to?',
+      options: ['Layer 2 (MAC)', 'Layer 3 (IP)', 'Layer 4 (Port)', 'Layer 1 (Physical)'],
+      answer: 'Layer 2 (MAC)',
+    },
+    {
+      questionText: 'What is the "Cache" in ARP?',
+      options: ['A temporary storage for MAC-to-IP mappings', 'A rejected packet list', 'A permanent database of all MACs', 'The routing table'],
+      answer: 'A temporary storage for MAC-to-IP mappings',
+    },
+    {
+      questionText: 'Which message type is sent to all hosts on the subnet?',
+      options: ['Unicast', 'Broadcast', 'Multicast', 'Anycast'],
+      answer: 'Broadcast',
+    },
+    {
+      questionText: 'When does a host send an ARP Request?',
+      options: ['When it knows the IP but needs the MAC', 'When it knows the MAC but needs the IP', 'When it needs to assign an IP', 'When it needs to route to the internet'],
+      answer: 'When it knows the IP but needs the MAC',
+    }
+  ]}
+/>
+
+<br/>
+
 ## **Basic ARP Questions**
 
 > **Address Resolution Protocol(ARP) resolve MAC address from the known IP Address**, It sends sends a broadcast message (ARP Request) across the local network, asking "Who has this IP address?" The device with the matching IP address then replies with its unique MAC address (ARP Reply) in a unicast message, allowing the requesting device to create an entry in its ARP table (or cache) for future communication.
@@ -750,7 +784,11 @@ A secure ARP system is like:
     | 2 | No device replies |
     | 3 | Host waits, then times out |
     | 4 | No ARP entry created; communication fails |
-- No reply. It may retry multiple times before failing (often logged as timeout).
+- No ARP entry created; communication fails |
+
+---
+
+
     
     ### ✅ **What Happens When a Host ARPs for a Non-Existent IP (Updated Explanation)**
     
@@ -3233,4 +3271,33 @@ A secure ARP system is like:
     ### ELI5 Analogy
     
     > VXLAN is like sending letters inside envelopes within envelopes across different cities. ICMP is just a letter inside. Instead of shouting for your neighbor (broadcast), a central directory tells everyone where to send the letters directly, so fewer loud calls are needed.
+
+---
+
+## 📝 Test Your Knowledge
+
+<Quiz 
+  questions={[
+    {
+      questionText: 'What is the primary function of ARP?',
+      options: ['Map MAC to IP', 'Map IP to MAC', 'Assign IP addresses', 'Route packets'],
+      answer: 'Map IP to MAC',
+    },
+    {
+      questionText: 'Which command displays the ARP table on Windows?',
+      options: ['arp -a', 'ipconfig /all', 'show arp', 'getmac'],
+      answer: 'arp -a',
+    },
+    {
+      questionText: 'What type of address is FF:FF:FF:FF:FF:FF?',
+      options: ['Unicast', 'Multicast', 'Broadcast', 'Anycast'],
+      answer: 'Broadcast',
+    },
+    {
+      questionText: 'Which security feature protects against ARP Spoofing?',
+      options: ['Port Security', 'Dynamic ARP Inspection (DAI)', 'BPDU Guard', 'Root Guard'],
+      answer: 'Dynamic ARP Inspection (DAI)',
+    }
+  ]}
+/>
     >

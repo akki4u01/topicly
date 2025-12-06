@@ -3,6 +3,40 @@ id: BGP
 title: BGP Interview Question
 ---
 
+import Quiz from '@site/src/components/Quiz';
+
+<Quiz 
+  questions={[
+    {
+      questionText: 'What does AS stand for in BGP?',
+      options: ['Autonomous System', 'Automated Switching', 'Active Segment', 'Area Server'],
+      answer: 'Autonomous System',
+    },
+    {
+      questionText: 'Which protocol is BGP classified as?',
+      options: ['Path Vector', 'Link State', 'Distance Vector', 'Hybrid'],
+      answer: 'Path Vector',
+    },
+    {
+      questionText: 'What is the main difference between iBGP and eBGP?',
+      options: ['Peering within same AS vs different AS', 'Uses UDP vs TCP', 'Uses IPv4 vs IPv6', 'Metric vs Cost'],
+      answer: 'Peering within same AS vs different AS',
+    },
+    {
+      questionText: 'What is an ASN?',
+      options: ['A unique identifier for an AS', 'A serial number for routers', 'A security key', 'A metric value'],
+      answer: 'A unique identifier for an AS',
+    },
+    {
+      questionText: 'Does BGP use TCP or UDP?',
+      options: ['TCP', 'UDP', 'Neither', 'Both'],
+      answer: 'TCP',
+    }
+  ]}
+/>
+
+<br/>
+
 # BGP
 
 ### BGP Interview Questions
@@ -793,6 +827,10 @@ title: BGP Interview Question
     - The rule was introduced in early BGP implementations to **avoid routing blackholes**.
     - If BGP advertised a route externally that internal routers didn’t know how to reach (because it wasn’t in the IGP), traffic could be dropped inside the AS.
     - Synchronization ensured internal routers were aware of the path, so packets could be forwarded correctly.
+
+---
+
+
     
     ---
     
@@ -2438,3 +2476,32 @@ Important Questions:Q
     - AS mismatch
     - TTL / EBGP multihop
     - Link flaps
+
+---
+
+## 📝 Test Your Knowledge
+
+<Quiz 
+  questions={[
+    {
+      questionText: 'Which TCP port does BGP use?',
+      options: ['179', '80', '443', '22'],
+      answer: '179',
+    },
+    {
+      questionText: 'Which attribute is used to prevent loops in BGP?',
+      options: ['Local Preference', 'Weight', 'AS_PATH', 'MED'],
+      answer: 'AS_PATH',
+    },
+    {
+      questionText: 'What is the default Keepalive time in BGP?',
+      options: ['10 seconds', '30 seconds', '60 seconds', '180 seconds'],
+      answer: '60 seconds',
+    },
+    {
+      questionText: 'Which BGP message type is used to establish a session?',
+      options: ['OPEN', 'UPDATE', 'KEEPALIVE', 'NOTIFICATION'],
+      answer: 'OPEN',
+    }
+  ]}
+/>

@@ -3,6 +3,40 @@ id: VLAN
 title: VLAN Related Questions
 ---
 
+import Quiz from '@site/src/components/Quiz';
+
+<Quiz 
+  questions={[
+    {
+      questionText: 'What does VLAN stand for?',
+      options: ['Virtual Local Area Network', 'Variable Local Area Network', 'Visual LAN', 'Verified LAN'],
+      answer: 'Virtual Local Area Network',
+    },
+    {
+      questionText: 'Which port type carries multiple VLANs?',
+      options: ['Trunk Port', 'Access Port', 'Serial Port', 'Console Port'],
+      answer: 'Trunk Port',
+    },
+    {
+      questionText: 'What is the "Native VLAN"?',
+      options: ['VLAN for untagged traffic on a trunk', 'VLAN 1 only', 'The management VLAN', 'A security feature'],
+      answer: 'VLAN for untagged traffic on a trunk',
+    },
+    {
+      questionText: 'Which protocol tags frames with VLAN ID?',
+      options: ['802.1Q', '802.11ac', '802.1x', 'STP'],
+      answer: '802.1Q',
+    },
+    {
+      questionText: 'What connects different VLANs?',
+      options: ['Router / L3 Switch', 'Hub', 'L2 Switch', 'Repeater'],
+      answer: 'Router / L3 Switch',
+    }
+  ]}
+/>
+
+<br/>
+
 # VLAN
 This is VLAN contents
 
@@ -874,7 +908,7 @@ This is VLAN contents
     
     ### 4. **Special Cases**
     
-    - **Native VLAN frames:** Untagged frames on trunk ports belong to the native VLAN.
+    - **Native VLAN** is the VLAN to which untagged frames are assigned on a trunk port.
     - **VLAN hopping attack risk:** If the native VLAN is misconfigured or default VLAN 1 is used, attackers might exploit this.
     
     ---
@@ -2861,3 +2895,32 @@ This is VLAN contents
 - **How would you implement VLAN-based guest and corporate network separation?**
 - **A trunk port is down, and VLANs aren't propagating — how do you troubleshoot?**
 - **How would you use VLANs in a campus network to implement security zones?**
+
+---
+
+## 📝 Test Your Knowledge
+
+<Quiz 
+  questions={[
+    {
+      questionText: 'What is the maximum standard VLAN ID?',
+      options: ['1001', '4094', '4096', '255'],
+      answer: '4094',
+    },
+    {
+      questionText: 'Which protocol is used for VLAN tagging?',
+      options: ['802.1D', '802.1Q', '802.1w', '802.3ad'],
+      answer: '802.1Q',
+    },
+    {
+      questionText: 'Traffic from which VLAN is untagged on a trunk?',
+      options: ['Management VLAN', 'Data VLAN', 'Native VLAN', 'Voice VLAN'],
+      answer: 'Native VLAN',
+    },
+    {
+      questionText: 'Which device is required for Inter-VLAN routing?',
+      options: ['Hub', 'L2 Switch', 'Router or L3 Switch', 'Repeater'],
+      answer: 'Router or L3 Switch',
+    }
+  ]}
+/>

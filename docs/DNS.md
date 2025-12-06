@@ -3,6 +3,8 @@ id: DNS
 title: DNS Related Questions
 ---
 
+import Quiz from '@site/src/components/Quiz';
+
 # DNS
 This is DNS contents
 
@@ -310,7 +312,31 @@ Components of DNS
     ### ⚠️ Important Notes:
     
     - **PTR records must be manually set** by the owner of the IP address (usually an ISP or hosting provider).
-    - **rDNS is not required** for normal browsing, but **is critical for mail server trustworthiness**.
+    
+---
+
+## 📝 Test Your Knowledge
+
+<Quiz 
+  questions={[
+    {
+      questionText: 'Which DNS record maps a specific Hostname to an IPv4 address?',
+      options: ['AAAA Record', 'MX Record', 'A Record', 'CNAME Record'],
+      answer: 'A Record',
+    },
+    {
+      questionText: 'What port does DNS primarily use?',
+      options: ['TCP 80', 'UDP 53', 'TCP 443', 'UDP 67'],
+      answer: 'UDP 53',
+    },
+    {
+      questionText: 'Which server holds the actual DNS records for a domain (the source of truth)?',
+      options: ['Recursive Resolver', 'Root Server', 'Authoritative Name Server', 'ISP Resolver'],
+      answer: 'Authoritative Name Server',
+    }
+  ]}
+/>
+
 - **What is the difference between CNAME and A record?**
     
     ### ✅ Difference Between **CNAME** and **A Record** in DNS

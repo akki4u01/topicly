@@ -3,6 +3,8 @@ id: DHCP
 title: DHCP Related Questions
 ---
 
+import Quiz from '@site/src/components/Quiz';
+
 # DHCP
 This is DHCP contents
 
@@ -1277,4 +1279,29 @@ This is DHCP contents
     ## 🧠 Interview Summary:
     
     > To troubleshoot DHCP failures, verify physical connectivity, client settings, DHCP server status, and network device configurations. Capture DHCP traffic to trace request/offer flow, check relay agents and VLAN setups, and inspect security settings like DHCP snooping. Testing with alternate devices and reviewing logs helps isolate the problem.
+
+---
+
+## 📝 Test Your Knowledge
+
+<Quiz 
+  questions={[
+    {
+      questionText: 'What is the correct order of the DHCP handshake?',
+      options: ['DORA (Discover, Offer, Request, Ack)', 'DOAR (Discover, Offer, Ack, Request)', 'RODA (Request, Offer, Discover, Ack)', 'ORDA (Offer, Request, Discover, Ack)'],
+      answer: 'DORA (Discover, Offer, Request, Ack)',
+    },
+    {
+      questionText: 'Which UDP port does the DHCP Server listen on?',
+      options: ['67', '68', '53', '80'],
+      answer: '67',
+    },
+    {
+      questionText: 'What happens when 50% of the lease time has expired?',
+      options: ['Client broadcasts a request', 'Client sends a unicast renewal request', 'Client stops using IP', 'Server forces renewal'],
+      answer: 'Client sends a unicast renewal request',
+    }
+  ]}
+/>
+
     >
