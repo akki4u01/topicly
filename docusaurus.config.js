@@ -84,7 +84,7 @@ const config = {
         title: 'Akash Sachdeva',
         logo: {
           alt: 'Akash Sachdeva Logo',
-          src: 'img/logo.svg',
+          src: 'img/topicly_logo.png',
         },
         items: [
           {
@@ -94,6 +94,7 @@ const config = {
             label: 'Notes',
           },
           { to: '/blog', label: 'Blog', position: 'left' },
+          { to: '/about', label: 'About', position: 'left' },
           {
             href: 'https://github.com/akki4u01/topicly',
             label: 'GitHub',
@@ -136,6 +137,10 @@ const config = {
               {
                 label: 'Interactive Mode',
                 to: '/docs/interactive-features',
+              },
+              {
+                label: 'About Topicly Team',
+                to: '/about',
               },
             ],
           },
