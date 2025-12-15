@@ -134,8 +134,24 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Networking Notes',
-                to: '/docs/intro',
+                label: 'L2 (Switching)',
+                to: '/docs/ARP',
+              },
+              {
+                label: 'L3 (Routing)',
+                to: '/docs/IPv6',
+              },
+              {
+                label: 'Transport & Services',
+                to: '/docs/TCP-UDP',
+              },
+              {
+                label: 'Automation',
+                to: '/docs/Python-Fundamental',
+              },
+              {
+                label: 'Interview Prep',
+                to: '/docs/FAANG-Style',
               },
             ],
           },

@@ -1,5 +1,5 @@
 ---
-id: Python Fundamental
+id: Python-Fundamental
 title: Python Fundamental Related Questions
 ---
 

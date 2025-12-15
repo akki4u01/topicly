@@ -33,17 +33,17 @@ const sidebars = {
     {
       type: 'category',
       label: '🌐 Layer 3 (Routing)',
-      items: ['IPv6', 'OSPF', 'OSPF_Explain', 'BGP', 'BGP_Explain', 'LifeOfAPacket', 'MPLS'],
+      items: ['IPv4', 'IPv6', 'OSPF', 'OSPF_Explain', 'BGP', 'BGP_Explain', 'LifeOfAPacket', 'MPLS'],
     },
     {
       type: 'category',
       label: '🚚 Transport & Services',
-      items: ['TCP UDP', 'DHCP', 'DNS'], // Verified: TCP-UDP.md has id 'TCP UDP'
+      items: ['TCP-UDP', 'DHCP', 'DNS'], // Verified: TCP-UDP.md has id 'TCP UDP'
     },
     {
       type: 'category',
       label: '🐍 Automation',
-      items: ['Python Fundamental', 'Python'], // Verified: PythonFundamental.md has id 'Python Fundamental'
+      items: ['Python-Fundamental', 'Python'], // Verified: PythonFundamental.md has id 'Python Fundamental'
     },
     {
       type: 'category',
