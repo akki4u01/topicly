@@ -18,10 +18,11 @@ const sidebars = {
 
   // But you can create a sidebar manually
   tutorialSidebar: [
+    'interactive-features',
     {
       type: 'category',
       label: '🏁 Start Here',
-      items: ['intro', 'interactive-features'],
+      items: ['intro'],
       collapsed: false,
     },
     {

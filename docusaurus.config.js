@@ -10,11 +10,11 @@ import { themes as prismThemes } from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Akash Sachdeva',
+  title: 'Topicly by Akash Sachdeva',
   tagline: 'Mastering Networking & Cloud Careers',
   favicon: 'img/favicon.ico',
 
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
+  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
@@ -34,12 +34,36 @@ const config = {
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
+  // useful metadata like html lang. For example, if your site is Chinese,
+  // you may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
   },
+
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'articles',
+        path: 'articles',
+        routeBasePath: 'articles',
+        sidebarPath: './sidebarsArticles.js',
+      },
+    ],
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      ({
+        hashed: true,
+        language: ["en"],
+        indexDocs: true,
+        indexBlog: true,
+        indexPages: true,
+        docsRouteBasePath: "/docs",
+        blogRouteBasePath: "/blog",
+      }),
+    ],
+  ],
 
   presets: [
     [
@@ -81,7 +105,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Akash Sachdeva',
+        title: 'Topicly by Akash Sachdeva',
         logo: {
           alt: 'Akash Sachdeva Logo',
           src: 'img/topicly_logo.png',
@@ -95,6 +119,7 @@ const config = {
           },
           { to: '/blog', label: 'Blog', position: 'left' },
           { to: '/about', label: 'About', position: 'left' },
+          { to: '/articles/intro', label: 'Article', position: 'left' },
           {
             href: 'https://github.com/akki4u01/topicly',
             label: 'GitHub',
