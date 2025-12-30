@@ -28,6 +28,9 @@ const sidebars = {
     {
       type: 'category',
       label: '🔌 Layer 2 (Switching)',
+      link: {
+        type: 'generated-index',
+      },
       items: ['ARP', 'VLAN', 'VLAN_Explain', 'STP RSTP MSTP', 'STP_Explain', 'NAT'],
     },
     {

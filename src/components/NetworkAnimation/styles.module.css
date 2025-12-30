@@ -1,0 +1,101 @@
+.networkContainer {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    overflow: visible;
+}
+
+.pathLine {
+    stroke-dasharray: 10;
+    animation: dash 30s linear infinite;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: -1000;
+    }
+}
+
+.packet {
+    offset-path: path("M100,100 L300,100 L300,300 M300,100 L500,100");
+    /* Default fallback */
+    animation: travel 3s linear infinite;
+}
+
+/* Specific paths for packets */
+.packet1 {
+    /* Cloud to Router */
+    animation: travelPath1 2s linear infinite;
+}
+
+.packet2 {
+    /* Router to Switch */
+    animation: travelPath2 2s linear infinite;
+    animation-delay: 1s;
+}
+
+.packet3 {
+    /* Switch to Device */
+    animation: travelPath3 2s linear infinite;
+    animation-delay: 2s;
+}
+
+@keyframes travelPath1 {
+    0% {
+        offset-distance: 0%;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        offset-distance: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes travelPath2 {
+    0% {
+        offset-distance: 0%;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        offset-distance: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes travelPath3 {
+    0% {
+        offset-distance: 0%;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        offset-distance: 100%;
+        opacity: 0;
+    }
+}

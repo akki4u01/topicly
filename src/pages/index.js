@@ -4,6 +4,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 // import HomepageFeatures from '@site/src/components/HomepageFeatures'; // Disabling default features for now to focus on custom design
 import Heading from '@theme/Heading';
+import NetworkAnimation from '@site/src/components/NetworkAnimation';
 
 import styles from './index.module.css';
 
@@ -13,81 +14,104 @@ export default function Home() {
     <Layout
       title={`Home | ${siteConfig.title}`}
       description="Interactive Master Classes in Networking, Cloud, and Engineering">
-      <HomepageHeader />
       <main>
-        <Features />
+        <div style={{ paddingTop: '4rem' }}>
+          <TopicCategories />
+        </div>
       </main>
     </Layout>
   );
 }
 
-function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext();
-  return (
-    <header className={clsx('hero', styles.heroBanner)}>
-      <div className="container" style={{ zIndex: 1, position: 'relative' }}>
-        <h1 className="hero-title">Elevate Your Tech Career</h1>
-        <p className="hero-subtitle">Interactive Master Classes in Networking, Cloud, and Engineering.</p>
 
-        <div className={styles.buttons} style={{ marginTop: '2.5rem', display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Start Learning 📚
-          </Link>
-          <Link
-            className="button button--lg button-primary-gradient"
-            to="/docs/interactive-features">
-            Launch Master Class 🚀
-          </Link>
-          <Link
-            className="button button--secondary button--outline button--lg"
-            to="/blog">
-            Read My Blog ✍️
-          </Link>
+
+function CategoryCard({ title, icon, link, color }) {
+  return (
+    <div className={clsx('col col--4 margin-bottom--lg')}>
+      <Link to={link} style={{ textDecoration: 'none' }}>
+        <div className="card-glass padding--lg h-100 display-flex flex-dir-column align-items-center cursor-pointer"
+          style={{
+            height: '100%',
+            transition: 'transform 0.2s ease',
+            borderTop: `4px solid ${color || 'var(--ifm-color-primary)'}`
+          }}>
+          <div style={{
+            fontSize: '3rem',
+            marginBottom: '1rem',
+            background: 'var(--ifm-color-emphasis-100)',
+            width: '80px',
+            height: '80px',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            {icon}
+          </div>
+          <Heading as="h3" className="text--center margin-bottom--sm" style={{ color: 'var(--ifm-color-emphasis-900)' }}>{title}</Heading>
+          <div className="button button--link">Explore &rarr;</div>
         </div>
-      </div>
-    </header>
-  );
-}
-
-function FeatureCard({ title, description, icon }) {
-  return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center padding--md card-glass" style={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <div style={{ fontSize: '3.5rem', marginBottom: '1rem', background: 'var(--ifm-color-primary-lightest)', width: '80px', height: '80px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>{icon}</div>
-        <Heading as="h3" style={{ marginBottom: '1rem' }}>{title}</Heading>
-        <p style={{ opacity: 0.9 }}>{description}</p>
-      </div>
+      </Link>
     </div>
   )
 }
 
-function Features() {
-  const features = [
+function TopicCategories() {
+  const categories = [
     {
-      title: 'Interactive Master Classes',
+      title: 'Layer 2 (Switching)',
+      icon: '🔌',
+      link: '/docs/category/layer-2-switching',
+      color: '#3b82f6' // Blue
+    },
+    {
+      title: 'Layer 3 (Routing)',
+      icon: '🌐',
+      link: '/docs/IPv4',
+      color: '#10b981' // Green
+    },
+    {
+      title: 'Transport & Services',
+      icon: '🚚',
+      link: '/docs/TCP-UDP',
+      color: '#f59e0b' // Amber
+    },
+    {
+      title: 'Automation',
+      icon: '🐍',
+      link: '/docs/Python-Fundamental',
+      color: '#8b5cf6' // Violet
+    },
+    {
+      title: 'Interview Prep',
+      icon: '💼',
+      link: '/docs/FAANG-Style',
+      color: '#ec4899' // Pink
+    },
+    {
+      title: 'OSI Model Layers',
+      icon: '📶',
+      link: '/osi-model',
+      color: '#ec4899' // Pink
+    },
+    {
+      title: 'Interactive Learning',
       icon: '🚀',
-      description: 'Ditch passive reading. Engage with 400+ interactive Flashcards and Quizzes designed to cement your networking knowledge.',
-    },
-    {
-      title: 'Deep Technical Dives',
-      icon: '🔬',
-      description: 'Explore complex protocols like BGP, OSPF, and MPLS with detailed breakdowns, packet flows, and real-world scenarios.',
-    },
-    {
-      title: 'Community & Growth',
-      icon: '🤝',
-      description: 'Join the discussion on our Blog. Share insights, ask questions, and grow your professional network with like-minded engineers.',
-    },
+      link: '/docs/interactive-features',
+      color: '#f43f5e' // Rose
+    }
   ];
 
   return (
     <section className={styles.features} style={{ padding: '6rem 0', background: 'linear-gradient(180deg, var(--ifm-background-color) 0%, var(--ifm-color-emphasis-100) 100%)' }}>
       <div className="container">
-        <div className="row">
-          {features.map((props, idx) => (
-            <FeatureCard key={idx} {...props} />
+        <div className="text--center margin-bottom--xl">
+          <Heading as="h2" style={{ fontSize: '2.5rem' }}>Explore Topics</Heading>
+          <p className="hero-subtitle" style={{ fontSize: '1.2rem' }}>Jump straight into the master class categories</p>
+        </div>
+        <div className="row justify-center">
+          {categories.map((props, idx) => (
+            <CategoryCard key={idx} {...props} />
           ))}
         </div>
       </div>
