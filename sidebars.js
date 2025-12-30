@@ -30,6 +30,7 @@ const sidebars = {
       label: '🔌 Layer 2 (Switching)',
       link: {
         type: 'generated-index',
+        slug: '/category/layer-2-switching',
       },
       items: ['ARP', 'VLAN', 'VLAN_Explain', 'STP RSTP MSTP', 'STP_Explain', 'NAT'],
     },
