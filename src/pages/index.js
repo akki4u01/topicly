@@ -4,9 +4,14 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 // import HomepageFeatures from '@site/src/components/HomepageFeatures'; // Disabling default features for now to focus on custom design
 import Heading from '@theme/Heading';
-import NetworkAnimation from '@site/src/components/NetworkAnimation';
+// import NetworkAnimation from '@site/src/components/NetworkAnimation';
+import NetworkPacketFlow from '@site/src/components/NetworkPacketFlow';
 
 import styles from './index.module.css';
+
+import { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import OSILayersAnimation from '@site/src/components/OSILayersAnimation';
 
 export default function Home() {
   const { siteConfig } = useDocusaurusContext();
@@ -15,11 +20,72 @@ export default function Home() {
       title={`Home | ${siteConfig.title}`}
       description="Interactive Master Classes in Networking, Cloud, and Engineering">
       <main>
-        <div style={{ paddingTop: '4rem' }}>
+        <div style={{ paddingTop: '2rem' }}>
+          <AnimationGallery />
           <TopicCategories />
         </div>
       </main>
     </Layout>
+  );
+}
+
+function AnimationGallery() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    { component: <NetworkPacketFlow />, title: "Packet Flow" },
+    { component: <OSILayersAnimation />, title: "OSI Model" }
+  ];
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  return (
+    <div className="relative w-full">
+      {/* Main Content */}
+      <div className="w-full">
+        {slides[currentSlide].component}
+      </div>
+
+      {/* Navigation Overlays */}
+      <div className="absolute top-1/2 left-4 -translate-y-1/2 z-50">
+        <button
+          onClick={prevSlide}
+          className="p-2 rounded-full bg-slate-800/50 text-white hover:bg-slate-700/80 transition-all backdrop-blur-sm border border-slate-600"
+          aria-label="Previous Animation"
+        >
+          <ChevronLeft size={32} />
+        </button>
+      </div>
+
+      <div className="absolute top-1/2 right-4 -translate-y-1/2 z-50">
+        <button
+          onClick={nextSlide}
+          className="p-2 rounded-full bg-slate-800/50 text-white hover:bg-slate-700/80 transition-all backdrop-blur-sm border border-slate-600"
+          aria-label="Next Animation"
+        >
+          <ChevronRight size={32} />
+        </button>
+      </div>
+
+      {/* Slide Indicators */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-50 mb-8">
+        {slides.map((slide, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrentSlide(idx)}
+            className={`w-3 h-3 rounded-full transition-all ${currentSlide === idx ? 'bg-blue-500 w-8' : 'bg-slate-500 hover:bg-slate-400'
+              }`}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 

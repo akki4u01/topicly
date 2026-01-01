@@ -5,6 +5,10 @@
  */
 
 /* Custom Fonts - You can import Google Fonts here if you like, usually done in docusaurus.config.js or head tags, but standard system fonts or a clean sans-serif stack work well too. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
 
 :root {
